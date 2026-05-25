@@ -6,10 +6,10 @@ import java.util.List;
 public class CategoriaPostiBean {//italiano 
 	private String nome;
 	private Double modifica_prezzo;
-	private List<PostiBean> categoria_posti;
+	private List<PostiBean> posti;
 	
 	public CategoriaPostiBean() {
-		categoria_posti = new ArrayList<PostiBean>();
+		posti = new ArrayList<PostiBean>();
 	}
 
 	public String getNome() {
@@ -28,13 +28,15 @@ public class CategoriaPostiBean {//italiano
 		this.modifica_prezzo = modifica_prezzo;
 	}
 
-	public List<CategoriaPostiBean> getCategoria_posti() {
-		return categoria_posti;
+	public List<PostiBean> getPosti() {
+		return posti;
 	}
 
-	public void setCategoria_posti(List<CategoriaPostiBean> categoria_posti) {
-		this.categoria_posti = categoria_posti;
+	public void setPosti(List<PostiBean> posti) {
+		this.posti = posti;
 	}
+
 	
+
 	
 }
