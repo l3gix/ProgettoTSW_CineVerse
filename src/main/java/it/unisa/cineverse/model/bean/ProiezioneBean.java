@@ -17,6 +17,14 @@ public class ProiezioneBean
 	
 	private List<BigliettoBean> biglietto;
 	
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
 	public ProiezioneBean()
 	{
 		starts = null;
