@@ -9,6 +9,7 @@ public class PagamentoBean
 	private String provider;
 	private String id_transazione_provider;
 	private double costo;
+	private String status;
 	private LocalDateTime data_pagamento;
 	private LocalDateTime data_creazione;
 	
@@ -57,6 +58,15 @@ public class PagamentoBean
 	public void setCosto(double costo) {
 		this.costo = costo;
 	}
+	
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
 
 	public LocalDateTime getData_pagamento() {
 		return data_pagamento;
