@@ -13,9 +13,9 @@ public interface UtentiDao
 	
 	void delete(String email)throws SQLException;
 	
-	List<UtentiDao> findAll()throws SQLException;
+	List<UtentiBean> findAll()throws SQLException;
 	
-	UtentiBean findByEmail()throws SQLException;
+	UtentiBean findByEmail(String email)throws SQLException;
 	
 
 }

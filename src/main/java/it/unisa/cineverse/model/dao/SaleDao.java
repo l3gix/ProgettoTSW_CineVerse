@@ -15,5 +15,5 @@ public interface SaleDao
 	
 	List<SaleBean> findAll()throws SQLException;
 	
-	SaleBean findById()throws SQLException;
+	SaleBean findById(int id)throws SQLException;
 }
