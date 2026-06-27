@@ -14,7 +14,7 @@
     </header>
     <div id="container">
         <section id="login">
-            <form action="" method="post">
+            <form action="Login" method="post">
                 <label for="email">Email</label>
                 <input type="email" placeholder="email" name="email" id="email">
 
