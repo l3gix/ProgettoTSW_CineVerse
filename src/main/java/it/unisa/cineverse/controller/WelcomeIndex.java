@@ -10,14 +10,14 @@ import java.io.IOException;
 /**
  * Servlet implementation class Index
  */
-@WebServlet("/Index")
-public class Index extends HttpServlet {
+@WebServlet("/WelcomeIndex")
+public class WelcomeIndex extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public Index() {
+    public WelcomeIndex() {
         super();
         // TODO Auto-generated constructor stub
     }
