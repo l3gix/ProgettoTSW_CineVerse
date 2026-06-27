@@ -20,6 +20,14 @@
 
                 <label for="password">Password</label>
                 <input type="password" placeholder="password" id="password">
+                <%
+			        String errore = (String) request.getAttribute("errore");
+			        if (errore != null) {
+			    %>
+			        <p style="color:red"><%= errore %></p>
+			    <%
+			        }
+			    %>
                 <button type="submit">Accedi</button>
             </form>
 
