@@ -23,7 +23,7 @@ public class UtentiDaoImpl implements UtentiDao
 	}
 
 	@Override
-	public void save(UtentiBean utenti) throws SQLException {
+	public synchronized void save(UtentiBean utenti) throws SQLException {
 		String sql = "INSERT INTO "+TABLE_NAME+" (email, password_hash, nome, cognome, phone, ruolo)\n"
 				+ "VALUES (?, ?, ?, ?, ?, ?);";
 		try(Connection connection = ds.getConnection();
@@ -40,7 +40,7 @@ public class UtentiDaoImpl implements UtentiDao
 	}
 
 	@Override
-	public void update(UtentiBean utenti) throws SQLException {
+	public synchronized void update(UtentiBean utenti) throws SQLException {
 		String sql = "UPDATE " + TABLE_NAME
 				+ "SET password_hash = ?,\n"
 				+ "    nome = ?,\n"
@@ -62,7 +62,7 @@ public class UtentiDaoImpl implements UtentiDao
 	}
 
 	@Override
-	public void delete(String email) throws SQLException {
+	public synchronized void delete(String email) throws SQLException {
 		String sql = "DELETE FROM " + TABLE_NAME
 				+ "WHERE email = ?;";
 		try(Connection connection = ds.getConnection();
@@ -74,7 +74,7 @@ public class UtentiDaoImpl implements UtentiDao
 	}
 
 	@Override
-	public List<UtentiBean> findAll() throws SQLException {
+	public synchronized List<UtentiBean> findAll() throws SQLException {
 		List<UtentiBean> utenti = new ArrayList<UtentiBean>();
 		String sql = "SELECT *\n"
 				+ "FROM " + TABLE_NAME;
@@ -98,7 +98,7 @@ public class UtentiDaoImpl implements UtentiDao
 	}
 
 	@Override
-	public UtentiBean findByEmail(String email) throws SQLException {
+	public synchronized UtentiBean findByEmail(String email) throws SQLException {
 		UtentiBean bean = new UtentiBean();
 		String sql = "SELECT *\n"
 				+ "FROM " + TABLE_NAME
@@ -121,5 +121,34 @@ public class UtentiDaoImpl implements UtentiDao
 		}
 		return bean;
 	}
+
+	@Override
+	public synchronized UtentiBean findByEmailAndPassword(String email, String password) throws SQLException {
+		UtentiBean bean = null;
+		String sql = "SELECT *\n"
+				+ "FROM " + TABLE_NAME
+				+ "WHERE email = ? AND password_hash = ?;";
+		try(Connection connection = ds.getConnection();
+				PreparedStatement ps = connection.prepareStatement(sql);){
+				ps.setString(1, email);
+				ps.setString(2, password);
+				try (ResultSet rs = ps.executeQuery())
+				{
+					while(rs.next())
+					{
+						bean = new UtentiBean();
+						bean.setEmail(rs.getString("email"));
+						bean.setPassword_hash(rs.getString("password_hash"));
+						bean.setNome(rs.getString("nome"));
+						bean.setCognome(rs.getString("cognome"));
+						bean.setPhone(rs.getString("phone"));
+						bean.setRuolo(rs.getString("ruolo"));
+					}
+				}
+		}
+		return bean;
+	}
+	
+	
 
 }

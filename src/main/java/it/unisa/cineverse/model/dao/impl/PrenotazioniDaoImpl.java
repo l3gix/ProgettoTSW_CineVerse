@@ -24,7 +24,7 @@ public class PrenotazioniDaoImpl implements PrenotazioniDao
 	}
 	
 	@Override
-	public void save(PrenotazioniBean prenotazioni) throws SQLException {
+	public synchronized void save(PrenotazioniBean prenotazioni) throws SQLException {
 		String sql ="INSERT INTO "+ TABLE_NAME + " (id_utenti, status, importo_totale, scadenza)\n"
 				+ "VALUES (?, ?, ?, ?);";
 		try(Connection connection = ds.getConnection();
@@ -39,7 +39,7 @@ public class PrenotazioniDaoImpl implements PrenotazioniDao
 	}
 
 	@Override
-	public void update(PrenotazioniBean prenotazioni) throws SQLException {
+	public synchronized void update(PrenotazioniBean prenotazioni) throws SQLException {
 		String sql = "UPDATE " + TABLE_NAME
 				+ "SET id_utenti = ?,\n"
 				+ "    status = ?,\n"
@@ -59,7 +59,7 @@ public class PrenotazioniDaoImpl implements PrenotazioniDao
 	}
 
 	@Override
-	public void delete(int id) throws SQLException {
+	public synchronized void delete(int id) throws SQLException {
 		String sql = "DELETE FROM " + TABLE_NAME
 				+ "WHERE id = ?;";
 		try(Connection connection = ds.getConnection();
@@ -71,7 +71,7 @@ public class PrenotazioniDaoImpl implements PrenotazioniDao
 	}
 
 	@Override
-	public List<PrenotazioniBean> findAll() throws SQLException {
+	public synchronized List<PrenotazioniBean> findAll() throws SQLException {
 		List<PrenotazioniBean> prenotazioni = new ArrayList<PrenotazioniBean>();
 		String sql = "SELECT *\n"
 				+ "FROM " + TABLE_NAME;
@@ -95,7 +95,7 @@ public class PrenotazioniDaoImpl implements PrenotazioniDao
 	}
 
 	@Override
-	public PrenotazioniBean findById(int id) throws SQLException {
+	public synchronized PrenotazioniBean findById(int id) throws SQLException {
 		PrenotazioniBean bean = new PrenotazioniBean();
 		String sql = "SELECT *\n"
 				+ "FROM " + TABLE_NAME

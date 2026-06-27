@@ -24,7 +24,7 @@ public class SaleDaoImpl implements SaleDao
 	
 	
 	@Override
-	public void save(SaleBean sale) throws SQLException {
+	public synchronized void save(SaleBean sale) throws SQLException {
 		String sql = "INSERT INTO "+ TABLE_NAME+ " (posti_totali, screen_type)\n"
 				+ "VALUES (?, ?);";
 		try(Connection connection = ds.getConnection();
@@ -36,7 +36,7 @@ public class SaleDaoImpl implements SaleDao
 	}
 
 	@Override
-	public void update(SaleBean sale) throws SQLException {
+	public synchronized void update(SaleBean sale) throws SQLException {
 		String sql = "UPDATE " + TABLE_NAME
 				+ "SET posti_totali = ?,\n"
 				+ "    screen_type = ?\n"
@@ -51,7 +51,7 @@ public class SaleDaoImpl implements SaleDao
 	}
 
 	@Override
-	public void delete(int id) throws SQLException {
+	public synchronized void delete(int id) throws SQLException {
 		String sql = "DELETE FROM " + TABLE_NAME
 				+ "WHERE id = ?;\n";
 		try(Connection connection = ds.getConnection();
@@ -63,7 +63,7 @@ public class SaleDaoImpl implements SaleDao
 	}
 
 	@Override
-	public List<SaleBean> findAll() throws SQLException {
+	public synchronized List<SaleBean> findAll() throws SQLException {
 		List<SaleBean> sale = new ArrayList<SaleBean>();
 		String sql = "SELECT *\n"
 				+ "FROM " + TABLE_NAME;
@@ -84,7 +84,7 @@ public class SaleDaoImpl implements SaleDao
 	}
 
 	@Override
-	public SaleBean findById(int id) throws SQLException {
+	public synchronized SaleBean findById(int id) throws SQLException {
 		SaleBean bean = new SaleBean();
 		String sql = "SELECT *\n"
 				+ "FROM " + TABLE_NAME
