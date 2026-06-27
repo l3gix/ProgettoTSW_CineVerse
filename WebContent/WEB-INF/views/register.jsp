@@ -6,7 +6,7 @@
 <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style/register.css">
-    <title>Title</title>
+    <title>Register</title>
 </head>
 <body>
    <header>
@@ -35,7 +35,8 @@
 
             <div id="register">
                 <p>Hai gia un account ?</p>
-                <button>Accedi &#8594</button>
+                <button onclick="window.location.href='<%=request.getContextPath()%>/WelcomeLogin'"
+                >Accedi &#8594</button>
             </div>
 
         </section>

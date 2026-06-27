@@ -110,6 +110,7 @@ button:hover
      box-shadow: 
         0 0 18px #007BFA,          /* luce esterna */
         inset 0 0 18px #007BFA;    /* luce interna */
+     cursor: pointer;
 }
 
 
