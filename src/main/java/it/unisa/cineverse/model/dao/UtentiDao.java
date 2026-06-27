@@ -17,5 +17,7 @@ public interface UtentiDao
 	
 	UtentiBean findByEmail(String email)throws SQLException;
 	
+	UtentiBean findByEmailAndPassword(String email,String password)throws SQLException;
+	
 
 }

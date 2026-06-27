@@ -24,7 +24,7 @@ public class ProiezioniDaoImpl implements ProiezioniDao
 	}
 	
 	@Override
-	public void save(ProiezioneBean proiezioni) throws SQLException {
+	public synchronized void save(ProiezioneBean proiezioni) throws SQLException {
 		String sql ="INSERT INTO " + TABLE_NAME
 				+ "(id_film, id_sale, id_formato, starts, ends, prezzo_base, status)\n"
 				+ "VALUES (?, ?, ?, ?, ?, ?, ?);";
@@ -42,7 +42,7 @@ public class ProiezioniDaoImpl implements ProiezioniDao
 	}
 
 	@Override
-	public void update(ProiezioneBean proiezioni) throws SQLException {
+	public synchronized void update(ProiezioneBean proiezioni) throws SQLException {
 		String sql ="UPDATE " + TABLE_NAME
 				+ "SET id_film = ?,\n"
 				+ "    id_sale = ?,\n"
@@ -68,7 +68,7 @@ public class ProiezioniDaoImpl implements ProiezioniDao
 	}
 
 	@Override
-	public void delete(int id) throws SQLException {
+	public synchronized void delete(int id) throws SQLException {
 		String sql = "DELETE FROM " + TABLE_NAME
 				+ "WHERE id = ?;";
 		try(Connection connection = ds.getConnection();
@@ -80,7 +80,7 @@ public class ProiezioniDaoImpl implements ProiezioniDao
 	}
 
 	@Override
-	public List<ProiezioneBean> findAll() throws SQLException {
+	public synchronized List<ProiezioneBean> findAll() throws SQLException {
 		List<ProiezioneBean> proiezione = new ArrayList<ProiezioneBean>();
 		String sql ="SELECT *\n"
 				+ "FROM " + TABLE_NAME;
@@ -106,7 +106,7 @@ public class ProiezioniDaoImpl implements ProiezioniDao
 	}
 
 	@Override
-	public ProiezioneBean findById(int id) throws SQLException {
+	public synchronized ProiezioneBean findById(int id) throws SQLException {
 		ProiezioneBean bean = new ProiezioneBean();
 		String sql = "SELECT *\n"
 				+ "FROM " + TABLE_NAME

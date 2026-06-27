@@ -19,7 +19,7 @@
                 <input type="email" placeholder="email" name="email" id="email">
 
                 <label for="password">Password</label>
-                <input type="password" placeholder="password" id="password">
+                <input type="password" placeholder="password" name="password" id="password">
                 
                 <label for="nome">Nome</label>
                 <input type="text" name="nome" placeholder="nome" id="nome">
@@ -30,6 +30,15 @@
                 <label for="telefono">Telefono</label>
                 <input type="text" name="telefono" placeholder="telefono" id="telefono">
                 
+                 <%
+			        String errore = (String) request.getAttribute("errore");
+			        if (errore != null) {
+			    %>
+			        <p style="color:red"><%= errore %></p>
+			    <%
+			        }
+			    %>
+			    
                 <button type="submit">Registrati</button>
             </form>
 

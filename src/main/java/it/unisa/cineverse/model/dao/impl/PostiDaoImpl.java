@@ -23,7 +23,7 @@ public class PostiDaoImpl implements PostiDao
 	}
 	
 	@Override
-	public void save(PostiBean posti) throws SQLException {
+	public synchronized void save(PostiBean posti) throws SQLException {
 		String sql = "INSERT INTO "+TABLE_NAME +" (id_sale, id_categoria_posti, row_label)\n"
 				+ "VALUES (?, ?, ?);";
 		try(Connection connection = ds.getConnection();
@@ -36,7 +36,7 @@ public class PostiDaoImpl implements PostiDao
 	}
 
 	@Override
-	public void update(PostiBean posti) throws SQLException {
+	public synchronized void update(PostiBean posti) throws SQLException {
 		String sql = "UPDATE " + TABLE_NAME
 				+ "SET id_sale = ?,\n"
 				+ "    id_categoria_posti = ?,\n"
@@ -54,7 +54,7 @@ public class PostiDaoImpl implements PostiDao
 	}
 
 	@Override
-	public void delete(int id) throws SQLException {
+	public synchronized void delete(int id) throws SQLException {
 		String sql = "DELETE FROM " + TABLE_NAME
 				+ "WHERE id = ?";
 		try(Connection connection = ds.getConnection();
@@ -66,7 +66,7 @@ public class PostiDaoImpl implements PostiDao
 	}
 
 	@Override
-	public List<PostiBean> findAll() throws SQLException {
+	public synchronized List<PostiBean> findAll() throws SQLException {
 		List<PostiBean> posti = new ArrayList<PostiBean>();
 		String sql = "SELECT *\n"
 				+ "FROM " + TABLE_NAME;
@@ -89,7 +89,7 @@ public class PostiDaoImpl implements PostiDao
 	}
 
 	@Override
-	public PostiBean findById(int id) throws SQLException {
+	public synchronized PostiBean findById(int id) throws SQLException {
 		PostiBean bean = new PostiBean();
 		String sql ="SELECT *\n"
 				+ "FROM " + TABLE_NAME
