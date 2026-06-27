@@ -24,8 +24,8 @@ public class UtentiDaoImpl implements UtentiDao
 
 	@Override
 	public synchronized void save(UtentiBean utenti) throws SQLException {
-		String sql = "INSERT INTO "+TABLE_NAME+" (email, password_hash, nome, cognome, phone, ruolo)\n"
-				+ "VALUES (?, ?, ?, ?, ?, ?);";
+		String sql = "INSERT INTO "+TABLE_NAME+" (email, password_hash, nome, cognome, phone)\n"
+				+ "VALUES (?, ?, ?, ?, ?);";
 		try(Connection connection = ds.getConnection();
 				PreparedStatement ps = connection.prepareStatement(sql);){
 			ps.setString(1, utenti.getEmail());
@@ -33,7 +33,6 @@ public class UtentiDaoImpl implements UtentiDao
 			ps.setString(3,utenti.getNome());
 			ps.setString(4, utenti.getCognome());
 			ps.setString(5, utenti.getPhone());
-			ps.setString(6, utenti.getRuolo());
 			ps.executeUpdate();
 		}
 		

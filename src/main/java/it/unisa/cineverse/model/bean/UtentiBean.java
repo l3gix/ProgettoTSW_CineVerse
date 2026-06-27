@@ -20,6 +20,16 @@ public class UtentiBean
 	}
 
 
+	public UtentiBean(String email, String password_hash, String nome, String cognome, String phone) {
+		super();
+		this.email = email;
+		this.password_hash = password_hash;
+		this.nome = nome;
+		this.cognome = cognome;
+		this.phone = phone;
+	}
+
+
 	public String getEmail() {
 		return email;
 	}
@@ -71,6 +81,7 @@ public class UtentiBean
 	public List<PrenotazioniBean> getPrenotazione() {
 		return prenotazione;
 	}
+
 
 	public void setPrenotazione(List<PrenotazioniBean> prenotazione) {
 		this.prenotazione = prenotazione;
