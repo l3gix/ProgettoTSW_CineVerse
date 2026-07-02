@@ -19,7 +19,7 @@
                 <input type="email" placeholder="email" name="email" id="email">
 
                 <label for="password">Password</label>
-                <input type="password" placeholder="password" id="password">
+                <input type="password" placeholder="password" name="password" id="password">
                 <%
 			        String errore = (String) request.getAttribute("errore");
 			        if (errore != null) {
