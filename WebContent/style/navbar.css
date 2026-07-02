@@ -36,6 +36,7 @@ nav
     gap: 15px;
     align-items: center;
     padding: 10px;
+    justify-content: right;
 
 }
 
@@ -59,6 +60,16 @@ nav
     padding: 10px;
 }
 
+.icon > button
+{
+	display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    background: none;
+    cursor: pointer;
+}
+
 
 
 .menu-icon {
@@ -77,6 +88,7 @@ nav
     padding: 20px;
 }
 
+
 .burger ul {
     list-style: none;
     display: flex;
@@ -84,6 +96,8 @@ nav
     align-items: center;
     gap: 20px;
 }
+
+
 
 .burger.active {
     display: block;
