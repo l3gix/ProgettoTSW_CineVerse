@@ -14,7 +14,7 @@
     </header>
     <div id="container">
         <section id="login">
-            <form action="Register" method="post">
+            <form action="<%=request.getContextPath()%>/Register" method="post">
                 <label for="email">Email</label>
                 <input type="email" placeholder="email" name="email" id="email">
 

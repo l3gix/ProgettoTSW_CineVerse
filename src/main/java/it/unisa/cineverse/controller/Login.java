@@ -65,7 +65,6 @@ public class Login extends HttpServlet {
 			HttpSession session = request.getSession();
 			session.setAttribute("utente", ut);
 			session.setAttribute("ruolo", ut.getRuolo());
-			
 			response.sendRedirect(request.getContextPath() + "/WelcomeIndex");
 			
 		}else 
