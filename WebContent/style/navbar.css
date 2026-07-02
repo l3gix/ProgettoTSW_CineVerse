@@ -1,0 +1,173 @@
+@import url('https://fonts.googleapis.com/css2?family=Saira:ital,wght@0,100..900;1,100..900&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Saira", sans-serif;
+}
+
+body
+{
+      /*min-height: 100vh;*/
+    min-height: 100vh;
+    color: white;
+
+}
+
+header
+{
+    width: 100%;
+    background-color: #091119;
+    display: flex;
+    height: 70px;
+}
+
+nav
+{
+    width: 100%;
+    display: flex;
+}
+
+.icon
+{
+    width: 50%;
+    display: flex;
+    gap: 15px;
+    align-items: center;
+    padding: 10px;
+
+}
+
+.icon img
+{
+    width: 20px;
+    height: 20px;
+}
+
+.hidden {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+.logo
+{
+    width: 50%;
+    display: flex;
+    align-items: center;
+    padding: 10px;
+}
+
+
+
+.menu-icon {
+    display: block;
+    cursor: pointer;
+}
+
+/* Menu burger nascosto su mobile */
+.burger {
+    display: none;
+    position: absolute;
+    top: 70px;
+    left: 0;
+    width: 100%;
+    background-color: #091119;
+    padding: 20px;
+}
+
+.burger ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+.burger.active {
+    display: block;
+}
+
+
+.menu-button {
+    background: none;
+    border: none;
+    color: white;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+}
+
+
+/* Di base mostro il burger */
+.open-icon {
+    display: block;
+}
+
+/* Di base nascondo la X */
+.close-icon {
+    display: none;
+}
+
+/* Quando il bottone ha active, nascondo burger e mostro X */
+.menu-button.active .open-icon {
+    display: none;
+}
+
+.menu-button.active .close-icon {
+    display: block;
+}
+
+
+
+@media screen and (min-width: 1024px) {
+
+    /* Nascondo l'icona burger */
+    header
+    {
+        justify-content: center;
+    }
+    nav 
+    {
+        width: 50%;
+    }
+    .menu-icon {
+        display: none;
+    }
+
+    .menu-button {
+        display: none;
+    }
+
+
+    .icon 
+    {
+        width: 35%;
+        justify-content: right;
+        padding: 20px;
+    }
+
+    .logo 
+    {
+        width: 30%;
+    }
+
+    /* Il menu diventa visibile */
+    .burger {
+        top:0;
+        position: relative;
+        display: flex;
+        width: 35%;
+        background-color: transparent;
+        padding: 0;
+        justify-content: center;
+    }
+
+    .burger ul {
+        flex-direction: row;
+        gap: 30px;
+    }
+}
+
+
