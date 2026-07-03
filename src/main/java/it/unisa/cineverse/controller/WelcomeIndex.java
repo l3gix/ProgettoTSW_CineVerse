@@ -57,7 +57,16 @@ public class WelcomeIndex extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		LocalDateTime nowdate =  LocalDateTime.now();
+		String dateParam = request.getParameter("date");
+
+		LocalDateTime selectedDate;
+
+		if (dateParam == null || dateParam.isBlank()) {
+		    selectedDate = LocalDateTime.now();
+		} else {
+		    selectedDate = LocalDateTime.parse(dateParam);
+		}
+		
 		List<FilmBean> films = null;
 		 try {
 			films = film.findAllNowShowing();
@@ -69,7 +78,7 @@ public class WelcomeIndex extends HttpServlet {
 		 for (FilmBean f : films)
 		 {
 			 try {
-				f.setProiezione(proiezione.findAllByIdFilmAndDateAndScheduled(f.getId(), nowdate) );
+				f.setProiezione(proiezione.findAllByIdFilmAndDateAndScheduled(f.getId(), selectedDate) );
 			 } catch (SQLException e) { e.printStackTrace();}
 			
 			 try {

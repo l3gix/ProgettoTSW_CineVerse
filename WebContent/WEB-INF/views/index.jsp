@@ -103,7 +103,9 @@
     %>
     </div>
     </section>
-
+	<script>
+    const contextPath = "<%= request.getContextPath() %>";
+</script>
     <script src="script/index.js"></script>
 </body>
 </html>
