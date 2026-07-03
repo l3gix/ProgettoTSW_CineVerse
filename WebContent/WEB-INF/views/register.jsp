@@ -17,10 +17,10 @@
         <section id="login">
             <form action="Register" method="post">
                 <label for="email">Email</label>
-                <input type="email" placeholder="email" name="email" id="email" onchange="validateFormElem(this,document.getElementById('errorEmail'),emailErrorMessage)"><p id="errorEmail"></p>
+                <input type="email" placeholder="email" name="email" id="email" required onchange="validateFormElem(this,document.getElementById('errorEmail'),emailErrorMessage)"><p id="errorEmail"></p>
 
                 <label for="password">Password</label>
-                <input type="password" placeholder="password" name="password" id="password" required pattern="^(?=.*[A-Z]).{8}$" onchange="validateFormElem(this,document.getElementById('errorPassword'),passwordErrorMessage)"><p id="errorPassword"></p>
+                <input type="password" placeholder="password" name="password" id="password" required pattern="(?=.*[A-Z]).{8,}$" onchange="validateFormElem(this,document.getElementById('errorPassword'),passwordErrorMessage)"><p id="errorPassword"></p>
                 
                 <label for="nome">Nome</label>
                 <input type="text" name="nome" placeholder="nome" id="nome" required pattern="^[A-Za-z]+$"
@@ -43,7 +43,7 @@
 			        }
 			    %>
 			    
-                <button type="submit" onclick="">Registrati</button>
+                <button type="submit" onclick="return validate()">Registrati</button>
             </form>
 
             <div id="register">

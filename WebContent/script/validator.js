@@ -11,7 +11,7 @@ function validateFormElem(formElem, span, errorMessage){
 		span.innerHTML = "";
 		return true;
 	}
-	formElem.classList.add("error");
+	formElem.style.border = "3px solid red"
 	span.style.color = "red";
 	if(formElem.validity.valueMissing){
 		span.innerHTML = emptyFieldErrorMessage;
