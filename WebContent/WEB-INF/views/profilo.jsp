@@ -4,13 +4,13 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Insert title here</title>
+<link rel="stylesheet" href="style/profilo.css">
+<link rel="stylesheet" href="style/sidebarprofilo.css">
 </head>
 <body>
-<form action="<%= request.getContextPath() %>/Logout" method="post">
-    <button type="submit" class="logout-btn">
-        Logout
-    </button>
-</form>
+<%@include file="sidebarprofilo.jsp" %>
+
 </body>
 </html>
