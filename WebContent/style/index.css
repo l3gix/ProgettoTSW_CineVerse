@@ -23,30 +23,6 @@ body
 
 }
 
-header
-{
-    width: 100%;
-    background-color: #091119;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    height: 100px;
-    padding-left: 30px;
-}
-
-
-header > p 
-{
-    background-image: linear-gradient(to bottom, #007BFA, #054282);
-    background-clip: text;
-    -webkit-background-clip: text;
-
-    color: transparent;
-    -webkit-text-fill-color: transparent;
-
-    font-size: xx-large;
-} 
-
 
 
 /* SLIDESHOW CONTAINER */
@@ -58,6 +34,7 @@ header > p
   position: relative;
   margin: auto;
   margin-top: 20px;
+  z-index: 1;
 }
 
 .mySlides img {
@@ -65,6 +42,7 @@ header > p
     height: 220px;
     object-fit: cover;
     display: block;
+    z-index: 2;
 }
 
 /* Hide the images by default */
@@ -203,6 +181,7 @@ header > p
 {
     background: linear-gradient(to left, #45484d 0%,#000000 100%); 
     display: flex;
+    justify-content: space-between;
 } 
 
 .hall p 

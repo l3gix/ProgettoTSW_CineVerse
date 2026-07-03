@@ -94,6 +94,7 @@
                 <div class="hall">
                     <p>sala <%=p.getId_sale() %></p>
                     <p>Proiezione laser</p>
+                    <p style="text-align: right;">Da <%=p.getPrezzo_base() %> €</p>
                 </div>
             </div>
             <%} %>
@@ -105,7 +106,7 @@
     </section>
 	<script>
     const contextPath = "<%= request.getContextPath() %>";
-</script>
+	</script>
     <script src="script/index.js"></script>
 </body>
 </html>
