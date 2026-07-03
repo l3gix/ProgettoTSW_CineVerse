@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,6 +14,7 @@ import javax.sql.DataSource;
 import it.unisa.cineverse.model.bean.CategoriaPostiBean;
 import it.unisa.cineverse.model.bean.FilmBean;
 import it.unisa.cineverse.model.dao.FilmDao;
+import it.unisa.cineverse.model.dao.ProiezioniDao;
 
 public class FilmDaoImpl implements FilmDao{
 	private static final String TABLE_NAME ="film "; 
@@ -122,5 +124,34 @@ public class FilmDaoImpl implements FilmDao{
 		
 
 	}
+
+	@Override
+	public synchronized List<FilmBean> findAllNowShowing() throws SQLException {
+		List<FilmBean> film = new ArrayList<FilmBean>();
+		String sql="SELECT * FROM " +TABLE_NAME + " WHERE status = 'now_showing'"; // prendo solo i film che sono attulente in corso
+		try(Connection connection=ds.getConnection();
+				PreparedStatement ps= connection.prepareStatement(sql);
+				ResultSet rs = ps.executeQuery()){
+			while(rs.next()) {
+				FilmBean bean= new FilmBean();
+				bean.setId(rs.getInt("id"));
+				bean.setTitolo(rs.getString("titolo"));
+				bean.setSinossi(rs.getString("sinossi"));
+				bean.setDurata_minuti(rs.getInt("durata_minuti"));
+				bean.setAge_rating(rs.getString("age_rating"));
+				bean.setData_rilascio(rs.getTimestamp("data_rilascio").toLocalDateTime());
+				bean.setTrailer_url(rs.getString("trailer_url"));
+				bean.setCast_film(rs.getString("cast_film"));
+				bean.setStatus(rs.getString("status"));
+				film.add(bean);
+				}
+		}
+		
+		return film;
+	
+	}
+	
+	
+	
 
 }

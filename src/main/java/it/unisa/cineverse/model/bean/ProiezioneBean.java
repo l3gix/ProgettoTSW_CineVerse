@@ -96,6 +96,27 @@ public class ProiezioneBean
 		this.biglietto = biglietto;
 	}
 	
+	public void addBiglietto(BigliettoBean biglietto)
+	{
+		this.biglietto.add(biglietto);
+	}
+
+	@Override
+	public String toString() {
+		// TODO Auto-generated method stub
+		return super.toString() +
+	            "[id=" + id +
+	            ", id_film=" + id_film +
+	            ", id_sale=" + id_sale +
+	            ", id_formato=" + id_formato +
+	            ", starts=" + starts +
+	            ", ends=" + ends +
+	            ", prezzo_base=" + prezzo_base +
+	            ", status='" + status + '\'' +
+	            ", biglietto=" + biglietto +
+	            ']';
+	}
+	
 	
 	
 }

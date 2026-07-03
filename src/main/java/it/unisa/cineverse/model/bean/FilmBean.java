@@ -103,6 +103,11 @@ public class FilmBean {
 	public void setGenere(List<GenereBean> genere) {
 		this.genere = genere;
 	}
+	
+	public void addGenere(GenereBean genere)
+	{
+		this.genere.add(genere);
+	}
 
 	public List<PosterBean> getPoster() {
 		return poster;
@@ -110,6 +115,11 @@ public class FilmBean {
 
 	public void setPoster(List<PosterBean> poster) {
 		this.poster = poster;
+	}
+	
+	public void addPoster(PosterBean poster)
+	{
+		this.poster.add(poster);
 	}
 
 	public List<ProiezioneBean> getProiezione() {
@@ -119,6 +129,22 @@ public class FilmBean {
 	public void setProiezione(List<ProiezioneBean> proiezione) {
 		this.proiezione = proiezione;
 	}
+
+	public void addProiezione(ProiezioneBean proiezione)
+	{
+		this.proiezione.add(proiezione);
+	}
+	
+	
+	@Override
+	public String toString() {
+		return super.toString() +" [id=" + id + ", titolo=" + titolo + ", sinossi=" + sinossi + ", durata_minuti=" + durata_minuti
+				+ ", age_rating=" + age_rating + ", data_rilascio=" + data_rilascio + ", trailer_url=" + trailer_url
+				+ ", cast_film=" + cast_film + ", status=" + status + ", genere=" + genere + ", poster=" + poster
+				+ ", proiezione=" + proiezione + "]";
+	}
+	
+	
 	
 	
 

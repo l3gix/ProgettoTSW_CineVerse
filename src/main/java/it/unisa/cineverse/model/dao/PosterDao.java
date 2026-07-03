@@ -15,6 +15,8 @@ public interface PosterDao
 	
 	List<PosterBean> findAll()throws SQLException;
 	
-	PosterBean findById(int id)throws SQLException;;
+	PosterBean findById(int id)throws SQLException;
+	
+	PosterBean findByIdFilm(int id)throws SQLException;
 	
 }

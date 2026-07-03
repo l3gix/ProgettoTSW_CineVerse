@@ -108,6 +108,32 @@ public class PosterDaoImpl implements PosterDao
 		}
 		return bean;
 	}
+
+	@Override
+	public synchronized PosterBean findByIdFilm(int id) throws SQLException {
+		PosterBean bean = null;
+		String sql = "SELECT *\n"
+				+ "FROM " + TABLE_NAME
+				+ "WHERE id_film = ?;";
+
+		try(Connection connection = ds.getConnection();
+				PreparedStatement ps = connection.prepareStatement(sql);){
+				ps.setInt(1, id);
+				try (ResultSet rs = ps.executeQuery())
+				{
+					while(rs.next())
+					{
+						bean = new PosterBean();
+						bean.setId(rs.getInt("id"));
+						bean.setId_film(rs.getInt("id_film"));
+						bean.setCopertina(rs.getString("copertina"));
+						bean.setBanner(rs.getString("banner"));
+						
+					}
+				}
+		}
+		return bean;
+	}
 	
 	
 	
