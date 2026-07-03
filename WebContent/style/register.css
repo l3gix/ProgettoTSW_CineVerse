@@ -20,7 +20,11 @@ body
     );
     background-repeat: no-repeat;
     color: white;
-
+	
+}
+.error{
+	color:red;
+	border-color:red;
 }
 
 #container
