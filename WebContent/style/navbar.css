@@ -21,6 +21,8 @@ header
     background-color: #091119;
     display: flex;
     height: 70px;
+    position : relative;
+    z-index: 9999;
 }
 
 nav
@@ -86,6 +88,7 @@ nav
     width: 100%;
     background-color: #091119;
     padding: 20px;
+    z-index: 1000000;
 }
 
 
@@ -101,6 +104,7 @@ nav
 
 .burger.active {
     display: block;
+     z-index: 30000;
 }
 
 
@@ -176,6 +180,7 @@ nav
         background-color: transparent;
         padding: 0;
         justify-content: center;
+        z-index: auto;
     }
 
     .burger ul {
