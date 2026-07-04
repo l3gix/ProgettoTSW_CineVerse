@@ -99,7 +99,7 @@ public class FilmDaoImpl implements FilmDao{
 	@Override
 	public synchronized FilmBean findbyId(int id) throws SQLException {
 		FilmBean bean = new FilmBean();
-		String sql= "SELECT * FROM" +TABLE_NAME +" WHERE id = ?";
+		String sql= "SELECT * FROM " +TABLE_NAME +" WHERE id = ?";
 		
 		try(Connection connection=ds.getConnection();
 				PreparedStatement ps= connection.prepareStatement(sql);){
@@ -148,6 +148,34 @@ public class FilmDaoImpl implements FilmDao{
 		}
 		
 		return film;
+	
+	}
+
+	@Override
+	public synchronized FilmBean findByIdAndNowShowing(int id) throws SQLException {
+		FilmBean bean = null;
+		String sql= "SELECT * FROM " +TABLE_NAME +" WHERE id = ? AND status = 'now_showing'";
+		
+		try(Connection connection=ds.getConnection();
+				PreparedStatement ps= connection.prepareStatement(sql);){
+				ps.setInt(1,id);
+				try (ResultSet rs  = ps.executeQuery()){
+					while(rs.next()) {
+						bean = new FilmBean();
+						bean.setId(rs.getInt("id"));
+						bean.setTitolo(rs.getString("titolo"));
+						bean.setSinossi(rs.getString("sinossi"));
+						bean.setDurata_minuti(rs.getInt("durata_minuti"));
+						bean.setAge_rating(rs.getString("age_rating"));
+						bean.setData_rilascio(rs.getTimestamp("data_rilascio").toLocalDateTime());
+						bean.setTrailer_url(rs.getString("trailer_url"));
+						bean.setCast_film(rs.getString("cast_film"));
+						bean.setStatus(rs.getString("status"));
+						
+					}
+				}
+		}
+		return bean;
 	
 	}
 	

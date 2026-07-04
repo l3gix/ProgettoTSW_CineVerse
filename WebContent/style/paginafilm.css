@@ -1,0 +1,266 @@
+@charset "UTF-8";
+@import url('https://fonts.googleapis.com/css2?family=Saira:ital,wght@0,100..900;1,100..900&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Saira", sans-serif;
+}
+
+body
+{
+      /*min-height: 100vh;*/
+    min-height: 100vh;
+   background-image: linear-gradient(
+        to top,
+        #091119 0%,
+        #091119 80%,
+        #054282 100%
+    );
+    background-repeat: no-repeat;
+    color: white;
+
+}
+
+
+.showing-list
+{
+    margin-top: 10%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+
+.container
+{
+    width: 95%;
+    display: inline;
+}
+.showing-list-info
+{
+    width: 100%;
+    display: inline;
+}
+
+.list-hall
+{
+    width: 100%;
+    display: flex;
+    margin-bottom: 10px;
+    flex-direction: column;
+}
+
+.session
+{
+    width: 100%;
+    border: 1px solid white;
+    margin-bottom: 10px;
+    padding-bottom: 20px;
+    background-color: black;
+}
+
+.session-range 
+{
+    padding: 0px 10px;
+    background: linear-gradient(to left, #45484d 0%,#000000 100%); 
+}
+.hall 
+{
+    background: linear-gradient(to left, #45484d 0%,#000000 100%); 
+    display: flex;
+} 
+
+.hall p 
+{
+    padding: 0px 10px;
+}
+
+
+.showing-list-film
+{
+    
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.showing-list-film img 
+{
+    width: 100px;
+    height: 150px;
+    box-shadow: 0px 0px 40px black;
+}
+
+.showing-film-card
+{
+    width: 100%;
+    
+}
+
+
+.showing-film-card h1
+{
+    text-align: center;
+    font-size: x-large;
+}
+
+.showing-film-card p 
+{
+    font-size: small;
+}
+
+.showing-film-card h3
+{
+    font-size: medium;
+}
+
+.button-day
+{
+    margin-top: 20px;
+    margin-bottom: 20px;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    overflow-x: auto;
+    flex-direction: row;
+    overflow-y: unset;
+    gap: 10px;
+}
+
+.button-day button
+{
+    min-width: 70px;
+    height: 30px;
+    background-color: transparent;
+    color: white;
+    border: 1px solid white;
+    font-size: small;
+    padding: 10px;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+@media screen and (min-width: 768px) {
+  .slideshow-container {
+    width: 90%;
+    margin: 20px auto 0 auto;
+    height: 320px;
+  }
+
+    .mySlides img {
+        height: 30px;
+    }
+}
+
+@media screen and (min-width: 1024px) {
+
+    .showing-list
+    {
+        margin-top: 5%;
+    }
+
+    .showing-list-info
+    {
+        display: flex;
+    }
+
+     .showing-list-film 
+    {
+        width: 20%;
+        height: 300px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .showing-list-film img 
+    {
+        width: 300px;
+        height: 300px;
+        
+    }
+
+    .button-day
+    {
+        padding-left: 50px;
+    }
+
+    .showing-film-card
+    {
+        width: 80%;
+        padding-left: 50px;
+    }
+
+    .showing-film-card h1 
+    {
+        text-align: left;
+    }
+
+    .container
+    {
+        width: 50%;
+        display: inline;
+        align-items: flex-start;
+    }
+
+    .button-day
+    {
+        width: 80%;
+        margin-left: auto;
+    }
+
+    .title
+    {
+        padding-left: 50px;
+    }
+
+
+    .list-hall
+    {
+        margin-top: 10px;
+        width: 80%;
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+        gap: 10px;
+        margin-bottom: 10px;
+        margin-left: auto;
+        padding-left: 50px;
+    }
+
+    .title
+    {
+        width: 80%;
+        display :flex;
+        margin-left : auto;
+    }
+
+    .session
+    {
+        width: 20%;
+    }
+
+    .hall 
+    {
+        flex-direction: column;
+    }    
+
+    .hall p 
+    {
+        font-size: small;
+    }
+
+    .session-range
+    {
+        font-size: small;
+    }
+
+
+
+}
