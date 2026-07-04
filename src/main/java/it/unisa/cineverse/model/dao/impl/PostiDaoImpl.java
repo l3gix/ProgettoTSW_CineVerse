@@ -80,7 +80,7 @@ public class PostiDaoImpl implements PostiDao
 				bean.setId(rs.getInt("id"));
 				bean.setId_sale(rs.getInt("id_sale"));
 				bean.setId_categoria_posti(rs.getString("id_categoria_posti"));
-				bean.setRow_label(rs.getString("id_categoria_posti"));
+				bean.setRow_label(rs.getString("row_label"));
 				posti.add(bean);
 			}
 			
@@ -105,11 +105,37 @@ public class PostiDaoImpl implements PostiDao
 						bean.setId(rs.getInt("id"));
 						bean.setId_sale(rs.getInt("id_sale"));
 						bean.setId_categoria_posti(rs.getString("id_categoria_posti"));
-						bean.setRow_label(rs.getString("id_categoria_posti"));
+						bean.setRow_label(rs.getString("row_label"));
 					}
 				}
 		}
 		return bean;
+	}
+
+	@Override
+	public synchronized List<PostiBean> findAllByIdSala(int id_sala) throws SQLException {
+		List<PostiBean> posti = new ArrayList<PostiBean>();
+		String sql = "SELECT *\n"
+				+ "FROM " + TABLE_NAME + " WHERE id_sale = ?";
+		
+		try(Connection connection = ds.getConnection();
+				PreparedStatement ps = connection.prepareStatement(sql);){
+				ps.setInt(1, id_sala);
+				try (ResultSet rs = ps.executeQuery())
+				{
+					while(rs.next())
+					{
+						PostiBean bean = new PostiBean();
+						bean.setId(rs.getInt("id"));
+						bean.setId_sale(rs.getInt("id_sale"));
+						bean.setId_categoria_posti(rs.getString("id_categoria_posti"));
+						bean.setRow_label(rs.getString("row_label"));
+						posti.add(bean);
+					}
+				}
+		}
+
+		return posti;
 	}
 
 }

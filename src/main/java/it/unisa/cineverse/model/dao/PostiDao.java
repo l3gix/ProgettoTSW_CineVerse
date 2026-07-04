@@ -15,5 +15,7 @@ public interface PostiDao
 	
 	List<PostiBean> findAll() throws SQLException;
 	
+	List<PostiBean> findAllByIdSala(int id_sala) throws SQLException;
+	
 	PostiBean findById(int id) throws SQLException;
 }

@@ -1,0 +1,486 @@
+:root {
+  --verde: #62c783;
+  --blu: #263b86;
+  --rosso: #db5a42;
+  --ultra: #ff8a00;
+  --occupato: #9b9b9b;
+  --sfondo: #f7f7f7;
+  --testo: #111;
+}
+
+.pagina {
+  width: 100%;
+  background: #ffffff;
+  padding: 14px 10px 0;
+  color: black;
+}
+
+/* Barra superiore */
+
+.top-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 14px;
+}
+
+.back-btn {
+  border: 1px solid #d3d3d3;
+  background: #fff;
+  color: #555;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.back-btn {
+  padding: 8px 12px;
+  font-size: 13px;
+}
+
+/* Area posti */
+
+.layout-prenotazione {
+  display: block;
+}
+
+.area-prenotazione {
+  width: 100%;
+  background: var(--sfondo);
+  padding: 18px 10px 35px;
+  overflow-x: hidden;
+  border-radius: 6px;
+}
+
+/* Schermo */
+
+.schermo {
+  width: 280px;
+  height: 55px;
+  margin: 0 auto 4px;
+  position: relative;
+}
+
+.schermo::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  /*background: linear-gradient(#d8d8d8, #f2f2f2);*/
+  background-color: #054282;
+  clip-path: polygon(0 0, 100% 0, 86% 45%, 14% 45%);
+  box-shadow: 0 18px 20px rgba(0, 0, 0, 0.15);
+}
+
+.titolo-sala {
+  text-align: center;
+  font-size: 16px;
+  font-weight: 700;
+  margin-bottom: 18px;
+}
+
+/* Mappa posti */
+
+.mappa-wrapper {
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.riga {
+  display: grid;
+  grid-template-columns: 16px repeat(17, 14px);
+  gap: 5px;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.lettera-riga {
+  font-size: 11px;
+  color: #777;
+  text-align: center;
+}
+
+.posto {
+  width: 16px;
+  height: 18px;
+  border: 1.5px solid;
+  border-radius: 0 0 4px 4px;
+  background: white;
+  cursor: pointer;
+  transition: 0.15s;
+  display: grid;
+  place-items: center;
+  font-size: 8px;
+  font-weight: bold;
+  user-select: none;
+}
+
+.posto:hover:not(.occupato):not(.vuoto):not(.accessibile) {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.18);
+}
+
+.verde {
+  border-color: var(--verde);
+}
+
+.blu {
+  border-color: var(--blu);
+}
+
+.rosso {
+  border-color: var(--rosso);
+}
+
+
+.posto.verde.selezionato {
+  background-color: var(--verde);
+}
+
+.posto.blu.selezionato {
+  background-color: var(--blu);
+}
+
+.posto.rosso.selezionato {
+  background-color: var(--rosso);
+}
+
+.posto.ultra.selezionato {
+  background-color: var(--ultra);
+}
+
+.posto.ultra.selezionato::before {
+  color: #fff;
+}
+
+
+.occupato {
+  background: var(--occupato);
+  border-color: var(--occupato);
+  cursor: not-allowed;
+}
+
+/*
+.selezionato {
+  background: #111;
+  border-color: #111;
+  color: #fff;
+}
+  */
+
+.accessibile {
+  background: #49a5d8;
+  border-color: #49a5d8;
+  color: #fff;
+  cursor: default;
+  border-radius: 50%;
+  font-size: 12px;
+}
+
+.accessibile::before {
+  content: "♿";
+}
+
+.vuoto {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Riepilogo */
+
+.riepilogo {
+    width: 100%;
+  background: #fff;
+  padding: 22px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.legend-item {
+  width: 100%;
+  border: 1px solid #d0d0d0;
+  background: #fff;
+  padding: 10px 12px;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.mini-posto {
+  width: 13px;
+  height: 13px;
+  border: 1.8px solid;
+  border-radius: 0 0 4px 4px;
+  display: inline-block;
+  flex-shrink: 0;
+}
+
+.mini-verde {
+  border-color: var(--verde);
+}
+
+.mini-blu {
+  border-color: var(--blu);
+}
+
+.mini-rosso {
+  border-color: var(--rosso);
+}
+
+.mini-ultra
+{
+    border-color: var(--ultra);
+}
+
+.ultra {
+  width: 16px;
+  height: 18px;
+  border-color: var(--ultra);
+  color: var(--ultra);
+  border-radius: 3px 3px 5px 5px;
+  margin-left: 0;
+}
+
+.ultra::before {
+  content: "★";
+  color: var(--ultra);
+  font-size: 7px;
+}
+.accessibile {
+  background: #49a5d8;
+  border-color: #49a5d8;
+  color: #fff;
+  cursor: default;
+  border-radius: 50%;
+  font-size: 8px;
+}
+.mini-occupato {
+  background: var(--occupato);
+  border-color: var(--occupato);
+  border-radius: 3px;
+}
+
+.prezzo {
+  margin-left: auto;
+  font-weight: 800;
+}
+
+.box-totale {
+  width: 100%;
+  margin-top: 8px;
+  padding: 15px;
+  border: 1px solid #ddd;
+  border-radius: 7px;
+  background: #fafafa;
+}
+
+.box-totale p {
+  font-size: 14px;
+  margin-bottom: 7px;
+}
+
+.box-totale strong {
+  font-size: 17px;
+}
+
+.azioni {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+  margin-top: 12px;
+}
+
+.btn {
+  width: 100%;
+  border: 0;
+  padding: 12px 14px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: 700;
+  transition: 0.2s;
+  font-size: 14px;
+
+      border : 3px solid transparent;
+    border-image-source: linear-gradient(to bottom, #007BFA, #054282);
+  /* Ritaglio del gradiente per adattarlo al bordo */
+    border-image-slice: 1; 
+    background-clip: padding-box;
+}
+
+/* Messaggio popup */
+
+.toast {
+  position: fixed;
+  left: 14px;
+  right: 14px;
+  bottom: 18px;
+  background: #111;
+  color: #fff;
+  padding: 13px 16px;
+  border-radius: 6px;
+  opacity: 0;
+  transform: translateY(12px);
+  pointer-events: none;
+  transition: 0.25s;
+  font-size: 14px;
+  text-align: center;
+  z-index: 999;
+}
+
+.toast.visibile {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Tablet */
+
+@media (min-width: 768px) {
+  body {
+    background: #111;
+  }
+
+  .pagina {
+    width: 95%;
+    margin: auto;
+    padding: 28px 20px 0;
+  }
+
+  .top-bar {
+    margin-bottom: 18px;
+  }
+
+  .back-btn {
+    padding: 9px 14px;
+    font-size: 14px;
+  }
+
+
+  .area-prenotazione {
+    min-height: 455px;
+    padding: 20px 18px 45px;
+  }
+
+  .schermo {
+    width: 390px;
+    height: 62px;
+  }
+
+  .titolo-sala {
+    font-size: 18px;
+  }
+
+  .riga {
+    grid-template-columns: 32px repeat(17, 22px);
+    gap: 8px;
+    margin-bottom: 10px;
+  }
+
+  .posto {
+    width: 22px;
+    height: 22px;
+  }
+
+  .ultra {
+    width: 30px;
+    height: 24px;
+  }
+
+  .riepilogo {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    padding: 30px 10px;
+  }
+
+  .legend-item {
+    width: auto;
+    padding: 8px 10px;
+    font-size: 12px;
+  }
+
+  .prezzo {
+    margin-left: 0;
+  }
+
+  .box-totale {
+    width: 360px;
+  }
+
+  .azioni {
+    flex-direction: row;
+  }
+
+  .toast {
+    left: auto;
+    right: 22px;
+    width: auto;
+    min-width: 280px;
+  }
+}
+
+/* Desktop */
+
+@media (min-width: 1024px) {
+  .pagina {
+    padding: 40px 30px 0;
+  }
+
+   .layout-prenotazione {
+    display: flex;
+    align-items: stretch;
+    gap: 20px;
+  }
+  .area-prenotazione
+  {
+    width: 70%;
+  }
+  .riepilogo
+  {
+    width: 30%;
+    padding: 34px 20px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start
+  }
+
+  .legend-item
+  {
+    width: 100%;
+  }
+
+  .area-prenotazione {
+    padding: 18px 20px 50px;
+  }
+
+  .schermo {
+    width: 450px;
+    height: 65px;
+  }
+
+  .riga {
+    grid-template-columns: 35px repeat(17, 23px);
+    gap: 9px;
+  }
+
+  .posto {
+    width: 22px;
+    height: 22px;
+  }
+
+  .ultra {
+    width: 31px;
+    height: 24px;
+  }
+
+  .riepilogo {
+    padding: 34px 20px;
+  }
+}

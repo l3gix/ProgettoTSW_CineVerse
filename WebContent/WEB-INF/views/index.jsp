@@ -121,6 +121,7 @@
         <div class="list-hall">
         <% for(ProiezioneBean p : f.getProiezione()) { %>
             <div class="session">
+             <a href="<%= request.getContextPath() %>/WelcomePrenotazionePosti?id=<%= p.getId() %>">
                 <div class="session-range">
                     <p><%= p.getStarts().toLocalTime() %> - <%= p.getEnds().toLocalTime() %></p>
                 </div>
@@ -130,6 +131,7 @@
                     <p>Proiezione laser</p>
                     <p style="text-align: right;">Da <%=p.getPrezzo_base() %> €</p>
                 </div>
+                        </a>
             </div>
             <%} %>
         </div>
