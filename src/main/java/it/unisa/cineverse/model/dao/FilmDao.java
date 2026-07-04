@@ -16,5 +16,7 @@ public interface FilmDao {
 	FilmBean findbyId(int id)throws SQLException;
 	
 	List<FilmBean> findAllNowShowing() throws SQLException;
+	
+	FilmBean findByIdAndNowShowing(int id)throws SQLException;
 
 }

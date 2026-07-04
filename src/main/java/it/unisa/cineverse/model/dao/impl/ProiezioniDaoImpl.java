@@ -139,15 +139,17 @@ public class ProiezioniDaoImpl implements ProiezioniDao
 		String sql = "SELECT *\n"
 				+ "FROM " + TABLE_NAME
 				+ " WHERE starts >= ?\n"
+				+ " AND starts < ? "
 				+ " AND status = ? AND id_film = ?; ";
 		try(Connection connection = ds.getConnection();
 				PreparedStatement ps = connection.prepareStatement(sql);){
 				ps.setTimestamp(1, Timestamp.valueOf(date));
+				ps.setTimestamp(2, Timestamp.valueOf(date.toLocalDate().plusDays(1).atStartOfDay()));
 				System.out.println(date);
 				System.out.println(Timestamp.valueOf(date.toLocalDate().plusDays(1).atStartOfDay()));
 				
-				ps.setString(2,"scheduled");
-				ps.setInt(3, id);
+				ps.setString(3,"scheduled");
+				ps.setInt(4, id);
 				try (ResultSet rs = ps.executeQuery())
 				{
 					while(rs.next())

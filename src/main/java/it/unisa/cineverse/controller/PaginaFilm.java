@@ -13,34 +13,30 @@ import java.util.List;
 
 import javax.sql.DataSource;
 
-import com.mysql.cj.x.protobuf.MysqlxCrud.Find;
-
 import it.unisa.cineverse.model.bean.FilmBean;
-import it.unisa.cineverse.model.bean.ProiezioneBean;
 import it.unisa.cineverse.model.dao.FilmDao;
 import it.unisa.cineverse.model.dao.PosterDao;
 import it.unisa.cineverse.model.dao.ProiezioniDao;
 import it.unisa.cineverse.model.dao.impl.FilmDaoImpl;
 import it.unisa.cineverse.model.dao.impl.PosterDaoImpl;
 import it.unisa.cineverse.model.dao.impl.ProiezioniDaoImpl;
-import it.unisa.cineverse.model.dao.impl.UtentiDaoImpl;
 
 /**
- * Servlet implementation class Index
+ * Servlet implementation class PaginaFilm
  */
-@WebServlet("/WelcomeIndex")
-public class WelcomeIndex extends HttpServlet {
+@WebServlet("/PaginaFilm")
+public class PaginaFilm extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-    
+       
 	private FilmDao film;
     private ProiezioniDao proiezione;
     private PosterDao poster;
     
-    public WelcomeIndex() {
+    public PaginaFilm() {
         super();
         // TODO Auto-generated constructor stub
     }
-    
+
     public void init(ServletConfig config) throws ServletException {
 		// TODO Auto-generated method stub
 		super.init(config);
@@ -51,14 +47,13 @@ public class WelcomeIndex extends HttpServlet {
 		proiezione = new ProiezioniDaoImpl(ds);
 		poster = new PosterDaoImpl(ds);
 	}
-
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
+    
+    
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		String dateParam = request.getParameter("date");
-
+		int id = Integer.parseInt(request.getParameter("id"));
+		
 		LocalDateTime selectedDate;
 
 
@@ -75,31 +70,28 @@ public class WelcomeIndex extends HttpServlet {
 	        }
 	    }
 		
-		List<FilmBean> films = null;
+		
+		FilmBean filmpagina = null;
 		 try {
-			films = film.findAllNowShowing();
+			 filmpagina = film.findByIdAndNowShowing(id);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		 
-		 for (FilmBean f : films)
-		 {
+		
 			 try {
-				f.setProiezione(proiezione.findAllByIdFilmAndDateAndScheduled(f.getId(), selectedDate) );
+				 filmpagina.setProiezione(proiezione.findAllByIdFilmAndDateAndScheduled(filmpagina.getId(), selectedDate) );
 			 } catch (SQLException e) { e.printStackTrace();}
 			
 			 try {
-				f.addPoster(poster.findByIdFilm(f.getId()) );
+				 filmpagina.addPoster(poster.findByIdFilm(filmpagina.getId()) );
 			} catch (SQLException e) {e.printStackTrace();}
 			  
-		 }
-		 
-		 System.out.println(films);
-		 request.setAttribute("films", films);
-		 request.getRequestDispatcher("/WEB-INF/views/index.jsp").forward(request, response);
-		 
 		
+		 
+		 System.out.println(filmpagina);
+		 request.setAttribute("filmpagina", filmpagina);
+		 request.getRequestDispatcher("/WEB-INF/views/paginafilm.jsp").forward(request, response);
 	}
 
 	/**
