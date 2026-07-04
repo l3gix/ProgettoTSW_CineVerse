@@ -21,6 +21,7 @@
 		List<CategoriaPostiBean> c = (List<CategoriaPostiBean>) request.getAttribute("categoria");
 		ProiezioneBean p = (ProiezioneBean) request.getAttribute("proiezioni");
 		List<PostiBean> poss = (List<PostiBean>) request.getAttribute("posti");
+		List<PostiBean> postisala = (List<PostiBean>) request.getAttribute("postisala");
 		
 	%>
 
@@ -59,17 +60,17 @@
     <section class="riepilogo">
       <div class="legend-item mini-ultra">
         <span class="mini-posto mini-ultra"></span>
-        LUX <span class="prezzo"><%=c.get(0).getModifica_prezzo() %></span>
+        LUX <span class="prezzo"><%=c.get(0).getModifica_prezzo() + p.getPrezzo_base()%></span>
       </div>
 
       <div class="legend-item mini-rosso">
         <span class="mini-posto mini-rosso"></span>
-        Standard<span class="prezzo"><%=c.get(1).getModifica_prezzo() %></span>
+        Standard<span class="prezzo"><%=c.get(1).getModifica_prezzo() + p.getPrezzo_base()%></span>
       </div>
 
       <div class="legend-item mini-blu">
         <span class="mini-posto mini-blu"></span>
-        Vip <span class="prezzo"><%=c.get(2).getModifica_prezzo()%></span>
+        Vip <span class="prezzo"><%=c.get(2).getModifica_prezzo() + p.getPrezzo_base()%></span>
       </div>
 
       <div class="legend-item ">
@@ -94,9 +95,11 @@
   
   <script>
     window.appData = {
+    		context: "<%= request.getContextPath() %>",
+    		idproiezione : <%=p.getId() %>,
+    		prezzoBase : <%= p.getPrezzo_base() %>,
     		
-    		prezzoBase: <%= p.getPrezzo_base() %>,
-    		 posti: [
+    		posti: [
     	            <% 
     	                for (int i = 0; i < poss.size(); i++) { 
     	                    PostiBean t = poss.get(i);
@@ -106,6 +109,21 @@
     	                    label: "<%= t.getRow_label() %>",
     	                    categoria: "<%= t.getId_categoria_posti() %>"
     	                }<%= (i < poss.size() - 1) ? "," : "" %>
+    	            <% 
+    	                } 
+    	            %>
+    	        ],
+    	        
+    	        postisala: [
+    	            <% 
+    	                for (int i = 0; i < postisala.size(); i++) { 
+    	                    PostiBean t = postisala.get(i);
+    	            %>
+    	                {
+    	                    id: <%= t.getId() %>,
+    	                    label: "<%= t.getRow_label() %>",
+    	                    categoria: "<%= t.getId_categoria_posti() %>"
+    	                }<%= (i < postisala.size() - 1) ? "," : "" %>
     	            <% 
     	                } 
     	            %>

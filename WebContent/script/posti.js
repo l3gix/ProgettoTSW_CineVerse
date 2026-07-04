@@ -1,7 +1,11 @@
 prezziBasedef = window.appData.prezzoBase;
 postidef = window.appData.posti;
 prezzidef = window.appData.prezziCategorie;
+id_proiezione = window.appData.idproiezione;
+contex = window.appData.context;
+postiinsala = window.appData.postisala;
 console.log(prezzidef);
+console.log(postiinsala);
 
 
 
@@ -10,6 +14,14 @@ const colore_tipo = {
 	"blu" : "VIP",
 	"ultra" : "LUX"
 };
+
+const tipotocolor = 
+{
+	"Standard" : "rosso",
+	"VIP" : "blu",
+	"LUX" : "ultra",
+	"Vuoto" : "vuoto",
+}
 
 var sala = [
   {
@@ -65,7 +77,7 @@ var sala = [
   {
     lettera: "G",
     posti: [
-      "rosso", "rosso", "rosso", "rcolore_tipo[tipo]]osso", "rosso",
+      "rosso", "rosso", "rosso", "rosso", "rosso",
       "occupato", "accessibile", "vuoto", "vuoto",
       "accessibile", "occupato",
       "rosso", "rosso", "rosso", "rosso", "rosso", "vuoto"
@@ -80,7 +92,7 @@ var confermaBtn = document.getElementById("conferma");
 var toast = document.getElementById("toast");
 
 var selezionati = [];
-
+/*
 function creaSala() {
   for (var i = 0; i < sala.length; i++) {
     var riga = sala[i];
@@ -124,23 +136,93 @@ function creaSala() {
     mappaPosti.appendChild(rigaDiv);
   }
 }
+*/
+
+
+function creaSala1() {
+	const postiPerRiga = {};
+	
+	postiinsala.forEach(posto => {
+		    // prende la lettera da A1, A2, A10, B1 ecc.
+		    const lettera = posto.label.match(/[A-Za-z]+/)[0];
+
+		    if (!postiPerRiga[lettera]) {
+		        postiPerRiga[lettera] = [];
+		    }
+
+		    postiPerRiga[lettera].push(posto);
+	});
+		
+	console.log(postiPerRiga.length);
+  for (let lettera in postiPerRiga) {
+	console.log(lettera);
+    //var riga = sala[i];
+	
+	//Creazionde della riga 
+    var rigaDiv = document.createElement("div");
+    rigaDiv.className = "riga";
+
+    var letteraDiv = document.createElement("div");
+    letteraDiv.className = "lettera-riga";
+    letteraDiv.innerHTML = lettera;
+
+    rigaDiv.appendChild(letteraDiv);
+	
+	console.log(postiPerRiga);
+
+	const postiRiga = postiPerRiga[lettera];
+	
+     postiRiga.forEach( posto => {
+
+      var bottonePosto = document.createElement("button");
+
+      bottonePosto.type = "button";
+      bottonePosto.className = "posto " + tipotocolor[posto.categoria].toLowerCase();
+
+	  bottonePosto.id = posto.label;
+      bottonePosto.setAttribute("data-tipo", tipotocolor[posto.categoria]);
+
+      if (
+        posto.categoria == "Vuoto"
+      ) {
+        bottonePosto.disabled = true;
+      }
+
+      bottonePosto.onclick = function () {
+        selezionaPosto(this);
+      };
+
+      rigaDiv.appendChild(bottonePosto);
+    });
+
+    mappaPosti.appendChild(rigaDiv);
+  }
+}
 
 function selezionaPosto(posto) {
+
+	//console.log(posto)
   var id = posto.id;
   var tipo = posto.getAttribute("data-tipo");
 
   var codicePosto = id;
   var posizione = cercaPostoSelezionato(codicePosto); // se ci sono posti selezionati 
-
+  
+  var categoria = colore_tipo[tipo];
+  var prezzoPosto = Number(prezzidef[categoria]);
+  
+  let params = 
+  	"id_posto=" + encodeURIComponent(trovaIdPostoDaCodice(id)) +
+  	"&id_proiezione=" + encodeURIComponent(id_proiezione )+
+  	"&prezzo=" + encodeURIComponent(prezziBasedef + prezzoPosto);
+	
   if (posizione == -1) {
 	
-	var categoria = colore_tipo[tipo];
-	
+	console.log("codice",trovaIdPostoDaCodice(id))
 	console.log("tipo:", tipo);
 	console.log("categoria:", categoria);
 	console.log("prezzo categoria:", prezzidef[categoria]);
 	
-	var prezzoPosto = Number(prezzidef[categoria]);
 	
     var nuovoPosto = {
 		codice: codicePosto,
@@ -154,12 +236,45 @@ function selezionaPosto(posto) {
     selezionati.push(nuovoPosto);
     let colore = posto.querySelector(".posto");
     posto.classList.add("selezionato");
+	
+	console.log(params)
+	
+	salvaPostoAjax("aggiungi",params) ;
+	
   } else {
     selezionati.splice(posizione, 1);
     posto.classList.remove("selezionato");
+	salvaPostoAjax("rimuovi",params) ;
   }
 
   aggiornaRiepilogo();
+}
+
+
+
+function trovaIdPostoDaCodice(codicePosto) {
+    var postoTrovato = postiinsala.find(p => p.label == codicePosto);
+    if (postoTrovato) {
+        return postoTrovato.id;
+    }
+    return null;
+}
+
+
+
+
+//funzione cha chiama ajax 
+function salvaPostoAjax( azione, par) {
+	    var params = 
+	        "azione=" + encodeURIComponent(azione) +
+			"&" + par;
+
+	    loadAjaxDoc(contex+"/PrenotazionePosti", "POST", params, handleSelezionaPosto);
+	}
+
+function handleSelezionaPosto(request)
+{
+	
 }
 
 function postiOccupati() // funzione per controllare se i posti sono occupati dal backend 
@@ -265,12 +380,83 @@ confermaBtn.onclick = function () {
   confermaPrenotazione();
 };
 
-creaSala();
+//creaSala();
+creaSala1()
 postiOccupati()
 aggiornaRiepilogo();
 
 
 /*Funzioni Ajax */
 
+function createXMLHttpRequest() {
+	var request;
+	try {
+		// Firefox 1+, Chrome 1+, Opera 8+, Safari 1.2+, Edge 12+, Internet Explorer 7+
+		request = new XMLHttpRequest();
+	} catch (e) {
+		// past versions of Internet Explorer 
+		try {
+			request = new ActiveXObject("Msxml2.XMLHTTP");  
+		} catch (e) {
+			try {
+				request = new ActiveXObject("Microsoft.XMLHTTP");
+			} catch (e) {
+				alert("Il browser non supporta AJAX");
+				return null;
+			}
+		}
+	}
+	return request;
+}
 
+function loadAjaxDoc(url, method, params, cFuction) {
+	var request = createXMLHttpRequest();
+	if(request){
+		
+		request.onreadystatechange = function() {
+			if (this.readyState == 4) {
+				if (this.status == 200) {
+				    cFuction(this);
+				} else {				
+					if(this.status == 0){ // When aborting the request
+						alert("Problemi nell'esecuzione della richiesta: nessuna risposta ricevuta nel tempo limite");
+					} else { // Any other situation
+						alert("Problemi nell'esecuzione della richiesta:\n" + this.statusText);
+					}
+					return null;
+				}
+		    }
+		};
+		
+		setTimeout(function () {     // to abort after 15 sec
+        	if (request.readyState < 4) {
+            	request.abort();
+        	}
+    	}, 15000); 
+		
+		if(method.toLowerCase() == "get"){
+			if(params){
+				request.open("GET", url + "?" + params, true);
+			} else {
+				request.open("GET", url, true);
+			}
+			request.setRequestHeader("Connection", "close");
+	        request.send(null);
+	        
+		} else {
+			
+			if(params){
+				request.open("POST", url, true);
+				request.setRequestHeader("Connection", "close");
+				request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+	        	request.send(params);
+			} else {
+				console.log("Usa GET se non ci sono parametri!");
+				return null;
+			}
+			
+		}
+		
+	}
+}
 

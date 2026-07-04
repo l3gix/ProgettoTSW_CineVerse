@@ -9,9 +9,13 @@ public interface BigliettoDao {
 	
  void save(BigliettoBean biglietto) throws SQLException;
  
+ void saveWhitOutIdPrenotazione(BigliettoBean biglietto) throws SQLException ;
+ 
  void update(BigliettoBean biglietto) throws SQLException;
  
- void delete(int id)throws SQLException;
+ void delete(int id) throws SQLException;
+ 
+ void deleteByIdPostoAndSala(int id_posto,int id_sala) throws SQLException;
  
  List<BigliettoBean> findAll()throws SQLException;
  

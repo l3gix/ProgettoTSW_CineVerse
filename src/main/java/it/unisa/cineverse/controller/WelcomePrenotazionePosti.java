@@ -123,12 +123,21 @@ public class WelcomePrenotazionePosti extends HttpServlet {
 			e.printStackTrace();
 		}
 		
+		List<PostiBean> creazioneposti = null;
+		try {
+			creazioneposti = posti.findAllByIdSala(p.getId_sale());
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		
 		request.setAttribute("film", f);
 		request.setAttribute("proiezioni", p);
 		request.setAttribute("categoria", c);
 		request.setAttribute("posti", poss);
+		request.setAttribute("postisala", creazioneposti);
+		System.out.println(creazioneposti.get(0).getRow_label());
 		//System.out.println(poss.get(0).getRow_label());
 		request.getRequestDispatcher("/WEB-INF/views/prenotazioneposto.jsp").forward(request, response);
 		
