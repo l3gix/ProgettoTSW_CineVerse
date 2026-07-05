@@ -4,6 +4,7 @@
 <%@ page import="it.unisa.cineverse.model.bean.SaleBean" %>
 <%@ page import="it.unisa.cineverse.model.bean.FormatoFilmBean" %>
 <%@ page import="it.unisa.cineverse.model.bean.ProiezioneBean" %>
+<%@ page import="java.time.format.DateTimeFormatter" %>
 <%@ page import="java.util.List" %>
 <!DOCTYPE html>
 <html>
@@ -12,15 +13,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gestione Film And Proiezioni Admin</title>
     <link rel="stylesheet" href="<%= request.getContextPath() %>/style/gestionefilm.css">
+        <link rel="stylesheet" href="<%= request.getContextPath() %>/style/asideadmin.css">
+    
 </head>
 <body>
-
+	
+	<%@include file="asideadmin.jsp" %>
 <%
 	List<FilmBean> film = (List<FilmBean>) request.getAttribute("film");
 	List<SaleBean> sale = (List<SaleBean>) request.getAttribute("sale");
 	List<FormatoFilmBean> formato = (List<FormatoFilmBean>) request.getAttribute("formato");
 	
 %>
+
+
 <div class="admin-menu">
         <button onclick="showSection('inser-film')">InserisciFilm</button>
         <button onclick="showSection('modifica-status')">Modifica status film</button>
@@ -126,7 +132,7 @@
            <% for(FilmBean f : film) {%>
             <tr>
                 <td><%=f.getTitolo() %></td>
-                <td><%=f.getDurata_minuti()%></td>
+                <td><%=f.getDurata_minuti()%> min</td>
                 <td><%=f.getStatus() %></td>
 
                 <td>
@@ -164,6 +170,7 @@
         </tr>
     </thead>
 
+<%  DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy 'alle' HH:mm"); %>
     <tbody>
            <% for(FilmBean f : film) {
         	   for(ProiezioneBean p : f.getProiezione()){
@@ -171,8 +178,8 @@
             <tr>
                 <td><%=f.getTitolo() %></td>
                 <td><%=p.getId_sale()%></td>
-                <td><%=p.getStarts()%></td>
-                <td><%=p.getEnds()%></td>
+                <td><%=p.getStarts().format(formatter)%></td>
+                <td><%=p.getEnds().format(formatter)%></td>
                 <td><%=p.getStatus()%></td>
                 <td>
                     <form action="<%= request.getContextPath() %>/admin/CambiaStatoFilmAndProiezione" method="post">
