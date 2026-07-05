@@ -288,6 +288,12 @@ body
 	display:none;
 }
 
+.session-link 
+{
+	text-decoration: none;
+    color: inherit;
+}
+
 @media screen and (min-width: 768px) {
   .slideshow-container {
     width: 90%;

@@ -108,9 +108,10 @@
 
     <script>
     //modo per passare il contextpath
-    const contextPath = "<%= request.getContextPath() %>";
-    const id = "<%= filmpagina.getId()%>"
+	    const contextPath = "<%= request.getContextPath() %>";
+	    const id = "<%= filmpagina.getId()%>"
 	</script>
+	
     <script src="script/paginafilm.js"></script>
 </body>
 </html>
