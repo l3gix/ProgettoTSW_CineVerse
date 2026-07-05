@@ -12,21 +12,23 @@ import java.sql.SQLException;
 import javax.sql.DataSource;
 
 import it.unisa.cineverse.model.dao.FilmDao;
+import it.unisa.cineverse.model.dao.ProiezioniDao;
 import it.unisa.cineverse.model.dao.impl.FilmDaoImpl;
 import it.unisa.cineverse.model.dao.impl.ProiezioniDaoImpl;
 
 /**
  * Servlet implementation class CambiaStatoFilm
  */
-@WebServlet("/admin/CambiaStatoFilm")
-public class CambiaStatoFilm extends HttpServlet {
+@WebServlet("/admin/CambiaStatoFilmAndProiezione")
+public class CambiaStatoFilmAndProiezione extends HttpServlet {
 	private static final long serialVersionUID = 1L;
     
 	private FilmDao film;
+	private ProiezioniDao proiezione;
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public CambiaStatoFilm() {
+    public CambiaStatoFilmAndProiezione() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -38,6 +40,7 @@ public class CambiaStatoFilm extends HttpServlet {
 		if(ds == null) throw new ServletException("DataSource non disponibile nel contesto");
 		
 		film = new FilmDaoImpl(ds);
+		proiezione = new ProiezioniDaoImpl(ds);
 	}
 
 	/**
@@ -45,14 +48,26 @@ public class CambiaStatoFilm extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		String scelta = request.getParameter("proiezione");
 		String status = request.getParameter("nuovoStatus");
 		int id = Integer.parseInt(request.getParameter("id"));
 		
-		try {
-			film.updateStatusById(id, status);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		if("film".equals(scelta))
+		{
+			try {
+				film.updateStatusById(id, status);
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}else 
+		{
+			try {
+				proiezione.updateStatusById(id, status);
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 		
 		response.sendRedirect(request.getContextPath() + "/admin/WelcomeGestioneFilmAdmin");

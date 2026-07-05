@@ -14,6 +14,7 @@ import javax.sql.DataSource;
 
 import it.unisa.cineverse.model.bean.FilmBean;
 import it.unisa.cineverse.model.bean.FormatoFilmBean;
+import it.unisa.cineverse.model.bean.ProiezioneBean;
 import it.unisa.cineverse.model.bean.SaleBean;
 import it.unisa.cineverse.model.dao.FilmDao;
 import it.unisa.cineverse.model.dao.FormatoFilmDao;
@@ -85,11 +86,22 @@ public class WelcomeGestioneFilmAdmin extends HttpServlet {
 			e.printStackTrace();
 		}
 		
+		try {
+			for(FilmBean t : f)
+			{
+				List<ProiezioneBean> pro = proiezione.findAllByIdFilm(t.getId());
+				t.setProiezione(pro);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		
 		request.setAttribute("film", f);
 		request.setAttribute("sale", s);
 		request.setAttribute("formato", fo);
+		
 		
 		request.getRequestDispatcher("/WEB-INF/views/admin/gestionefilm.jsp").forward(request, response);
 		
