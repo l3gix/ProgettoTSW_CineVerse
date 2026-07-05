@@ -4,9 +4,11 @@ prezzidef = window.appData.prezziCategorie;
 id_proiezione = window.appData.idproiezione;
 contex = window.appData.context;
 postiinsala = window.appData.postisala;
+postiincarello = window.appData.posticarello;
+
 console.log(prezzidef);
 console.log(postiinsala);
-
+console.log("posti nel carello "+ postiincarello);
 
 
 const colore_tipo = {
@@ -23,68 +25,6 @@ const tipotocolor =
 	"Vuoto" : "vuoto",
 }
 
-var sala = [
-  {
-    lettera: "A",
-    posti: [
-      "rosso", "rosso", "rosso", "rosso", "rosso", "rosso", "rosso",
-      "rosso", "rosso", "rosso", "rosso", "rosso", "rosso", "rosso",
-      "rosso", "rosso", "rosso"
-    ]
-  },
-  {
-    lettera: "B",
-    posti: [
-      "rosso", "rosso", "rosso", "rosso", "rosso", "rosso", "rosso",
-      "rosso", "rosso", "rosso", "rosso", "rosso", "rosso", "rosso",
-      "rosso", "rosso", "rosso"
-    ]
-  },
-  {
-    lettera: "C",
-    posti: [
-      "blu", "blu", "blu", "blu", "blu", "blu", "blu",
-      "blu", "blu", "blu", "blu", "blu", "blu", "blu",
-      "blu", "blu", "blu"
-    ]
-  },
-  {
-    lettera: "D",
-    posti: [
-      "rosso", "rosso", "rosso", "rosso", "rosso", "rosso", "rosso",
-      "rosso", "rosso", "rosso", "rosso", "rosso", "rosso", "rosso",
-      "rosso", "rosso", "rosso"
-    ]
-  },
-  {
-    lettera: "E",
-    posti: [
-      "rosso", "rosso", "rosso", "rosso", "rosso", "rosso", "rosso",
-      "rosso", "rosso", "rosso", "rosso", "rosso", "rosso", "rosso",
-      "rosso", "rosso", "rosso"
-    ]
-  },
-  {
-    lettera: "F",
-    posti: [
-      "vuoto", "ultra", "ultra", "vuoto",
-      "ultra", "ultra", "vuoto",
-      "ultra", "ultra", "vuoto",
-      "ultra", "ultra", "vuoto",
-      "ultra", "ultra", "vuoto", "vuoto"
-    ]
-  },
-  {
-    lettera: "G",
-    posti: [
-      "rosso", "rosso", "rosso", "rosso", "rosso",
-      "occupato", "accessibile", "vuoto", "vuoto",
-      "accessibile", "occupato",
-      "rosso", "rosso", "rosso", "rosso", "rosso", "vuoto"
-    ]
-  }
-];
-
 var mappaPosti = document.getElementById("mappaPosti");
 var postiScelti = document.getElementById("postiScelti");
 var totale = document.getElementById("totale");
@@ -92,51 +32,7 @@ var confermaBtn = document.getElementById("conferma");
 var toast = document.getElementById("toast");
 
 var selezionati = [];
-/*
-function creaSala() {
-  for (var i = 0; i < sala.length; i++) {
-    var riga = sala[i];
 
-    var rigaDiv = document.createElement("div");
-    rigaDiv.className = "riga";
-
-    var letteraDiv = document.createElement("div");
-    letteraDiv.className = "lettera-riga";
-    letteraDiv.innerHTML = riga.lettera;
-
-    rigaDiv.appendChild(letteraDiv);
-
-    for (var j = 0; j < riga.posti.length; j++) {
-      var tipoPosto = riga.posti[j];
-      var numeroPosto = j + 1;
-
-      var bottonePosto = document.createElement("button");
-
-      bottonePosto.type = "button";
-      bottonePosto.className = "posto " + tipoPosto;
-
-	  bottonePosto.id = riga.lettera + numeroPosto
-      bottonePosto.setAttribute("data-tipo", tipoPosto);
-
-      if (
-        tipoPosto == "occupato" ||
-        tipoPosto == "accessibile" ||
-        tipoPosto == "vuoto"
-      ) {
-        bottonePosto.disabled = true;
-      }
-
-      bottonePosto.onclick = function () {
-        selezionaPosto(this);
-      };
-
-      rigaDiv.appendChild(bottonePosto);
-    }
-
-    mappaPosti.appendChild(rigaDiv);
-  }
-}
-*/
 
 
 function creaSala1() {
@@ -199,6 +95,46 @@ function creaSala1() {
   }
 }
 
+
+function selezionaPostoDaCarrello(postoCarrello) {
+    // postoCarrello è un oggetto tipo:
+    // { id: 12, label: "A1", categoria: "Standard" }
+
+    var codicePosto = postoCarrello.label;
+    var categoria = postoCarrello.categoria;
+    var tipo = tipotocolor[categoria]; // Standard -> rosso, VIP -> blu, LUX -> ultra
+
+    var prezzoPosto = Number(String(prezzidef[categoria]).replace(",", "."));
+
+    var bottone = document.getElementById(codicePosto);
+
+    if (bottone == null) {
+        console.log("Bottone non trovato per:", codicePosto);
+        return;
+    }
+	bottone.disabled = false;
+	bottone.classList.remove("occupato");
+
+    // gli rimetto il colore giusto
+    bottone.classList.add(tipo);
+
+    // lo segno come selezionato
+    bottone.classList.add("selezionato");
+
+    // salvo anche nei selezionati per aggiornare il riepilogo
+    var posizione = cercaPostoSelezionato(codicePosto);
+
+    if (posizione == -1) {
+        var nuovoPosto = {
+            codice: codicePosto,
+            tipo: tipo,
+            categoria: categoria,
+            prezzo: prezzoPosto
+        };
+
+        selezionati.push(nuovoPosto);
+    }
+}
 function selezionaPosto(posto) {
 
 	//console.log(posto)
@@ -261,8 +197,6 @@ function trovaIdPostoDaCodice(codicePosto) {
 }
 
 
-
-
 //funzione cha chiama ajax 
 function salvaPostoAjax( azione, par) {
 	    var params = 
@@ -272,9 +206,18 @@ function salvaPostoAjax( azione, par) {
 	    loadAjaxDoc(contex+"/PrenotazionePosti", "POST", params, handleSelezionaPosto);
 	}
 
+	
 function handleSelezionaPosto(request)
 {
-	
+		let response = JSON.parse(request.responseText);
+		console.log(response);
+		if(response != "cancellazione")
+		{
+					//tempo = document.getElementById("tempo");
+					//tempo.innerHTML = response.tempo;	
+					//apriModale("Info","Tempo di scadenza per completare il tuo acquisto " + response.tempo);
+		}
+		console.log(response);
 }
 
 function postiOccupati() // funzione per controllare se i posti sono occupati dal backend 
@@ -336,12 +279,15 @@ function formattaPrezzo(prezzo) {
 
 function confermaPrenotazione() {
   if (selezionati.length == 0) {
-    mostraMessaggio("Seleziona almeno un posto.");
+	apriModale(
+		"Errore", "Devi selezionare un posto"
+	)
     return;
   }
 
   var testoPosti = "";
   var somma = 0;
+console.log("sono nel bottone"+ selezionati);
 
   for (var i = 0; i < selezionati.length; i++) {
     testoPosti += selezionati[i].codice;
@@ -351,29 +297,17 @@ function confermaPrenotazione() {
       testoPosti += ", ";
     }
   }
+	console.log(selezionati);
+  var params = 
+  	        "azione=" + encodeURIComponent("pagamento") +
+  			"&selezionati=" + encodeURIComponent(JSON.stringify(selezionati));
 
-  mostraMessaggio(
-    "Prenotazione confermata: " + testoPosti + " - Totale " + formattaPrezzo(somma)
-  );
+  	    loadAjaxDoc(contex+"/PrenotazionePosti", "POST", params, handleSelezionaPosto);
 
-  /*
-    Qui puoi collegare la prenotazione al carrello o al database.
-
-    Esempio:
-    localStorage.setItem("postiCinema", JSON.stringify(selezionati));
-  */
- 
 	console.log("totale da mandare :" + somma );
 }
 
-function mostraMessaggio(messaggio) {
-  toast.innerHTML = messaggio;
-  toast.classList.add("visibile");
 
-  setTimeout(function () {
-    toast.classList.remove("visibile");
-  }, 2500);
-}
 
 
 confermaBtn.onclick = function () {
@@ -383,11 +317,28 @@ confermaBtn.onclick = function () {
 //creaSala();
 creaSala1()
 postiOccupati()
+
+if (postiincarello && postiincarello.length > 0) {
+    postiincarello.forEach(posto => {
+        selezionaPostoDaCarrello(posto);
+    });
+}
 aggiornaRiepilogo();
 
 
-/*Funzioni Ajax */
+function apriModale(t,cont) {
+    document.getElementById("modale").style.display = "flex";
+	titolo = document.getElementById("titolo-modale");
+	titolo.innerHTML = t;
+	contenuto = document.getElementById("contenuto-modale");
+	contenuto.innerHTML = cont;
+}
 
+function chiudiModale() {
+    document.getElementById("modale").style.display = "none";
+}
+
+/*Funzioni Ajax */
 function createXMLHttpRequest() {
 	var request;
 	try {

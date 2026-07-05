@@ -2,9 +2,12 @@
     pageEncoding="UTF-8"%>
 <%@ page import="java.util.List" %>
 <%@ page import="it.unisa.cineverse.model.bean.FilmBean" %>
+<%@ page import="it.unisa.cineverse.model.bean.UtentiBean" %>
 <%@ page import="it.unisa.cineverse.model.bean.ProiezioneBean" %>
 <%@ page import="it.unisa.cineverse.model.bean.CategoriaPostiBean" %>
 <%@ page import="it.unisa.cineverse.model.bean.PostiBean" %>
+<%@ page import="it.unisa.cineverse.model.bean.BigliettoBean" %>
+<%@ page import="java.util.ArrayList" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -23,10 +26,67 @@
 		List<PostiBean> poss = (List<PostiBean>) request.getAttribute("posti");
 		List<PostiBean> postisala = (List<PostiBean>) request.getAttribute("postisala");
 		
+		//prendo i posti nella sessione 
+		 HttpSession sessione = request.getSession(false);
+
+		    List<BigliettoBean> cart = null;
+
+		    if (sessione != null) {
+		        cart = (List<BigliettoBean>) sessione.getAttribute("cart");
+		    }
+
+		    List<PostiBean> postiCarrello = new ArrayList<>();
+		    
+
+		    if (cart != null) {
+		        for (BigliettoBean b : cart) {
+		            for (PostiBean pPosto : postisala) {
+		                if (pPosto.getId() == b.getId_posto()) {
+		                    postiCarrello.add(pPosto);
+		                    break;
+		                }
+		            }
+		        }
+		    }
+		
 	%>
 
-
-
+<header>
+        <nav>
+            <div class="logo">
+                <img src="img/logo_CineVerse.png" alt="logo_CineVerse" width="60px" height="60px">
+            </div>
+            <div class="desc">
+            	<p id="tempo"></p>
+            </div>
+            <!--profilo-->
+             <div class="icon">
+                <%
+                	UtentiBean utente =(UtentiBean) session.getAttribute("utente"); // prendiamo l'unte dalla sessione
+                %>
+                <% if(utente == null) { %>
+                <button 
+                	onclick="window.location.href='<%= request.getContextPath() %>/WelcomeLogin'"
+                	>
+	                <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-person" viewBox="0 0 16 16" style="color:white;">
+	                    <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6m2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0m4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4m-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10s-3.516.68-4.168 1.332c-.678.678-.83 1.418-.832 1.664z"/>
+	                </svg>
+                </button>
+                
+                <% } else { %>
+                <button 
+                	onclick="window.location.href='<%= request.getContextPath() %>/WelcomeProfilo'"
+                	>
+	                <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-person" viewBox="0 0 16 16" style="color: #054282">
+	                    <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6m2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0m4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4m-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10s-3.516.68-4.168 1.332c-.678.678-.83 1.418-.832 1.664z"/>
+	                </svg>
+                </button>
+                <%} %>
+                </div>
+        </nav>
+ </header>
+ 
+ 
     <div class="container-film">
         <div class="film">
 
@@ -91,7 +151,15 @@
   </main>
 
 
-  <div class="toast" id="toast"></div>
+  
+  <div id="modale" class="modale">
+    <div class="box-modale">
+        <h2 id="titolo-modale"></h2>
+        <p id="contenuto-modale"></p>
+
+        <button onclick="chiudiModale()">Chiudi</button>
+    </div>
+</div>
   
   <script>
     window.appData = {
@@ -111,6 +179,23 @@
     	                }<%= (i < poss.size() - 1) ? "," : "" %>
     	            <% 
     	                } 
+    	            %>
+    	        ],
+    	        
+    	        posticarello: [
+    	            <% 
+    	                if (postiCarrello != null && !postiCarrello.isEmpty()) {
+    	                    for (int i = 0; i < postiCarrello.size(); i++) { 
+    	                        PostiBean t = postiCarrello.get(i);
+    	            %>
+    	                {
+    	                    id: <%= t.getId() %>,
+    	                    label: "<%= t.getRow_label() %>",
+    	                    categoria: "<%= t.getId_categoria_posti() %>"
+    	                }<%= (i < postiCarrello.size() - 1) ? "," : "" %>
+    	            <% 
+    	                    }
+    	                }
     	            %>
     	        ],
     	        
