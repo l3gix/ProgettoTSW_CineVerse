@@ -78,12 +78,12 @@ public class BigliettoDaoImpl implements BigliettoDao{
 	}
 	
 	@Override
-	public synchronized void deleteByIdPostoAndSala(int id_posto, int id_sala) throws SQLException {
+	public synchronized void deleteByIdPostoAndSala(int id_posto, int id_proiezione) throws SQLException {
 		String sql = "DELETE FROM "+TABLE_NAME+" WHERE id_posto = ? AND id_proiezione = ?";
 		try(Connection connection=ds.getConnection();
 				PreparedStatement ps= connection.prepareStatement(sql)){
 			ps.setInt(1, id_posto);
-			ps.setInt(2, id_sala);
+			ps.setInt(2, id_proiezione);
 			ps.executeUpdate();
 		}
 		
