@@ -100,6 +100,7 @@
         <option value="now_showing">now_showing</option>
         <option value="archived">archived</option>
     </select>
+    </div>
 
     <div class="form-group">
         <label for="img1">Immagine Poster</label>

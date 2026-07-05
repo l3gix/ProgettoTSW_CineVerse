@@ -134,5 +134,35 @@ public class PagamentoDaoImpl implements PagamentoDao
 		}
 		return bean;
 	}
+
+	@Override
+	public synchronized List<PagamentoBean> findAllByIdPrenotazione(int id) throws SQLException {
+		List<PagamentoBean> pagamento = new ArrayList<PagamentoBean>();
+		String sql = "SELECT * " 
+				+ " FROM " + TABLE_NAME + " WHERE id_prenotazione = ?";
+		try(Connection connection = ds.getConnection();
+				PreparedStatement ps = connection.prepareStatement(sql);){
+				ps.setInt(1, id);
+				try (ResultSet rs = ps.executeQuery())
+				{
+			while(rs.next())
+			{
+				PagamentoBean bean = new PagamentoBean();
+				bean.setId(rs.getInt("id"));
+				bean.setId_prenotazione(rs.getInt("id_prenotazione"));
+				bean.setProvider(rs.getString("provider"));
+				bean.setId_transazione_provider(rs.getString("id_transazione_provider"));
+				bean.setCosto(rs.getDouble("costo"));
+				bean.setStatus(rs.getString("status"));
+				bean.setData_pagamento(rs.getTimestamp("data_pagamento").toLocalDateTime());
+				bean.setData_creazione(rs.getTimestamp("data_creazione").toLocalDateTime());
+				pagamento.add(bean);
+				
+			}
+				}
+			
+		}
+		return pagamento;
+	}
 	
 }
