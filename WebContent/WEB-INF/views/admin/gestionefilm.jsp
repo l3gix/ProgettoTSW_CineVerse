@@ -3,6 +3,7 @@
 <%@ page import="it.unisa.cineverse.model.bean.FilmBean" %>
 <%@ page import="it.unisa.cineverse.model.bean.SaleBean" %>
 <%@ page import="it.unisa.cineverse.model.bean.FormatoFilmBean" %>
+<%@ page import="it.unisa.cineverse.model.bean.ProiezioneBean" %>
 <%@ page import="java.util.List" %>
 <!DOCTYPE html>
 <html>
@@ -18,11 +19,13 @@
 	List<FilmBean> film = (List<FilmBean>) request.getAttribute("film");
 	List<SaleBean> sale = (List<SaleBean>) request.getAttribute("sale");
 	List<FormatoFilmBean> formato = (List<FormatoFilmBean>) request.getAttribute("formato");
+	List<ProiezioneBean> proiezione =  (List<ProiezioniBean>) request.getAttribute("proiezioni");
 %>
 <div class="admin-menu">
         <button onclick="showSection('inser-film')">InserisciFilm</button>
         <button onclick="showSection('modifica-status')">Modifica status film</button>
         <button onclick="showSection('insert-proiezioni')">Nuova Proiezione</button>
+        <button onclick="showSection('modifica-status-proiezione')">Modifica Status Proiezione</button>
     </div>
     <section class="insert-film section" id="inser-film">
         <h1>Inserisci un nuovo film</h1>
@@ -106,7 +109,7 @@
     </form>
     </section>
 
-    <section class="modifica-status section" id="modifica-status">
+<section class="modifica-status section" id="modifica-status">
         <h1>Gestione film</h1>
 
 <table class="film-table">
@@ -123,18 +126,20 @@
            <% for(FilmBean f : film) {%>
             <tr>
                 <td><%=f.getTitolo() %></td>
-                <td><%=f.getTitolo() %></td>
+                <td><%=f.getDurata_minuti()%></td>
                 <td><%=f.getStatus() %></td>
 
                 <td>
-                    <form action="<%= request.getContextPath() %>/CambiaStatoFilm" method="post">
+                    <form action="<%= request.getContextPath() %>/admin/CambiaStatoFilm" method="post">
                         <input type="hidden" name="idFilm" >
 
-                       		<%if(("archived").equals(f.getStatus())) {%>
-                            <input type="hidden" name="nuovoStatus" value="active">
+                       <%if(("archived").equals(f.getStatus())) {%>
+                            <input type="hidden" name="nuovoStatus" value="now_showing">
+                            <input type="hidden" name="id" value="<%=f.getId() %>" >
                             <button type="submit" class="btn-active">now_showing</button>
                        <%} else { %>
                             <input type="hidden" name="nuovoStatus" value="archived">
+                            <input type="hidden" name="id" value="<%=f.getId() %>" >
                             <button type="submit" class="btn-archive">archived</button>
                         <%} %>
                     </form>
@@ -144,6 +149,47 @@
     </tbody>
 </table>
     </section>
+ <section class="modifica-status section" id="modifica-status-proiezione">
+        <h1>Gestione film</h1>
+    
+<table class="film-table">
+    <thead>
+        <tr>
+            <th>Titolo</th>
+            <th>Durata</th>
+            <th>Stato</th>
+            <th>Azione</th>
+        </tr>
+    </thead>
+
+    <tbody>
+           <% for(FilmBean f : film) {%>
+            <tr>
+                <td><%=f.getTitolo() %></td>
+                <td><%=f.getDurata_minuti()%></td>
+                <td><%=f.getStatus() %></td>
+
+                <td>
+                    <form action="<%= request.getContextPath() %>/admin/CambiaStatoFilm" method="post">
+                        <input type="hidden" name="idFilm" >
+
+                       <%if(("archived").equals(f.getStatus())) {%>
+                            <input type="hidden" name="nuovoStatus" value="now_showing">
+                            <input type="hidden" name="id" value="<%=f.getId() %>" >
+                            <button type="submit" class="btn-active">now_showing</button>
+                       <%} else { %>
+                            <input type="hidden" name="nuovoStatus" value="archived">
+                            <input type="hidden" name="id" value="<%=f.getId() %>" >
+                            <button type="submit" class="btn-archive">archived</button>
+                        <%} %>
+                    </form>
+                </td>
+            </tr>
+             <% }%>
+    </tbody>
+</table>
+    </section>
+
 
     <section class="insert-proiezioni section" id="insert-proiezioni">
           <h1>Inserisci nuovo spettacolo</h1>

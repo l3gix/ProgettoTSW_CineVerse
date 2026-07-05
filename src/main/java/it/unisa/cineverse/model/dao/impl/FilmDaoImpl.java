@@ -55,7 +55,7 @@ public class FilmDaoImpl implements FilmDao{
 
 	@Override
 	public synchronized void update(FilmBean film) throws SQLException {
-		String sql= "UPDATE" +TABLE_NAME +" SET titolo = ?, sinossi = ?, durata_minuti = ?, age_rating = ?,  data_rilascio = ?, trailer_url = ?, cast_film = ?, status = ? WHERE id = ?";
+		String sql= "UPDATE " +TABLE_NAME +" SET titolo = ?, sinossi = ?, durata_minuti = ?, age_rating = ?,  data_rilascio = ?, trailer_url = ?, cast_film = ?, status = ? WHERE id = ?";
 		try(Connection connection=ds.getConnection();
 				PreparedStatement ps= connection.prepareStatement(sql)){
 			ps.setString(1, film.getTitolo());
@@ -67,6 +67,16 @@ public class FilmDaoImpl implements FilmDao{
 			ps.setString(7, film.getCast_film());
 			ps.setString(8, film.getStatus());
 			ps.setInt(9, film.getId());
+			ps.executeUpdate();
+		}
+	}
+	
+	public synchronized void updateStatusById(int id,String status) throws SQLException {
+		String sql= "UPDATE " +TABLE_NAME +" SET status = ? WHERE id = ?";
+		try(Connection connection=ds.getConnection();
+				PreparedStatement ps= connection.prepareStatement(sql)){
+			ps.setString(1, status);
+			ps.setInt(2, id);
 			ps.executeUpdate();
 		}
 	}
