@@ -74,7 +74,7 @@ public class FilmDaoImpl implements FilmDao{
 	@Override
 	public synchronized void delete(int id) throws SQLException {
 		
-		String sql= "DELETE FROM" +TABLE_NAME +" WHERE id = ?";
+		String sql= "DELETE FROM " +TABLE_NAME +" WHERE id = ?";
 		try(Connection connection=ds.getConnection();
 				PreparedStatement ps= connection.prepareStatement(sql)){
 			ps.setInt(1, id);
@@ -86,7 +86,7 @@ public class FilmDaoImpl implements FilmDao{
 	@Override
 	public synchronized List<FilmBean> findAll() throws SQLException {
 		List<FilmBean> film = new ArrayList<FilmBean>();
-		String sql="SELECT * FROM" +TABLE_NAME;
+		String sql="SELECT * FROM " +TABLE_NAME;
 		try(Connection connection=ds.getConnection();
 				PreparedStatement ps= connection.prepareStatement(sql);
 				ResultSet rs = ps.executeQuery()){

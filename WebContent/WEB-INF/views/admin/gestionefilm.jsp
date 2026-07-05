@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="it.unisa.cineverse.model.bean.FilmBean" %>
+<%@ page import="it.unisa.cineverse.model.bean.SaleBean" %>
+<%@ page import="it.unisa.cineverse.model.bean.FormatoFilmBean" %>
+<%@ page import="java.util.List" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,6 +13,12 @@
     <link rel="stylesheet" href="<%= request.getContextPath() %>/style/gestionefilm.css">
 </head>
 <body>
+
+<%
+	List<FilmBean> film = (List<FilmBean>) request.getAttribute("film");
+	List<SaleBean> sale = (List<SaleBean>) request.getAttribute("sale");
+	List<FormatoFilmBean> formato = (List<FormatoFilmBean>) request.getAttribute("formato");
+%>
 <div class="admin-menu">
         <button onclick="showSection('inser-film')">InserisciFilm</button>
         <button onclick="showSection('modifica-status')">Modifica status film</button>
@@ -110,26 +120,27 @@
     </thead>
 
     <tbody>
-           
+           <% for(FilmBean f : film) {%>
             <tr>
-                <td>Interstellar</td>
-                <td>169 min</td>
-                <td>active</td>
+                <td><%=f.getTitolo() %></td>
+                <td><%=f.getTitolo() %></td>
+                <td><%=f.getStatus() %></td>
 
                 <td>
                     <form action="<%= request.getContextPath() %>/CambiaStatoFilm" method="post">
                         <input type="hidden" name="idFilm" >
 
-                       
+                       		<%if(("archived").equals(f.getStatus())) {%>
                             <input type="hidden" name="nuovoStatus" value="active">
                             <button type="submit" class="btn-active">now_showing</button>
-                       
+                       <%} else { %>
                             <input type="hidden" name="nuovoStatus" value="archived">
                             <button type="submit" class="btn-archive">archived</button>
-                        
+                        <%} %>
                     </form>
                 </td>
             </tr>
+             <% }%>
     </tbody>
 </table>
     </section>
@@ -137,35 +148,32 @@
     <section class="insert-proiezioni section" id="insert-proiezioni">
           <h1>Inserisci nuovo spettacolo</h1>
 
-    <form  action="InserisciProiezione" method="post">
+    <form  action="<%= request.getContextPath() %>/admin/InserimentoProiezione" method="post">
 
         <div class="form-group">
             <label for="id_film">Film</label>
             <select name="id_film" id="id_film" required>
-                <option value="">Seleziona film</option>
-                <option value="1">Film 1</option>
-                <option value="2">Film 2</option>
-                <option value="3">Film 3</option>
+            <% for(FilmBean f : film){ %>
+                <option value="<%=f.getId()%>"><%=f.getTitolo() %></option>
+                <%} %>
             </select>
         </div>
 
         <div class="form-group">
             <label for="id_sale">Sala</label>
             <select name="id_sale" id="id_sale" required>
-                <option value="">Seleziona sala</option>
-                <option value="1">Sala 1</option>
-                <option value="2">Sala 2</option>
-                <option value="3">Sala 3</option>
+               <% for(SaleBean s : sale){ %>
+                <option value="<%=s.getId()%>"> Sala <%=s.getId() %></option>
+                <%} %>
             </select>
         </div>
 
         <div class="form-group">
             <label for="id_formato">Formato</label>
             <select name="id_formato" id="id_formato" required>
-                <option value="">Seleziona formato</option>
-                <option value="1">2D</option>
-                <option value="2">3D</option>
-                <option value="3">IMAX</option>
+                <% for(FormatoFilmBean f : formato){ %>
+                <option value="<%=f.getId()%>"><%=f.getName() %></option>
+                <%} %>
             </select>
         </div>
 
@@ -193,7 +201,6 @@
         <div class="form-group">
             <label for="status">Stato</label>
             <select name="status" id="status" required>
-                <option value="">Seleziona stato</option>
                 <option value="scheduled">Scheduled</option>
                 <option value="cancelled">Non scheduled</option>
             </select>
