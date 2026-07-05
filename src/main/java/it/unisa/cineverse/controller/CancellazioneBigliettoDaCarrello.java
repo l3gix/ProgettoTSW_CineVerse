@@ -86,13 +86,14 @@ public class CancellazioneBigliettoDaCarrello extends HttpServlet {
 										// TODO Auto-generated catch block
 										e.printStackTrace();
 									}
+                                   
                                     
                                 }
                             }
                         }
                     }
 
-                    session.setAttribute("cart", cart);
+                    CarrelloUtility.scadenzaCarello(session, "cart", cart, biglietto);
                 }
             }
         }
