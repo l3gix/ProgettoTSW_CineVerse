@@ -15,7 +15,7 @@ public interface BigliettoDao {
  
  void delete(int id) throws SQLException;
  
- void deleteByIdPostoAndSala(int id_posto,int id_sala) throws SQLException;
+ void deleteByIdPostoAndSala(int id_posto,int id_proiezione) throws SQLException;
  
  List<BigliettoBean> findAll()throws SQLException;
  
