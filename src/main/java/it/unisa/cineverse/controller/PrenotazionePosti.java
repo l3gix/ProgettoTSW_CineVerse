@@ -144,7 +144,8 @@ public class PrenotazionePosti extends HttpServlet {
 			            break;
 			        }
 			    }
-
+				
+				CarrelloUtility.scadenzaCarello(session, "cart", cart, biglietto);
 			}
 			
 			JSONObject json = new JSONObject();
