@@ -23,6 +23,26 @@ public class FilmBean {
 		proiezione= new ArrayList<ProiezioneBean>();
 		data_rilascio= null;
 	}
+	
+	
+
+	public FilmBean( String titolo, String sinossi, int durata_minuti, String age_rating,
+			LocalDateTime data_rilascio, String trailer_url, String cast_film, String status) {
+		this.titolo = titolo;
+		this.sinossi = sinossi;
+		this.durata_minuti = durata_minuti;
+		this.age_rating = age_rating;
+		this.data_rilascio = data_rilascio;
+		this.trailer_url = trailer_url;
+		this.cast_film = cast_film;
+		this.status = status;
+		
+		genere= new ArrayList<GenereBean>();
+		poster= new ArrayList<PosterBean>();
+		proiezione= new ArrayList<ProiezioneBean>();
+	}
+
+
 
 	public int getId() {
 		return id;

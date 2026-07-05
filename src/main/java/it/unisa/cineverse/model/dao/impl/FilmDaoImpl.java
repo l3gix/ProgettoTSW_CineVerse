@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -26,9 +27,9 @@ public class FilmDaoImpl implements FilmDao{
 
 	@Override
 	public synchronized void save(FilmBean film) throws SQLException {
-		String sql= "INSERT INTO" +TABLE_NAME +"(titolo, sinossi, durata_minuti, age_rating, data_rilascio, trailer_url, cast_film, status) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+		String sql= "INSERT INTO " +TABLE_NAME +"(titolo, sinossi, durata_minuti, age_rating, data_rilascio, trailer_url, cast_film, status) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 		try(Connection connection=ds.getConnection();
-				PreparedStatement ps= connection.prepareStatement(sql)){
+				PreparedStatement ps= connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)){
 			ps.setString(1, film.getTitolo());
 			ps.setString(2, film.getSinossi());
 			ps.setInt(3, film.getDurata_minuti());
@@ -38,6 +39,17 @@ public class FilmDaoImpl implements FilmDao{
 			ps.setString(7, film.getCast_film());
 			ps.setString(8, film.getStatus());
 			ps.executeUpdate();
+			
+			 try (ResultSet rs = ps.getGeneratedKeys()) {
+		            if (rs.next()) {
+		                int idFilmAppenaInserito = rs.getInt(1);
+		                film.setId(idFilmAppenaInserito);
+
+		                System.out.println("ID FILM GENERATO: " + idFilmAppenaInserito);
+		            } else {
+		                throw new SQLException("Nessun ID generato per il film");
+		            }
+		        }
 		}
 	}
 

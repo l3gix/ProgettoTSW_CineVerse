@@ -5,8 +5,8 @@
 <head>
 <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="style/gestionefilm.css">
+    <title>Gestione Film Admin</title>
+    <link rel="stylesheet" href="<%= request.getContextPath() %>/style/gestionefilm.css">
 </head>
 <body>
 <div class="admin-menu">
@@ -18,7 +18,7 @@
         <h1>Inserisci un nuovo film</h1>
 
         <form 
-      action="<%= request.getContextPath() %>/InserisciFilm"
+      action="<%= request.getContextPath() %>/admin/InserimentoFilm"
       method="post"
       enctype="multipart/form-data">
 
@@ -30,6 +30,11 @@
     <div class="form-group">
         <label for="sinossi">Sinossi</label>
         <textarea name="sinossi" id="sinossi" placeholder="Inserisci una descrizione"></textarea>
+    </div>
+    
+     <div class="form-group">
+        <label for="sinossi">Cast</label>
+        <textarea name="cast" id="cast" placeholder="Inserisci il cast"></textarea>
     </div>
 
     <div class="form-group">
@@ -113,7 +118,7 @@
 
                 <td>
                     <form action="<%= request.getContextPath() %>/CambiaStatoFilm" method="post">
-                        <input type="hidden" name="idFilm" value="<%= film.getId() %>">
+                        <input type="hidden" name="idFilm" >
 
                        
                             <input type="hidden" name="nuovoStatus" value="active">
@@ -200,6 +205,6 @@
 
     </section>
 
-       <script src="scripts.js"></script>
+       <script src="<%= request.getContextPath() %>/script/gestionefilm.js"></script>
 </body>
 </html>
