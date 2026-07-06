@@ -11,6 +11,7 @@
         <h2>Menu</h2>
         <a href="<%=request.getContextPath()%>/admin/WelcomeGestioneFilmAdmin">Gestione Film And Proiezioni</a>
         <a href="<%=request.getContextPath()%>/admin/WelcomeGestioneUtenteAdmin">Gestione utenti</a>
+        <a href="<%=request.getContextPath()%>/admin/WelcomeGestioneSale">Gestione Sale</a>
         <div class="linea"></div>
         <a href="<%=request.getContextPath()%>/Logout">Logout</a>
         <a href="<%=request.getContextPath()%>/WelcomeIndex">HomePage</a>
