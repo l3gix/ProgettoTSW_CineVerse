@@ -1,0 +1,316 @@
+@import url('https://fonts.googleapis.com/css2?family=Saira:ital,wght@0,100..900;1,100..900&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Saira", sans-serif;
+}
+
+body
+{
+      /*min-height: 100vh;*/
+    min-height: 100vh;
+
+}
+
+:root {
+  --verde: #62c783;
+  --blu: #263b86;
+  --rosso: #db5a42;
+  --ultra: #ff8a00;
+  --occupato: #9b9b9b;
+  --sfondo: #f7f7f7;
+  --testo: #111;
+}
+
+.pagina {
+  width: 100%;
+  padding: 14px 10px 0;
+  color: black;
+}
+
+
+/* Area posti */
+
+.layout-prenotazione {
+  display: block;
+}
+
+.area-prenotazione {
+  width: 100%;
+  background: var(--sfondo);
+  padding: 18px 10px 35px;
+  overflow-x: hidden;
+  border-radius: 6px;
+}
+
+/* Schermo */
+
+.schermo {
+  width: 280px;
+  height: 55px;
+  margin: 0 auto 4px;
+  position: relative;
+}
+
+.schermo::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  /*background: linear-gradient(#d8d8d8, #f2f2f2);*/
+  background-color: #054282;
+  clip-path: polygon(0 0, 100% 0, 86% 45%, 14% 45%);
+  box-shadow: 0 18px 20px rgba(0, 0, 0, 0.15);
+}
+
+.titolo-sala {
+  text-align: center;
+  font-size: 16px;
+  font-weight: 700;
+  margin-bottom: 18px;
+  color : black;
+}
+
+/* Mappa posti */
+
+.mappa-wrapper {
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.riga {
+  display: grid;
+  grid-template-columns: 16px repeat(17, 14px);
+  gap: 5px;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.lettera-riga {
+  font-size: 11px;
+  color: #777;
+  text-align: center;
+}
+
+.posto {
+  width: 16px;
+  height: 18px;
+  border: 1.5px solid;
+  border-radius: 0 0 4px 4px;
+  background: white;
+  cursor: pointer;
+  transition: 0.15s;
+  display: grid;
+  place-items: center;
+  font-size: 8px;
+  font-weight: bold;
+  user-select: none;
+}
+
+
+
+.verde {
+  border-color: var(--verde);
+}
+
+.blu {
+  border-color: var(--blu);
+}
+
+.rosso {
+  border-color: var(--rosso);
+}
+
+
+
+
+.occupato {
+  background: var(--occupato);
+  border-color: var(--occupato);
+  cursor: not-allowed;
+}
+
+
+
+
+
+.vuoto {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Riepilogo */
+
+
+
+.mini-posto {
+  width: 13px;
+  height: 13px;
+  border: 1.8px solid;
+  border-radius: 0 0 4px 4px;
+  display: inline-block;
+  flex-shrink: 0;
+}
+
+.mini-verde {
+  border-color: var(--verde);
+}
+
+.mini-blu {
+  border-color: var(--blu);
+}
+
+.mini-rosso {
+  border-color: var(--rosso);
+}
+
+.mini-ultra
+{
+    border-color: var(--ultra);
+}
+
+.ultra {
+  width: 16px;
+  height: 18px;
+  border-color: var(--ultra);
+  color: var(--ultra);
+  border-radius: 3px 3px 5px 5px;
+  margin-left: 0;
+}
+
+.ultra::before {
+  content: "★";
+  color: var(--ultra);
+  font-size: 7px;
+}
+
+.mini-occupato {
+  background: var(--occupato);
+  border-color: var(--occupato);
+  border-radius: 3px;
+}
+
+
+
+.selezione-box {
+    width: 100%;
+    margin: 30px auto;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    align-items: center;
+    padding: 10px;
+}
+
+.selezione-box select,
+.selezione-box button {
+    width: 75%;
+    padding: 12px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+}
+
+.selezione-box select {
+    background-color: white;
+}
+
+.selezione-box select:disabled {
+    background-color: #e9e9e9;
+    color: #777;
+    cursor: not-allowed;
+}
+
+.selezione-box button {
+    border: none;
+    background-color: #007BFA;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.selezione-box button:hover {
+    background-color: #005ec2;
+}
+
+
+
+
+@media (min-width: 768px) {
+ 
+  .area-prenotazione {
+    min-height: 455px;
+    padding: 20px 18px 45px;
+  }
+
+  .schermo {
+    width: 390px;
+    height: 62px;
+  }
+
+  .titolo-sala {
+    font-size: 18px;
+  }
+
+  .riga {
+    grid-template-columns: 32px repeat(17, 22px);
+    gap: 8px;
+    margin-bottom: 10px;
+  }
+
+  .posto {
+    width: 22px;
+    height: 22px;
+  }
+
+  .ultra {
+    width: 30px;
+    height: 24px;
+  }
+
+  
+
+
+
+/* Desktop */
+
+@media (min-width: 1024px) {
+  .pagina {
+    padding: 40px 30px 0;
+  }
+
+   .layout-prenotazione {
+    display: flex;
+    align-items: stretch;
+    gap: 20px;
+  }
+
+
+
+  .area-prenotazione {
+    padding: 18px 20px 50px;
+  }
+
+  .schermo {
+    width: 450px;
+    height: 65px;
+  }
+
+  .riga {
+    grid-template-columns: 35px repeat(17, 23px);
+    gap: 9px;
+  }
+
+  .posto {
+    width: 22px;
+    height: 22px;
+  }
+
+
+}}
+
