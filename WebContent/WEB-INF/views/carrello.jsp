@@ -96,7 +96,10 @@ if (listafilm != null && !listafilm.isEmpty()) {
     <div class="totale-box">
         <p>Totale</p>
         <h2><%= totale %>€</h2>
-        <button>Vai al pagamento</button>
+        <button
+        	onclick="window.location.href='<%=request.getContextPath() %>/WelcomePagamento'"
+        	>
+        </button>
     </div>
 
 </div>

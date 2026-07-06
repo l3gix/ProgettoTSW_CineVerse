@@ -65,6 +65,19 @@ public class BigliettoDaoImpl implements BigliettoDao{
 			ps.executeUpdate();
 		}
 	}
+	
+	public synchronized void updateIdPrenotazioneAndStatusByIdProiezioneAndIdPosto(int id_prenotazione , String status ,int id_proiezione,int id_posto) throws SQLException {
+		String sql = "UPDATE " +TABLE_NAME+ "SET id_prenotazione = ? ,"
+				+ "status = ? WHERE id_proiezione = ? AND id_posto = ?";
+		try(Connection connection=ds.getConnection();
+				PreparedStatement ps= connection.prepareStatement(sql)){
+			ps.setInt(1, id_prenotazione);
+			ps.setString(2, status);
+			ps.setInt(3, id_proiezione);
+			ps.setInt(4, id_posto);
+			ps.executeUpdate();
+		}
+	}
 
 	@Override
 	public synchronized void delete(int id) throws SQLException {

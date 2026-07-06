@@ -27,14 +27,26 @@ public class PrenotazioniDaoImpl implements PrenotazioniDao
 	public synchronized void save(PrenotazioniBean prenotazioni) throws SQLException {
 		String sql ="INSERT INTO "+ TABLE_NAME + " (id_utenti, status, importo_totale, scadenza)\n"
 				+ "VALUES (?, ?, ?, ?);";
-		try(Connection connection = ds.getConnection();
-				PreparedStatement ps = connection.prepareStatement(sql);){
-			ps.setString(1, prenotazioni.getId_utenti());
-			ps.setString(2, prenotazioni.getStatus());
-			ps.setDouble(3, prenotazioni.getImporto_totale());
-			ps.setTimestamp(4, Timestamp.valueOf(prenotazioni.getScadenza()));
-			ps.executeUpdate();
-		}
+		try (
+		        Connection connection = ds.getConnection();
+		        PreparedStatement ps = connection.prepareStatement(
+		            sql, 
+		            PreparedStatement.RETURN_GENERATED_KEYS
+		        )
+		    ) {
+
+		        ps.setString(1, prenotazioni.getId_utenti());
+		        ps.setString(2, prenotazioni.getStatus());
+		        ps.setDouble(3, prenotazioni.getImporto_totale()); 
+		        ps.setTimestamp(4, Timestamp.valueOf(prenotazioni.getScadenza()));
+		        ps.executeUpdate();
+
+		        try (ResultSet rs = ps.getGeneratedKeys()) {
+		            if (rs.next()) {
+		            	prenotazioni.setId(rs.getInt(1)); // ultimo id generato
+		            }
+		        }
+		    }
 		
 	}
 
