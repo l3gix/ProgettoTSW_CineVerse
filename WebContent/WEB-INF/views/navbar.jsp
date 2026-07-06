@@ -12,7 +12,7 @@
                 <ul>
                     <li><a href="<%= request.getContextPath()%>/WelcomeIndex">Al cinema</a></li>
                     <li><a>Coming soon</a></li>
-                    <li><a>About us</a></li>
+                    <li><a href="<%= request.getContextPath()%>/WelcomeAboutUs">About us</a></li>
                 </ul>
             </div>
 
