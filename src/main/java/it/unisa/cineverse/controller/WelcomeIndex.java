@@ -9,6 +9,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.sql.DataSource;
@@ -75,6 +76,43 @@ public class WelcomeIndex extends HttpServlet {
 	        }
 	    }
 		
+	    List<ProiezioneBean> proiezionigiorno = null;
+	    try {
+			proiezionigiorno = proiezione.findAllByIdFilmAndDateAndScheduled( selectedDate);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	    List<FilmBean> fildamandare = new ArrayList<FilmBean>();
+	    for (ProiezioneBean p : proiezionigiorno) {
+
+	        FilmBean filmTrovato = null;
+
+	        // Controllo se il film è già presente nella lista
+	        for (FilmBean f : fildamandare) {
+	            if (f.getId() == p.getId_film()) {
+	                filmTrovato = f;
+	                break;
+	            }
+	        }
+
+	        // Se non esiste ancora, lo prendo dal database e lo aggiungo
+	        if (filmTrovato == null) {
+	            try {
+	                filmTrovato = film.findbyId(p.getId_film());
+	                filmTrovato.addPoster(poster.findByIdFilm(filmTrovato.getId()));
+	                fildamandare.add(filmTrovato);
+	            } catch (SQLException e) {
+	                e.printStackTrace();
+	                continue;
+	            }
+	        }
+
+	        // Aggiungo la proiezione al film corretto
+	        filmTrovato.addProiezione(p);
+	    }
+	    
+	    /*
 		List<FilmBean> films = null;
 		 try {
 			films = film.findAllNowShowing();
@@ -86,7 +124,7 @@ public class WelcomeIndex extends HttpServlet {
 		 for (FilmBean f : films)
 		 {
 			 try {
-				f.setProiezione(proiezione.findAllByIdFilmAndDateAndScheduled(f.getId(), selectedDate) );
+				f.setProiezione(proiezione.findAllByIdFilmAndDateAndScheduled( selectedDate) );
 			 } catch (SQLException e) { e.printStackTrace();}
 			
 			 try {
@@ -94,9 +132,9 @@ public class WelcomeIndex extends HttpServlet {
 			} catch (SQLException e) {e.printStackTrace();}
 			  
 		 }
-		 
-		 System.out.println(films);
-		 request.setAttribute("films", films);
+		 */
+		 //System.out.println(films);
+		 request.setAttribute("films", fildamandare);
 		 request.getRequestDispatcher("/WEB-INF/views/index.jsp").forward(request, response);
 		 
 		
