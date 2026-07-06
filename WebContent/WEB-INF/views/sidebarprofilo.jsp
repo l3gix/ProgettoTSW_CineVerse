@@ -4,7 +4,7 @@
 
 <aside id="side">
 		<% UtentiBean utente=(UtentiBean) session.getAttribute("utente"); %>
-        <h1>Ciao <%= utente.getNome() %></h1>
+        <h1 style="color:white">Ciao <%= utente.getNome() %></h1>
         <div class="voce">
             <div class="icon">
                 <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-person" viewBox="0 0 16 16">
@@ -22,7 +22,26 @@
                 </button>
             </div>
         </div>
-
+        
+		<div class="voce">
+            <div class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-person-vcard" viewBox="0 0 16 16">
+					  <path d="M5 8a2 2 0 1 0 0-4 2 2 0 0 0 0 4m4-2.5a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1h-4a.5.5 0 0 1-.5-.5M9 8a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1h-4A.5.5 0 0 1 9 8m1 2.5a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5"/>
+					  <path d="M2 2a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2zM1 4a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H8.96q.04-.245.04-.5C9 10.567 7.21 9 5 9c-2.086 0-3.8 1.398-3.984 3.181A1 1 0 0 1 1 12z"/>
+					</svg>
+            </div>
+            <div class="desc">
+                <p>Modifica<br>Profilo</p>
+            </div>
+             <div class="arrow">
+                <button  onclick="window.location.href='<%= request.getContextPath()%>/WelcomeModificaProfilo'">
+                    <svg xmlns="http://www.w3.org/2000/svg" style="color: white;" width="30" height="30" fill="currentColor" class="bi bi-arrow-right-circle" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd" d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8m15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0M4.5 7.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5z"/>
+                    </svg>
+                </button>
+            </div>
+            </div>
+			
           <div class="voce">
             <div class="icon">
                 <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-box-arrow-left" viewBox="0 0 16 16">
@@ -41,16 +60,14 @@
                 </button>
             </div>
             </div>
-        </div>
+        
+          
+        
     </aside>
-     <main class="main">
             <button id="openSide" class="open-btn">
-                <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-caret-left-fill" viewBox="0 0 16 16">
+                <svg xmlns="http://www.w3.org/2000/svg" style="color:black" width="30" height="30" fill="currentColor" class="bi bi-caret-left-fill" viewBox="0 0 16 16">
   <path d="m3.86 8.753 5.482 4.796c.646.566 1.658.106 1.658-.753V3.204a1 1 0 0 0-1.659-.753l-5.48 4.796a1 1 0 0 0 0 1.506z"/>
 </svg>
             </button>
 
-        <h2>Contenuto principale</h2>
-        <p>Ciaoo</p>
-    </main>
     <script src="script/sidebar.js"></script>

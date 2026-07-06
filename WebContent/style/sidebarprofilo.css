@@ -7,18 +7,6 @@
     font-family: "Saira", sans-serif;
 }
 
-body {
-    min-height: 100vh;
-    background-image: linear-gradient(
-        to top,
-        #091119 0%,
-        #091119 80%,
-        #054282 100%
-    );
-    background-repeat: no-repeat;
-    color: white;
-}
-
 
 .open-btn {
     background-color: transparent;
@@ -36,7 +24,7 @@ body {
     top: 0;
     left: -100%;
     width: 100%;
-    height: 100vh;
+    min-height: 100vh;
     padding: 25px;
     background-color: #091119;
     z-index: 1000;

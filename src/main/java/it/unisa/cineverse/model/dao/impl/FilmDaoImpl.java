@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -26,9 +27,9 @@ public class FilmDaoImpl implements FilmDao{
 
 	@Override
 	public synchronized void save(FilmBean film) throws SQLException {
-		String sql= "INSERT INTO" +TABLE_NAME +"(titolo, sinossi, durata_minuti, age_rating, data_rilascio, trailer_url, cast_film, status) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+		String sql= "INSERT INTO " +TABLE_NAME +"(titolo, sinossi, durata_minuti, age_rating, data_rilascio, trailer_url, cast_film, status) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 		try(Connection connection=ds.getConnection();
-				PreparedStatement ps= connection.prepareStatement(sql)){
+				PreparedStatement ps= connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)){
 			ps.setString(1, film.getTitolo());
 			ps.setString(2, film.getSinossi());
 			ps.setInt(3, film.getDurata_minuti());
@@ -38,12 +39,23 @@ public class FilmDaoImpl implements FilmDao{
 			ps.setString(7, film.getCast_film());
 			ps.setString(8, film.getStatus());
 			ps.executeUpdate();
+			
+			 try (ResultSet rs = ps.getGeneratedKeys()) {
+		            if (rs.next()) {
+		                int idFilmAppenaInserito = rs.getInt(1);
+		                film.setId(idFilmAppenaInserito);
+
+		                System.out.println("ID FILM GENERATO: " + idFilmAppenaInserito);
+		            } else {
+		                throw new SQLException("Nessun ID generato per il film");
+		            }
+		        }
 		}
 	}
 
 	@Override
 	public synchronized void update(FilmBean film) throws SQLException {
-		String sql= "UPDATE" +TABLE_NAME +" SET titolo = ?, sinossi = ?, durata_minuti = ?, age_rating = ?,  data_rilascio = ?, trailer_url = ?, cast_film = ?, status = ? WHERE id = ?";
+		String sql= "UPDATE " +TABLE_NAME +" SET titolo = ?, sinossi = ?, durata_minuti = ?, age_rating = ?,  data_rilascio = ?, trailer_url = ?, cast_film = ?, status = ? WHERE id = ?";
 		try(Connection connection=ds.getConnection();
 				PreparedStatement ps= connection.prepareStatement(sql)){
 			ps.setString(1, film.getTitolo());
@@ -58,11 +70,21 @@ public class FilmDaoImpl implements FilmDao{
 			ps.executeUpdate();
 		}
 	}
+	
+	public synchronized void updateStatusById(int id,String status) throws SQLException {
+		String sql= "UPDATE " +TABLE_NAME +" SET status = ? WHERE id = ?";
+		try(Connection connection=ds.getConnection();
+				PreparedStatement ps= connection.prepareStatement(sql)){
+			ps.setString(1, status);
+			ps.setInt(2, id);
+			ps.executeUpdate();
+		}
+	}
 
 	@Override
 	public synchronized void delete(int id) throws SQLException {
 		
-		String sql= "DELETE FROM" +TABLE_NAME +" WHERE id = ?";
+		String sql= "DELETE FROM " +TABLE_NAME +" WHERE id = ?";
 		try(Connection connection=ds.getConnection();
 				PreparedStatement ps= connection.prepareStatement(sql)){
 			ps.setInt(1, id);
@@ -74,7 +96,7 @@ public class FilmDaoImpl implements FilmDao{
 	@Override
 	public synchronized List<FilmBean> findAll() throws SQLException {
 		List<FilmBean> film = new ArrayList<FilmBean>();
-		String sql="SELECT * FROM" +TABLE_NAME;
+		String sql="SELECT * FROM " +TABLE_NAME;
 		try(Connection connection=ds.getConnection();
 				PreparedStatement ps= connection.prepareStatement(sql);
 				ResultSet rs = ps.executeQuery()){

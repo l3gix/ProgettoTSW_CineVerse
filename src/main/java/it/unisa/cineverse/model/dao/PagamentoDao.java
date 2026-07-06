@@ -15,6 +15,8 @@ public interface PagamentoDao
 	
 	List<PagamentoBean> findAll() throws SQLException;
 	
+	List<PagamentoBean> findAllByIdPrenotazione(int id) throws SQLException;
+	
 	PagamentoBean findById(int id) throws SQLException;
 	
 	

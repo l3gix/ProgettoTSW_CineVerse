@@ -9,6 +9,8 @@ public interface FilmDao {
 	
 	void update(FilmBean film)throws SQLException;
 	
+	public void updateStatusById(int id,String status) throws SQLException;
+
 	void delete(int id)throws SQLException;
 	
 	List<FilmBean> findAll()throws SQLException;
@@ -18,5 +20,7 @@ public interface FilmDao {
 	List<FilmBean> findAllNowShowing() throws SQLException;
 	
 	FilmBean findByIdAndNowShowing(int id)throws SQLException;
+	
+	
 
 }

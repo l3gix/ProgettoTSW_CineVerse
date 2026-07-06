@@ -67,6 +67,19 @@ public class ProiezioniDaoImpl implements ProiezioniDao
 		}
 		
 	}
+	
+	public synchronized void updateStatusById(int id,String status) throws SQLException {
+		String sql ="UPDATE " + TABLE_NAME
+				+ "SET status = ?\n"
+				+ "WHERE id = ?;";
+		try(Connection connection = ds.getConnection();
+				PreparedStatement ps = connection.prepareStatement(sql);){
+			ps.setString(1, status);
+			ps.setInt(2, id);
+			ps.executeUpdate();
+		}
+		
+	}
 
 	@Override
 	public synchronized void delete(int id) throws SQLException {
@@ -150,6 +163,34 @@ public class ProiezioniDaoImpl implements ProiezioniDao
 				
 				ps.setString(3,"scheduled");
 				ps.setInt(4, id);
+				try (ResultSet rs = ps.executeQuery())
+				{
+					while(rs.next())
+					{
+						ProiezioneBean bean = new ProiezioneBean();
+						bean.setId(rs.getInt("id"));
+						bean.setId_film(rs.getInt("id_film"));
+						bean.setId_sale(rs.getInt("id_sale"));
+						bean.setId_formato(rs.getInt("id_formato"));
+						bean.setStarts(rs.getTimestamp("starts").toLocalDateTime());
+						bean.setEnds(rs.getTimestamp("ends").toLocalDateTime());
+						bean.setPrezzo_base(rs.getDouble("prezzo_base"));
+						bean.setStatus(rs.getString("status"));
+						proiezioni.add(bean);
+					}
+				}
+		}
+		return proiezioni;
+	}
+	
+	public synchronized List<ProiezioneBean> findAllByIdFilm(int id) throws SQLException {
+		List<ProiezioneBean> proiezioni = new ArrayList<ProiezioneBean>();
+		String sql = "SELECT *\n"
+				+ "FROM " + TABLE_NAME
+				+ " WHERE id_film = ?; ";
+		try(Connection connection = ds.getConnection();
+				PreparedStatement ps = connection.prepareStatement(sql);){
+				ps.setInt(1, id);
 				try (ResultSet rs = ps.executeQuery())
 				{
 					while(rs.next())

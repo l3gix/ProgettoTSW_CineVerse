@@ -12,6 +12,8 @@ public interface ProiezioniDao
 	
 	void update(ProiezioneBean proiezioni)throws SQLException;
 	
+	void updateStatusById(int id,String status) throws SQLException;
+	
 	void delete(int id)throws SQLException;
 	
 	List<ProiezioneBean> findAll()throws SQLException;
@@ -19,4 +21,6 @@ public interface ProiezioniDao
 	ProiezioneBean findById(int id)throws SQLException;
 	
 	List<ProiezioneBean> findAllByIdFilmAndDateAndScheduled(int id,LocalDateTime date) throws SQLException;
+	
+	List<ProiezioneBean> findAllByIdFilm(int id) throws SQLException;
 }
