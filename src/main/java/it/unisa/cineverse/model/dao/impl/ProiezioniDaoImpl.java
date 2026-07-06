@@ -145,7 +145,41 @@ public class ProiezioniDaoImpl implements ProiezioniDao
 		}
 		return bean;
 	}
-
+	
+	public synchronized List<ProiezioneBean> findAllByIdFilmAndDateAndScheduled( LocalDateTime date) throws SQLException {
+		List<ProiezioneBean> proiezioni = new ArrayList<ProiezioneBean>();
+		String sql = "SELECT *\n"
+				+ "FROM " + TABLE_NAME
+				+ " WHERE starts >= ?\n"
+				+ " AND starts < ? "
+				+ " AND status = ? ; ";
+		try(Connection connection = ds.getConnection();
+				PreparedStatement ps = connection.prepareStatement(sql);){
+				ps.setTimestamp(1, Timestamp.valueOf(date));
+				ps.setTimestamp(2, Timestamp.valueOf(date.toLocalDate().plusDays(1).atStartOfDay()));
+				System.out.println(date);
+				System.out.println(Timestamp.valueOf(date.toLocalDate().plusDays(1).atStartOfDay()));
+				
+				ps.setString(3,"scheduled");
+				try (ResultSet rs = ps.executeQuery())
+				{
+					while(rs.next())
+					{
+						ProiezioneBean bean = new ProiezioneBean();
+						bean.setId(rs.getInt("id"));
+						bean.setId_film(rs.getInt("id_film"));
+						bean.setId_sale(rs.getInt("id_sale"));
+						bean.setId_formato(rs.getInt("id_formato"));
+						bean.setStarts(rs.getTimestamp("starts").toLocalDateTime());
+						bean.setEnds(rs.getTimestamp("ends").toLocalDateTime());
+						bean.setPrezzo_base(rs.getDouble("prezzo_base"));
+						bean.setStatus(rs.getString("status"));
+						proiezioni.add(bean);
+					}
+				}
+		}
+		return proiezioni;
+	}
 	@Override
 	public synchronized List<ProiezioneBean> findAllByIdFilmAndDateAndScheduled(int id, LocalDateTime date) throws SQLException {
 		List<ProiezioneBean> proiezioni = new ArrayList<ProiezioneBean>();

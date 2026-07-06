@@ -60,7 +60,6 @@
             <button></button>
             <button></button>
             <button></button>
-            <button>Tutti</button>
 
         </div>
         
@@ -131,7 +130,7 @@
                     <p>Proiezione laser</p>
                     <p style="text-align: right;">Da <%=p.getPrezzo_base() %> €</p>
                 </div>
-                        </a>
+               </a>
             </div>
             <%} %>
         </div>

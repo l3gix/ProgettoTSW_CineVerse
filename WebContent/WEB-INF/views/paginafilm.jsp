@@ -53,7 +53,6 @@
             <button></button>
             <button></button>
             <button></button>
-            <button>Tutti</button>
 
         </div>
         <div class="title">
@@ -91,16 +90,18 @@
          <% for(ProiezioneBean p : filmpagina.getProiezione()) { %>
          
             <div class="session">
+             <a href="<%= request.getContextPath() %>/WelcomePrenotazionePosti?id=<%= p.getId() %>">
                 <div class="session-range">
                     <p><%= p.getStarts().toLocalTime() %> - <%= p.getEnds().toLocalTime() %></p>
                 </div>
+
                 <div class="hall">
                     <p>sala <%=p.getId_sale() %></p>
                     <p>Proiezione laser</p>
                     <p style="text-align: right;">Da <%=p.getPrezzo_base() %> €</p>
                 </div>
+               </a>
             </div>
-            
 			<%} %>
         	</div>
         </div>

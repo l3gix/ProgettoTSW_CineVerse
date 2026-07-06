@@ -239,9 +239,73 @@ function postiOccupati() // funzione per controllare se i posti sono occupati da
 	});
 }
 
+function cercaPostoSelezionato(codicePosto) {
+  for (var i = 0; i < selezionati.length; i++) {
+    if (selezionati[i].codice == codicePosto) {
+      return i;
+    }
+  }
+
+  return -1;
+}
+
+function aggiornaRiepilogo() {
+  if (selezionati.length == 0) {
+    postiScelti.innerHTML = "nessuno";
+    totale.innerHTML = "0,00€";
+    return;
+  }
+
+  var testoPosti = "";
+  var somma = 0;
+
+  for (var i = 0; i < selezionati.length; i++) {
+    testoPosti += selezionati[i].codice;
+    somma += selezionati[i].prezzo +  prezziBasedef;
+
+    if (i < selezionati.length - 1) {
+      testoPosti += ", ";
+    }
+  }
+
+  postiScelti.innerHTML = testoPosti;
+  totale.innerHTML = formattaPrezzo(somma);
+}
+
+function formattaPrezzo(prezzo) {
+  return prezzo.toFixed(2).replace(".", ",") + "€";
+}
 
 
+function confermaPrenotazione() {
+  if (selezionati.length == 0) {
+	apriModale(
+		"Errore", "Devi selezionare un posto"
+	)
+    return;
+  }
 
+  var testoPosti = "";
+  var somma = 0;
+console.log("sono nel bottone"+ selezionati);
+
+  for (var i = 0; i < selezionati.length; i++) {
+    testoPosti += selezionati[i].codice;
+    somma += selezionati[i].prezzo + prezziBasedef;
+
+    if (i < selezionati.length - 1) {
+      testoPosti += ", ";
+    }
+  }
+	console.log(selezionati);
+  var params = 
+  	        "azione=" + encodeURIComponent("pagamento") +
+  			"&selezionati=" + encodeURIComponent(JSON.stringify(selezionati));
+
+  	    loadAjaxDoc(contex+"/PrenotazionePosti", "POST", params, handleSelezionaPosto);
+
+	console.log("totale da mandare :" + somma );
+}
 
 
 
@@ -262,6 +326,17 @@ if (postiincarello && postiincarello.length > 0) {
 aggiornaRiepilogo();
 
 
+function apriModale(t,cont) {
+    document.getElementById("modale").style.display = "flex";
+	titolo = document.getElementById("titolo-modale");
+	titolo.innerHTML = t;
+	contenuto = document.getElementById("contenuto-modale");
+	contenuto.innerHTML = cont;
+}
+
+function chiudiModale() {
+    document.getElementById("modale").style.display = "none";
+}
 
 /*Funzioni Ajax */
 function createXMLHttpRequest() {
@@ -335,4 +410,3 @@ function loadAjaxDoc(url, method, params, cFuction) {
 		
 	}
 }
-

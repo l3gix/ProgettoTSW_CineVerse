@@ -11,7 +11,7 @@ const giorni = [
     "sab"
 ]
 
-for(let i = 0 ; i < button.length - 1 ; i++)
+for(let i = 0 ; i < button.length ; i++)
 {
 	let data = new Date();
 	    data.setDate(data.getDate() + i);
