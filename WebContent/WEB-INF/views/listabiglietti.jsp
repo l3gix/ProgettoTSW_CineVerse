@@ -11,26 +11,34 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Carrello</title>
-  <link  rel="stylesheet" href="style/carrello.css">
-  <link rel="stylesheet" href="style/navbar.css">
+<title>ListaFilm</title>
+  <link  rel="stylesheet" href="style/listabiglietti.css">
+  <link rel="stylesheet" href="style/sidebarprofilo.css">
 </head>
 <body>
 
-<%@include file="navbar.jsp" %>
+<%@include file="sidebarprofilo.jsp" %>
 <%
-List<FilmBean> listafilm = (List<FilmBean>) request.getAttribute("filmdelcarello");
+List<List<FilmBean>> listafilmtotale = (List<List<FilmBean>>) request.getAttribute("listafilm");
 
 double totale = 0;
 
-if (listafilm != null && !listafilm.isEmpty()) {
+if (listafilmtotale != null && !listafilmtotale.isEmpty()) {
 %>
 
 <div class="carrello">
-
-    <h1>Il tuo carrello</h1>
-
+	<div class="carello-titolo">
+	<div>
+		<svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" fill="currentColor" class="bi bi-ticket-perforated" viewBox="0 0 16 16">
+					  <path d="M4 4.85v.9h1v-.9zm7 0v.9h1v-.9zm-7 1.8v.9h1v-.9zm7 0v.9h1v-.9zm-7 1.8v.9h1v-.9zm7 0v.9h1v-.9zm-7 1.8v.9h1v-.9zm7 0v.9h1v-.9z"/>
+					  <path d="M1.5 3A1.5 1.5 0 0 0 0 4.5V6a.5.5 0 0 0 .5.5 1.5 1.5 0 1 1 0 3 .5.5 0 0 0-.5.5v1.5A1.5 1.5 0 0 0 1.5 13h13a1.5 1.5 0 0 0 1.5-1.5V10a.5.5 0 0 0-.5-.5 1.5 1.5 0 0 1 0-3A.5.5 0 0 0 16 6V4.5A1.5 1.5 0 0 0 14.5 3zM1 4.5a.5.5 0 0 1 .5-.5h13a.5.5 0 0 1 .5.5v1.05a2.5 2.5 0 0 0 0 4.9v1.05a.5.5 0 0 1-.5.5h-13a.5.5 0 0 1-.5-.5v-1.05a2.5 2.5 0 0 0 0-4.9z"/>
+					</svg>
+	</div>
+    <h1>I Mie Biglietti</h1>
+	</div>
+	<div class="info">
     <%
+    for(List<FilmBean> listafilm : listafilmtotale){
     for (FilmBean film : listafilm) {
 
         if (film.getProiezione() != null && !film.getProiezione().isEmpty()) {
@@ -55,6 +63,7 @@ if (listafilm != null && !listafilm.isEmpty()) {
                 }
     %>
 
+
     <div class="ticket-card">
         <div class="ticket-sopra">
             <h2><%= film.getTitolo() %></h2>
@@ -70,7 +79,7 @@ if (listafilm != null && !listafilm.isEmpty()) {
         <div class="ticket-sotto">
             <p class="label">Prezzo</p>
             <h3><%= totaleSpettacolo %>€</h3>
-	<form action="<%= request.getContextPath() %>/CancellazioneBigliettoDaCarrello" method="post">
+	
 	    <input type="hidden" name="id_proiezione" value="<%= proiezione.getId() %>">
 		 <% 
 	    if (proiezione.getBiglietto() != null) {
@@ -82,8 +91,7 @@ if (listafilm != null && !listafilm.isEmpty()) {
 	    }
 	    %>
 		
-	    <button type="submit">Rimuovi</button>
-	</form>
+
         </div>
     </div>
 
@@ -91,31 +99,11 @@ if (listafilm != null && !listafilm.isEmpty()) {
             }
         }
     }
+    }}
     %>
 
-    <div class="totale-box">
-        <p>Totale</p>
-        <h2><%= totale %>€</h2>
-        <button
-        	onclick="window.location.href='<%=request.getContextPath() %>/WelcomePagamento'"
-        	>
-        </button>
-    </div>
-
 </div>
-
-<%
-} else {
-%>
-
-<div class="carrello">
-    <h1>Il tuo carrello</h1>
-    <p>Il carrello è vuoto.</p>
 </div>
-
-<%
-}
-%>
 
 </body>
 </html>

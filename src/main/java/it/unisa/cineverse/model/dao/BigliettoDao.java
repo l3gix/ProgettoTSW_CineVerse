@@ -13,6 +13,8 @@ public interface BigliettoDao {
  
  void update(BigliettoBean biglietto) throws SQLException;
  
+ void updateIdPrenotazioneAndStatusByIdProiezioneAndIdPosto(int id_prenotazione , String status ,int id_proiezione,int id_posto) throws SQLException ;
+ 
  void delete(int id) throws SQLException;
  
  void deleteByIdPostoAndSala(int id_posto,int id_proiezione) throws SQLException;
@@ -22,6 +24,8 @@ public interface BigliettoDao {
  BigliettoBean findbyId(int id)throws SQLException;
  
  List<BigliettoBean> findAllByIdProiezione(int id)throws SQLException;
+ 
+List<BigliettoBean> findAllByIdPrenotazione(int id) throws SQLException;
 		
 	
 	

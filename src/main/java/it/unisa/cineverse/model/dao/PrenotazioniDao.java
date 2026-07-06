@@ -15,6 +15,8 @@ public interface PrenotazioniDao
 	
 	List<PrenotazioniBean> findAll()throws SQLException;
 	
+	List<PrenotazioniBean> findAllByidUtente(String id_utente) throws SQLException;
+	
 	PrenotazioniBean findById(int id)throws SQLException;
 	
 }
