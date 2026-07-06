@@ -24,6 +24,8 @@ public interface BigliettoDao {
  BigliettoBean findbyId(int id)throws SQLException;
  
  List<BigliettoBean> findAllByIdProiezione(int id)throws SQLException;
+ 
+List<BigliettoBean> findAllByIdPrenotazione(int id) throws SQLException;
 		
 	
 	

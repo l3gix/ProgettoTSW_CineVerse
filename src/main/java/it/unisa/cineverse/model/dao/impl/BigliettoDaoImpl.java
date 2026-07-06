@@ -173,6 +173,31 @@ public class BigliettoDaoImpl implements BigliettoDao{
 		}
 		return biglietto;
 	}
+	
+	public synchronized List<BigliettoBean> findAllByIdPrenotazione(int id) throws SQLException {
+		List<BigliettoBean> biglietto = new ArrayList<BigliettoBean>();
+		String sql = "SELECT * FROM " +TABLE_NAME +" WHERE id_prenotazione = ?";
+		try(Connection connection=ds.getConnection();
+				PreparedStatement ps= connection.prepareStatement(sql);){
+				ps.setInt(1, id);
+				try (ResultSet rs  = ps.executeQuery()){
+					while(rs.next()) {
+						
+						BigliettoBean bean = new BigliettoBean();
+						bean.setId(rs.getInt("id"));
+						bean.setId_prenotazione(rs.getInt("id_prenotazione"));
+						bean.setId_proiezione(rs.getInt("id_proiezione"));
+						bean.setId_posto(rs.getInt("id_posto"));
+						bean.setPrezzo(rs.getDouble("prezzo"));
+						bean.setStatus(rs.getString("status"));
+						bean.setData_creazione(rs.getTimestamp("data_creazione").toLocalDateTime());
+						biglietto.add(bean);
+					}
+				}
+			
+		}
+		return biglietto;
+	}
 
 	
 }

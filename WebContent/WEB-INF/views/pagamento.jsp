@@ -30,6 +30,7 @@ if (listafilm != null && !listafilm.isEmpty()) {
 	<div class="carello-titolo">
     <h1>IL Tuo pagamento</h1>
 	</div>
+	<div class="info">
     <%
     for (FilmBean film : listafilm) {
 
@@ -54,7 +55,7 @@ if (listafilm != null && !listafilm.isEmpty()) {
                     }
                 }
     %>
-<div class="info">
+
     <div class="ticket-card">
         <div class="ticket-sopra">
             <h2><%= film.getTitolo() %></h2>

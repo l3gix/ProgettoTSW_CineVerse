@@ -105,7 +105,31 @@ public class PrenotazioniDaoImpl implements PrenotazioniDao
 		}
 		return prenotazioni;
 	}
-
+	
+	public synchronized List<PrenotazioniBean> findAllByidUtente(String id_utente) throws SQLException {
+		List<PrenotazioniBean> prenotazioni = new ArrayList<PrenotazioniBean>();
+		String sql = "SELECT *\n"
+				+ "FROM " + TABLE_NAME + " WHERE id_utenti = ?";
+		try(Connection connection = ds.getConnection();
+				PreparedStatement ps = connection.prepareStatement(sql);){
+				ps.setString(1, id_utente);
+				try (ResultSet rs = ps.executeQuery())
+				{
+			while(rs.next())
+			{
+				PrenotazioniBean bean = new PrenotazioniBean();
+				bean.setId(rs.getInt("id"));
+				bean.setId_utenti(rs.getString("id_utenti"));
+				bean.setStatus(rs.getString("status"));
+				bean.setImporto_totale(rs.getDouble("importo_totale"));
+				bean.setScadenza(rs.getTimestamp("scadenza").toLocalDateTime());
+				bean.setCreazione(rs.getTimestamp("creazione").toLocalDateTime());
+				prenotazioni.add(bean);
+			}
+				}
+		}
+		return prenotazioni;
+	}
 	@Override
 	public synchronized PrenotazioniBean findById(int id) throws SQLException {
 		PrenotazioniBean bean = new PrenotazioniBean();
