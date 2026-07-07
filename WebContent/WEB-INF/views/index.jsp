@@ -12,21 +12,44 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta charset="UTF-8">
 <title>CineVerse</title>
-<link rel="stylesheet" href="style/navbar.css">
-<link rel="stylesheet" href="style/index.css">
-<link rel="stylesheet" href="style/search.css">
+<link rel="stylesheet" href="<%=request.getContextPath() %>/style/navbar.css">
+<link rel="stylesheet" href="<%=request.getContextPath() %>/style/index.css">
+<link rel="stylesheet" href="<%=request.getContextPath() %>/style/search.css">
 </head>
 <body>
 	<%@include file="navbar.jsp" %>
 	
 	<%
 		List<FilmBean> films = (List<FilmBean>) request.getAttribute("films");
+		List<FilmBean> comingsoon = (List<FilmBean>) request.getAttribute("comingsoon");
+		
+	String dateParam = request.getParameter("date");
+	 LocalDate dataSelezionata;
+	 
+   if (dateParam == null || dateParam.isBlank()) {
+       dataSelezionata = LocalDate.now();
+   } else {
+       dataSelezionata = LocalDateTime.parse(dateParam).toLocalDate();
+   }
+
+		
+	 String giornoSettimana = dataSelezionata
+	            .getDayOfWeek()
+	            .getDisplayName(TextStyle.FULL, Locale.ITALIAN)
+	            .toUpperCase();
+
+	    String mese = dataSelezionata
+	            .getMonth()
+	            .getDisplayName(TextStyle.SHORT, Locale.ITALIAN)
+	            .toUpperCase()
+	            .replace(".", "");
+		
 	%>
 	
 	
     <div class="slideshow-container">
   	
-  	 <% for (FilmBean f : films) { %>
+  	 <% for (FilmBean f : comingsoon) { %>
     <div class="mySlides fade">
         <div>
         <img src="<%= f.getPoster().get(0).getBanner() %>" alt="<%= f.getPoster().get(0).getBanner()%>" style="width:100%">
@@ -53,16 +76,58 @@
 
     <section class="showing-list">
         <div class="container">
-             <div class="button-day" id ="giorni">
-            <button></button>
-            <button></button>
-            <button></button>
-            <button></button>
-            <button></button>
-            <button></button>
-            <button></button>
+           
+             
 
-        </div>
+ 	<% if (films != null && !films.isEmpty()) { %>
+
+    <div class="button-day" id="giorni">
+
+    <button 
+        class="<%= dataSelezionata.equals(LocalDate.now()) ? "active-day" : "" %>"
+        onclick="window.location.href='<%= request.getContextPath() %>/WelcomeIndex?date=<%= LocalDate.now().atStartOfDay() %>'">
+
+    </button>
+
+    <button 
+        class="<%= dataSelezionata.equals(LocalDate.now().plusDays(1)) ? "active-day" : "" %>"
+        onclick="window.location.href='<%= request.getContextPath() %>/WelcomeIndex?date=<%= LocalDate.now().plusDays(1).atStartOfDay() %>'">
+
+    </button>
+
+    <button 
+        class="<%= dataSelezionata.equals(LocalDate.now().plusDays(2)) ? "active-day" : "" %>"
+        onclick="window.location.href='<%= request.getContextPath() %>/WelcomeIndex?date=<%= LocalDate.now().plusDays(2).atStartOfDay() %>'">
+        
+    </button>
+
+    <button 
+        class="<%= dataSelezionata.equals(LocalDate.now().plusDays(3)) ? "active-day" : "" %>"
+        onclick="window.location.href='<%= request.getContextPath() %>/WelcomeIndex?date=<%= LocalDate.now().plusDays(3).atStartOfDay() %>'">
+        
+    </button>
+
+    <button 
+        class="<%= dataSelezionata.equals(LocalDate.now().plusDays(4)) ? "active-day" : "" %>"
+        onclick="window.location.href='<%= request.getContextPath() %>/WelcomeIndex?date=<%= LocalDate.now().plusDays(4).atStartOfDay() %>'">
+     
+    </button>
+
+    <button 
+        class="<%= dataSelezionata.equals(LocalDate.now().plusDays(5)) ? "active-day" : "" %>"
+        onclick="window.location.href='<%= request.getContextPath() %>/WelcomeIndex?date=<%= LocalDate.now().plusDays(5).atStartOfDay() %>'">
+       
+    </button>
+
+    <button 
+        class="<%= dataSelezionata.equals(LocalDate.now().plusDays(6)) ? "active-day" : "" %>"
+        onclick="window.location.href='<%= request.getContextPath() %>/WelcomeIndex?date=<%= LocalDate.now().plusDays(6).atStartOfDay() %>'">
+        
+    </button>
+
+</div>
+
+
         
         <% if (films != null && !films.isEmpty()) { %>
 
@@ -80,37 +145,15 @@
 				
 				<p class="sinossi"><%=f.getSinossi() %></p>
 				
-                <h3>cast</h3>
+                <h3>Cast</h3>
                 <p><%= f.getCast_film() %></p>
 
-                <h3>durata</h3>
+                <h3>Durata</h3>
                 <p><%= f.getDurata_minuti() %> min</p>
             </div>
         </div>
 		<div class="title">
-			<% 
-			 String dateParam = request.getParameter("date");
-			 LocalDate dataSelezionata;
-			 
-		    if (dateParam == null || dateParam.isBlank()) {
-		        dataSelezionata = LocalDate.now();
-		    } else {
-		        dataSelezionata = LocalDateTime.parse(dateParam).toLocalDate();
-		    }
-
-				
-			 String giornoSettimana = dataSelezionata
-			            .getDayOfWeek()
-			            .getDisplayName(TextStyle.FULL, Locale.ITALIAN)
-			            .toUpperCase();
-
-			    String mese = dataSelezionata
-			            .getMonth()
-			            .getDisplayName(TextStyle.SHORT, Locale.ITALIAN)
-			            .toUpperCase()
-			            .replace(".", "");
 			
-			%>
             <h3> 
             PROSSIMI SPETTACOLI PER
             <span style="color : #007BFA">
@@ -123,13 +166,13 @@
             <div class="session">
              <a href="<%= request.getContextPath() %>/WelcomePrenotazionePosti?id=<%= p.getId() %>">
                 <div class="session-range">
-                    <p><%= p.getStarts().toLocalTime() %> - <%= p.getEnds().toLocalTime() %></p>
+                    <p><%= p.getStarts().toLocalTime() %>-<span style="color:#666666"><%= p.getEnds().toLocalTime() %></span></p>
                 </div>
 
                 <div class="hall">
                     <p>sala <%=p.getId_sale() %></p>
                     <p>Proiezione laser</p>
-                    <p style="text-align: right;">Da <%=p.getPrezzo_base() %> €</p>
+                    <p style="text-align: right;">Da <span style="font-size : 20px;color:white"><%=p.getPrezzo_base() %> € </span></p>
                 </div>
                </a>
             </div>
@@ -138,11 +181,26 @@
     <% } 
     }
     %>
+    
+    <% } else { %>
+	<div class="empty-proiezioni">
+    <div class="empty-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" fill="currentColor" class="bi bi-calendar" viewBox="0 0 16 16">
+            <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5M1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4z"/>
+        </svg>
+    </div>
+
+    <h2>Nessuna proiezione disponibile</h2>
+    <p>Non ci sono spettacoli programmati per questa data.</p>
+</div>
+
+<% } %>
+    
     </div>
     </section>
 	<script>
     const contextPath = "<%= request.getContextPath() %>";
 	</script>
-    <script src="script/index.js"></script>
+    <script src="<%=request.getContextPath() %>/script/index.js"></script>
 </body>
 </html>

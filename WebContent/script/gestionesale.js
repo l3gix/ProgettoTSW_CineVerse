@@ -191,7 +191,7 @@ function vaiAiPosti() {
 	   console.log("ID SALA:", idSala);
 
 	   if (idProiezione === "") {
-	       alert("Seleziona prima una sala");
+	       //alert("Seleziona prima una sala");
 	       return;
 	   }
 

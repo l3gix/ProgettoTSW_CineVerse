@@ -169,6 +169,11 @@ nav
     display: inline;
 }
 
+.descrizione-film h3
+{
+	color : #007BFA;
+}
+
 .descrizione-film > div 
 {
     border-bottom: 1px solid white;

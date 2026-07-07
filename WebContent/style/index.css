@@ -161,6 +161,7 @@ body
     display: flex;
     margin-bottom: 10px;
     flex-direction: column;
+    margin-top: 10px;
 }
 
 .session
@@ -182,11 +183,27 @@ body
     background: linear-gradient(to left, #45484d 0%,#000000 100%); 
     display: flex;
     justify-content: space-between;
+    color : #666666;
+    font-size: 20px;
 } 
+
+.session a,
+.session a:hover,
+.session a:visited,
+.session a:active {
+    color: inherit;
+    text-decoration: none;
+}
 
 .hall p 
 {
     padding: 0px 10px;
+}
+
+.button-day button.active-day {
+    background-color: #007BFA;
+    color: white;
+    border-color: #007BFA;
 }
 /*
 .showing-list-film
@@ -231,6 +248,11 @@ body
 {
     width: 65%;
     
+}
+
+.showing-film-card p 
+{
+	color : #666666;
 }
 
 
@@ -341,7 +363,11 @@ body
      margin-top: 10px;
      
     }
-
+	
+	.showing-film-card p 
+	{
+		font-size: 16px;
+	}
 
     /*
      .showing-list-film 
@@ -365,6 +391,11 @@ body
         margin-right: 50px;
         background-color: #111;
         overflow: hidden;
+    }
+    
+    .showing-list
+    {
+    	margin-bottom: 5%;
     }
 
     .showing-list-film img 
@@ -444,4 +475,34 @@ body
 	}
 
 
+}
+
+.empty-proiezioni {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    text-align: center;
+    padding: 30px 20px;
+    margin-top: 30px;
+
+    background-color: #091119;
+    border: 1px solid white;
+    border-radius: 18px;
+    box-shadow: 0 0 35px rgba(0, 0, 0, 0.4);
+}
+
+
+
+.empty-proiezioni h2 {
+    font-size: 24px;
+    margin-bottom: 8px;
+    color: white;
+}
+
+.empty-proiezioni p {
+    font-size: 15px;
+    color: #999;
 }

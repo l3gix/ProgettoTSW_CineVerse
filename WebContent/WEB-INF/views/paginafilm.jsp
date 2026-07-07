@@ -13,9 +13,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Film</title>
-<link rel="stylesheet" href="style/navbar.css">
-<link rel="stylesheet" href="style/paginafilm.css">
-<link rel="stylesheet" href="style/search.css">
+<link rel="stylesheet" href="<%=request.getContextPath() %>/style/navbar.css">
+<link rel="stylesheet" href="<%=request.getContextPath() %>/style/paginafilm.css">
+<link rel="stylesheet" href="<%=request.getContextPath() %>/style/search.css">
 </head>
 <body>
 	
@@ -23,7 +23,30 @@
 	
 	<%
 		FilmBean filmpagina = (FilmBean) request.getAttribute("filmpagina");
+		
+	String dateParam = request.getParameter("date");
+	 LocalDate dataSelezionata;
+	 
+   if (dateParam == null || dateParam.isBlank()) {
+       dataSelezionata = LocalDate.now();
+   } else {
+       dataSelezionata = LocalDateTime.parse(dateParam).toLocalDate();
+   }
+
+		
+	 String giornoSettimana = dataSelezionata
+	            .getDayOfWeek()
+	            .getDisplayName(TextStyle.FULL, Locale.ITALIAN)
+	            .toUpperCase();
+
+	    String mese = dataSelezionata
+	            .getMonth()
+	            .getDisplayName(TextStyle.SHORT, Locale.ITALIAN)
+	            .toUpperCase()
+	            .replace(".", "");
+	
 	%>
+
 	
 	<section class="showing-list">
         <div class="container">
@@ -34,9 +57,9 @@
             <div class="showing-film-card">
                     <h1><%=filmpagina.getTitolo() %></h1>
                     <p><%=filmpagina.getSinossi() %></p>
-                    <h3>cast</h3>
+                    <h3>Cast</h3>
                     <p><%=filmpagina.getCast_film() %></p>
-                    <h3>durata</h3>
+                    <h3>Durata</h3>
                     <p><%=filmpagina.getDurata_minuti() %>min</p>
                     <h3>Data uscita</h3>
                     <p>
@@ -47,39 +70,51 @@
             </div>
         </div>
         <div class="button-day" id ="giorni">
-            <button></button>
-            <button></button>
-            <button></button>
-            <button></button>
-            <button></button>
-            <button></button>
-            <button></button>
+            <button 
+        class="<%= dataSelezionata.equals(LocalDate.now()) ? "active-day" : "" %>"
+        onclick="window.location.href='<%= request.getContextPath() %>/WelcomeIndex?date=<%= LocalDate.now().atStartOfDay() %>'">
+
+    </button>
+
+    <button 
+        class="<%= dataSelezionata.equals(LocalDate.now().plusDays(1)) ? "active-day" : "" %>"
+        onclick="window.location.href='<%= request.getContextPath() %>/WelcomeIndex?date=<%= LocalDate.now().plusDays(1).atStartOfDay() %>'">
+
+    </button>
+
+    <button 
+        class="<%= dataSelezionata.equals(LocalDate.now().plusDays(2)) ? "active-day" : "" %>"
+        onclick="window.location.href='<%= request.getContextPath() %>/WelcomeIndex?date=<%= LocalDate.now().plusDays(2).atStartOfDay() %>'">
+        
+    </button>
+
+    <button 
+        class="<%= dataSelezionata.equals(LocalDate.now().plusDays(3)) ? "active-day" : "" %>"
+        onclick="window.location.href='<%= request.getContextPath() %>/WelcomeIndex?date=<%= LocalDate.now().plusDays(3).atStartOfDay() %>'">
+        
+    </button>
+
+    <button 
+        class="<%= dataSelezionata.equals(LocalDate.now().plusDays(4)) ? "active-day" : "" %>"
+        onclick="window.location.href='<%= request.getContextPath() %>/WelcomeIndex?date=<%= LocalDate.now().plusDays(4).atStartOfDay() %>'">
+     
+    </button>
+
+    <button 
+        class="<%= dataSelezionata.equals(LocalDate.now().plusDays(5)) ? "active-day" : "" %>"
+        onclick="window.location.href='<%= request.getContextPath() %>/WelcomeIndex?date=<%= LocalDate.now().plusDays(5).atStartOfDay() %>'">
+       
+    </button>
+
+    <button 
+        class="<%= dataSelezionata.equals(LocalDate.now().plusDays(6)) ? "active-day" : "" %>"
+        onclick="window.location.href='<%= request.getContextPath() %>/WelcomeIndex?date=<%= LocalDate.now().plusDays(6).atStartOfDay() %>'">
+        
+    </button>
 
         </div>
         <div class="title">
-        <% 
-			 String dateParam = request.getParameter("date");
-			 LocalDate dataSelezionata;
-			 
-		    if (dateParam == null || dateParam.isBlank()) {
-		        dataSelezionata = LocalDate.now();
-		    } else {
-		        dataSelezionata = LocalDateTime.parse(dateParam).toLocalDate();
-		    }
-
-				
-			 String giornoSettimana = dataSelezionata
-			            .getDayOfWeek()
-			            .getDisplayName(TextStyle.FULL, Locale.ITALIAN)
-			            .toUpperCase();
-
-			    String mese = dataSelezionata
-			            .getMonth()
-			            .getDisplayName(TextStyle.SHORT, Locale.ITALIAN)
-			            .toUpperCase()
-			            .replace(".", "");
-			
-			%>
+        
             <h3> 
             PROSSIMI SPETTACOLI PER
             <span style="color : #007BFA">
@@ -93,13 +128,13 @@
             <div class="session">
              <a href="<%= request.getContextPath() %>/WelcomePrenotazionePosti?id=<%= p.getId() %>">
                 <div class="session-range">
-                    <p><%= p.getStarts().toLocalTime() %> - <%= p.getEnds().toLocalTime() %></p>
+                    <p><span style="color:white"><%= p.getStarts().toLocalTime() %> </span>- <%= p.getEnds().toLocalTime() %></p>
                 </div>
 
                 <div class="hall">
                     <p>sala <%=p.getId_sale() %></p>
                     <p>Proiezione laser</p>
-                    <p style="text-align: right;">Da <%=p.getPrezzo_base() %> €</p>
+                    <p style="text-align: right;">Da <span style="font-size : 20px;color:white"><%=p.getPrezzo_base() %> € </span></p>
                 </div>
                </a>
             </div>
@@ -114,6 +149,6 @@
 	    const id = "<%= filmpagina.getId()%>"
 	</script>
 	
-    <script src="script/paginafilm.js"></script>
+    <script src="<%=request.getContextPath() %>/script/paginafilm.js"></script>
 </body>
 </html>

@@ -19,7 +19,7 @@ import it.unisa.cineverse.model.dao.impl.ProiezioniDaoImpl;
 /**
  * Servlet implementation class CambiaStatoFilm
  */
-@WebServlet("/admin/CambiaStatoFilmAndProiezione")
+@WebServlet("/admin/CambiaStatoProiezione")
 public class CambiaStatoProiezione extends HttpServlet {
 	private static final long serialVersionUID = 1L;
     

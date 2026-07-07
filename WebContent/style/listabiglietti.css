@@ -72,8 +72,8 @@ div h1
 }
 
 .ticket-sopra p {
-    color: #d4d4d4;
-    font-size: 15px;
+    color: #666666;
+    font-size: 16px;
     margin-bottom: 6px;
 }
 
@@ -86,7 +86,7 @@ div h1
 }
 
 .posti span {
-    background-color: blue;
+    background-color: #007BFA;
     padding: 7px 13px;
     border-radius: 999px;
     font-size: 14px;
@@ -109,6 +109,7 @@ div h1
 .ticket-sotto h3 {
     font-size: 24px;
 }
+
 
 .ticket-sotto button {
     border: none;

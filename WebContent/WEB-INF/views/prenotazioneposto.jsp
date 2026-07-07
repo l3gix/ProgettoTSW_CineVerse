@@ -8,18 +8,23 @@
 <%@ page import="it.unisa.cineverse.model.bean.PostiBean" %>
 <%@ page import="it.unisa.cineverse.model.bean.BigliettoBean" %>
 <%@ page import="java.util.ArrayList" %>
+<%@ page import="java.time.format.DateTimeFormatter" %>
+<%@ page import="java.util.Locale" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style/prenotazioneposto.css">
-    <link rel="stylesheet" href="style/posti.css">
+    <link rel="stylesheet" href="<%=request.getContextPath() %>/style/prenotazioneposto.css">
+    <link rel="stylesheet" href="<%=request.getContextPath() %>/style/posti.css">
 <title>Posti</title>
 </head>
 <body>
 	
 	<%
+		DateTimeFormatter formatterOrario = DateTimeFormatter.ofPattern("HH:mm", Locale.ITALIAN);
+		DateTimeFormatter formatterData = DateTimeFormatter.ofPattern("EEEE d MMMM", Locale.ITALIAN);
+		
 		FilmBean f = (FilmBean) request.getAttribute("film");
 		List<CategoriaPostiBean> c = (List<CategoriaPostiBean>) request.getAttribute("categoria");
 		ProiezioneBean p = (ProiezioneBean) request.getAttribute("proiezioni");
@@ -75,9 +80,9 @@
                 
                 <% } else { %>
                 <button 
-                	onclick="window.location.href='<%= request.getContextPath() %>/WelcomeProfilo'"
+                	onclick="window.location.href='<%= request.getContextPath() %>/common/WelcomeProfilo'"
                 	>
-	                <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-person" viewBox="0 0 16 16" style="color: #054282">
+	                <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-person" viewBox="0 0 16 16" style="color: #007BFA">
 	                    <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6m2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0m4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4m-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10s-3.516.68-4.168 1.332c-.678.678-.83 1.418-.832 1.664z"/>
 	                </svg>
                 </button>
@@ -96,9 +101,11 @@
 
             <div class="descrizione-film">
                 <div>
+                <h3>Acquista Ora</h3>
                 <p><%=f.getTitolo() %></p>
                 </div>
-                <p>sala <%= p.getId_sale() %></p>
+                <p>sala <%= p.getId_sale() %> </p>
+                <p><%= p.getStarts().format(formatterData)%>, <%= p.getStarts().format(formatterOrario)%> - <%=p.getEnds().format(formatterOrario) %> </p>
             </div>
         </div>
     </div>
@@ -224,7 +231,7 @@
     	    };
     
 </script>
-  <script src="script/posti.js"></script>
+  <script src="<%=request.getContextPath() %>/script/posti.js"></script>
 
 </body>
 </html>

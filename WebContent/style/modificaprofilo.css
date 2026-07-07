@@ -104,11 +104,16 @@ body
         .button-row button {
             width: 130px;
             height: 58px;
-            border: 2px solid #d6d6d6;
-            background-color: white;
-            color: #d0d0d0;
+            background-color: #054282;
+            color: white;
             border-radius: 5px;
             font-size: 17px;
+           
+        }
+        
+           .button-row button:hover {
+            background-color: #005FC4;
+          
            
         }
 

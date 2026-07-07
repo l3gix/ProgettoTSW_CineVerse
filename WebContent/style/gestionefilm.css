@@ -75,7 +75,7 @@ button {
 }
 
 button:hover {
-    background-color: #0759ad;
+    background-color: #005FC4;
 }
 
 
@@ -86,13 +86,14 @@ button:hover {
 {
     margin-top: 10px;
     width: 100%;
-    padding: 25px;
+    padding: 20px;
     border-radius: 15px;
     display: flex;
     flex-direction: column;
     gap: 18px;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.35);
     overflow-x: auto;
+    font-size: 14px;
 }
 .film-table {
     width: 100%;
@@ -166,7 +167,7 @@ button:hover {
    {
         width: 50%;
    }
-
+   
    .insert-proiezioni
     {
         width: 50%;
@@ -193,7 +194,12 @@ button:hover {
     padding: 10px;
     border: none;
     border-radius: 20px;
-    background-color: #10263a;
+    background-color: #054282;
     color: white;
     cursor: pointer;
 }
+
+.admin-menu button:hover {
+    background-color: #005FC4;
+}
+

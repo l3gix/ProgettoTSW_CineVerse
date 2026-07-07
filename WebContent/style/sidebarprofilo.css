@@ -26,7 +26,7 @@
     width: 100%;
     min-height: 100vh;
     padding: 25px;
-    background-color: #091119;
+    background-color: #101C29;
     z-index: 1000;
     transition: left 0.3s ease;
 }
@@ -52,7 +52,7 @@
 }
 
 .voce {
-    background-color: #101c29;
+    background-color: #101C29;
     width: 100%;
     display: flex;
     align-items: center;
@@ -63,6 +63,7 @@
     text-decoration: none;
     color: white;
     cursor: pointer;
+    border : 1px solid white;
     transition: background-color 0.2s ease;
 }
 

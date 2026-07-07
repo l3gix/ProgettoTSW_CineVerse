@@ -22,11 +22,16 @@ a
 }
 
 
-a:visited,
 a:hover,
 a:active {
-    color :  #005fc4;
+    color: #005fc4;
 }
+
+a.active {
+    color: #005fc4;
+}
+
+
 header
 {
     width: 100%;
@@ -149,6 +154,14 @@ nav
     display: block;
 }
 
+svg:hover {
+	color: #005FC4;
+}
+
+svg
+{
+	color:white;
+}
 
 
 @media screen and (min-width: 1024px) {

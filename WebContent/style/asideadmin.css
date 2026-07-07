@@ -6,7 +6,7 @@
     width: 100%;
     min-height: 100vh;
 
-    background-color: #111;
+    background-color: #091119;
     color: white;
 
     padding: 20px;
@@ -23,7 +23,7 @@
 .linea {
     width: 100%;
     height: 1px;
-    background-color: #444;
+    background-color: #666666;
     margin: 20px 0;
 }
 
@@ -32,6 +32,11 @@
     color: white;
     text-decoration: none;
     margin: 15px 0;
+}
+
+.sidebar a:hover 
+{
+	color:#007BFA;
 }
 
 nav {

@@ -198,14 +198,7 @@
             </select>
         </div>
 
-        <div class="form-group">
-            <label for="id_formato">Formato</label>
-            <select name="id_formato" id="id_formato" required>
-                <% for(FormatoFilmBean f : formato){ %>
-                <option value="<%=f.getId()%>"><%=f.getName() %></option>
-                <%} %>
-            </select>
-        </div>
+        
 
         <div class="form-group">
             <label for="starts">Inizio spettacolo</label>

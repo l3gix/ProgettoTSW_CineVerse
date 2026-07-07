@@ -32,7 +32,7 @@
 </div>
 <section class="list-user section" id="vis-utenti">
 
-<h1>Visualizzaione utenti</h1>
+<h1>Visualizzazione utenti</h1>
 
 <table class="user-table">
     <thead>

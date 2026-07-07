@@ -65,11 +65,15 @@ body
 {
     padding: 0px 10px;
     background: linear-gradient(to left, #45484d 0%,#000000 100%); 
+    color : #666666;
+    font-size: 20px;
 }
 .hall 
 {
     background: linear-gradient(to left, #45484d 0%,#000000 100%); 
     display: flex;
+    color : #666666;
+    font-size: 20px;
 } 
 
 .hall p 
@@ -100,6 +104,11 @@ body
     
 }
 
+.showing-film-card p 
+{
+	color:#666666;
+}
+
 
 .showing-film-card h1
 {
@@ -128,6 +137,20 @@ body
     flex-direction: row;
     overflow-y: unset;
     gap: 10px;
+}
+
+.session a,
+.session a:hover,
+.session a:visited,
+.session a:active {
+    color: inherit;
+    text-decoration: none;
+}
+
+.button-day button.active-day {
+    background-color: #007BFA;
+    color: white;
+    border-color: #007BFA;
 }
 
 .button-day button

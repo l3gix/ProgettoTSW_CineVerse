@@ -32,7 +32,7 @@ public class CarrelloUtility
 			}
 			
 			sessione.removeAttribute(nome_attributo);
-		}, 5, TimeUnit.MINUTES);
+		}, 10, TimeUnit.MINUTES);
 		
 	}
 }

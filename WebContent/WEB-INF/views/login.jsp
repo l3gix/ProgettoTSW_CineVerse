@@ -5,9 +5,9 @@
 <head>
 <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style/login.css">
+    <link rel="stylesheet" href="<%=request.getContextPath() %>/style/login.css">
     <title>Login</title>
-    <script src="<%= request.getContextPath() %>/script/validator.js"></script>
+    <script src="<%= request.getContextPath() %><%=request.getContextPath() %>//script/validator.js"></script>
 </head>
 <body>
    <header>

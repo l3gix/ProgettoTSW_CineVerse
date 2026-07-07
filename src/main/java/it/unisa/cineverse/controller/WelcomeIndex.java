@@ -6,6 +6,8 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+
 import java.io.IOException;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
@@ -17,12 +19,15 @@ import javax.sql.DataSource;
 import com.mysql.cj.x.protobuf.MysqlxCrud.Find;
 
 import it.unisa.cineverse.model.bean.FilmBean;
+import it.unisa.cineverse.model.bean.PostiBean;
 import it.unisa.cineverse.model.bean.ProiezioneBean;
 import it.unisa.cineverse.model.dao.FilmDao;
 import it.unisa.cineverse.model.dao.PosterDao;
+import it.unisa.cineverse.model.dao.PostiDao;
 import it.unisa.cineverse.model.dao.ProiezioniDao;
 import it.unisa.cineverse.model.dao.impl.FilmDaoImpl;
 import it.unisa.cineverse.model.dao.impl.PosterDaoImpl;
+import it.unisa.cineverse.model.dao.impl.PostiDaoImpl;
 import it.unisa.cineverse.model.dao.impl.ProiezioniDaoImpl;
 import it.unisa.cineverse.model.dao.impl.UtentiDaoImpl;
 
@@ -36,6 +41,7 @@ public class WelcomeIndex extends HttpServlet {
 	private FilmDao film;
     private ProiezioniDao proiezione;
     private PosterDao poster;
+    private PostiDao posti;
     
     public WelcomeIndex() {
         super();
@@ -51,6 +57,7 @@ public class WelcomeIndex extends HttpServlet {
 		film = new FilmDaoImpl(ds);
 		proiezione = new ProiezioniDaoImpl(ds);
 		poster = new PosterDaoImpl(ds);
+		posti = new PostiDaoImpl(ds);
 	}
 
 	/**
@@ -112,6 +119,35 @@ public class WelcomeIndex extends HttpServlet {
 	        filmTrovato.addProiezione(p);
 	    }
 	    
+	    //Lista dei film cooming soon
+	    List<FilmBean> damandare = null;
+		try {
+			damandare = film.findComingSoon();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		for(FilmBean f : damandare)
+		{
+			ProiezioneBean pro = null;
+			try {
+				pro= proiezione.findPrimaProiezioneByFilm(f.getId());
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			f.addProiezione(pro);
+			
+			try {
+				f.addPoster(poster.findByIdFilm(f.getId()));
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+	    
 	    /*
 		List<FilmBean> films = null;
 		 try {
@@ -132,9 +168,23 @@ public class WelcomeIndex extends HttpServlet {
 			} catch (SQLException e) {e.printStackTrace();}
 			  
 		 }
+		 
+		
 		 */
 		 //System.out.println(films);
+	    	List<PostiBean> listaposti = new ArrayList<PostiBean>();
+	    	try {
+	    		listaposti = posti.findAll();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+	    	
+	    	HttpSession session = request.getSession();
+	    	session.setAttribute("listaposti", listaposti);
+	    		
 		 request.setAttribute("films", fildamandare);
+		 request.setAttribute("comingsoon", damandare);
 		 request.getRequestDispatcher("/WEB-INF/views/index.jsp").forward(request, response);
 		 
 		

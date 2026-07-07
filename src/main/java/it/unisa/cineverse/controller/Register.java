@@ -72,7 +72,7 @@ public class Register extends HttpServlet {
 		{
 			HttpSession session = request.getSession();
 			session.setAttribute("utente", ut);
-			session.setAttribute("ruolo", ut.getRuolo());
+			session.setAttribute("ruolo", "cliente");
 			
 			response.sendRedirect(request.getContextPath() + "/WelcomeIndex");
 			
