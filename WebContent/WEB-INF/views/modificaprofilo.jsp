@@ -10,6 +10,7 @@
 <title>Insert title here</title>
 <link rel="stylesheet" href="style/modificaprofilo.css">
 <link rel="stylesheet" href="style/sidebarprofilo.css">
+<script src="script/validator.js"></script>
 </head>
 <body>
 
@@ -39,18 +40,21 @@
 			<input type="hidden" id="scelta" name="scelta" value="nonpassoword">
             <div class="form-row">
                 <label for="nome">Nome</label>
-                <input type="text" id="nome" name="nome" value="<%=utente.getNome()%>">
+                <input type="text" id="nome" name="nome" value="<%=utente.getNome()%>" required pattern="^[A-Za-z]+$"
+                onchange="validateFormElem(this, document.getElementById('errorName'),nameOrLastnameErrorMessage)">
             </div>
 
             <div class="form-row">
                 <label for="cognome">Cognome</label>
-                <input type="text" id="cognome" name="cognome" value="<%=u.getCognome()%>">
+                <input type="text" id="cognome" name="cognome" value="<%=u.getCognome()%>"required pattern="^[A-Za-z]+$"
+                onchange="validateFormElem(this, document.getElementById('errorName'),nameOrLastnameErrorMessage)">
             </div>
 
             
             <div class="form-row">
                 <label for="numerotelefo">Numero Telefono</label>
-                <input type="tel" id="numerotelefo" name="numerotelefo" value="<%=u.getPhone()%>">
+                <input type="tel" id="numerotelefo" name="numerotelefo" value="<%=u.getPhone()%>" required pattern="^([0-9]{3}-[0-9]{7})$"
+                onchange="validateFormElem(this,document.getElementById('errorTelefono'),phoneErrorMessage)">
             </div>
 
             <div class="button-row">
@@ -66,21 +70,22 @@
 			<input type="hidden" id="scelta" name="scelta" value="modificapassword">
             <div class="form-row" style="margin-bottom:2px">
                 <label for="nuovapassaword1">Nuova Password</label>
-                <input type="text" id="nuovapassaword1" name="nuovapassaword1" placeholder="Nuova Password">
+                <input type="text" id="nuovapassaword1" name="nuovapassaword1" placeholder="Nuova Password" required pattern="(?=.*[A-Z]).{8,}$" onchange="validateFormElem(this,document.getElementById('errorPassword'),passwordErrorMessage)">
             </div>
-            
-             <div class="form-row" >
-             	<label></label>
-                <p>La vecchia password deve includere un minimo di 8 caratteri ,<br>una lettera maiuscola</p>
-                
-            </div>
+             <label></label>
+             
 
             <div class="form-row">
                 <label for="nuovapassaword2">Nuova Password</label>
-                <input type="password" id="nuovapassaword2" name="nuovapassaword2" placeholder="Nuova Password">
-                
+                <input type="password" id="nuovapassaword2" name="nuovapassaword2" placeholder="Nuova Password" required pattern="(?=.*[A-Z]).{8,}$" onchange="validateFormElem(this,document.getElementById('errorPassword'),passwordErrorMessage)"> 
             </div>
-			
+            
+			<div class="form-row" >
+                 <label></label>
+                <p>La vecchia password deve includere un minimo di 8 caratteri ,<br>una lettera maiuscola</p>
+
+            </div>
+            
 			<% String errorepassword =(String) request.getAttribute("errorroepassword");
                if (errorepassword != null) { %>
                <div class="form-row" >
