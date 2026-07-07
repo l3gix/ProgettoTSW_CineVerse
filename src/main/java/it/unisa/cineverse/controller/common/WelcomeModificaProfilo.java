@@ -1,4 +1,4 @@
-package it.unisa.cineverse.controller;
+package it.unisa.cineverse.controller.common;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -8,16 +8,16 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
- * Servlet implementation class WelcomeProfilo
+ * Servlet implementation class WelcomeModificaProfilo
  */
-@WebServlet("/WelcomeProfilo")
-public class WelcomeProfilo extends HttpServlet {
+@WebServlet("/common/WelcomeModificaProfilo")
+public class WelcomeModificaProfilo extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public WelcomeProfilo() {
+    public WelcomeModificaProfilo() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -26,7 +26,8 @@ public class WelcomeProfilo extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.getRequestDispatcher("/WEB-INF/views/profilo.jsp").forward(request, response);
+		// TODO Auto-generated method stub
+		request.getRequestDispatcher("/WEB-INF/views/common/modificaprofilo.jsp").forward(request, response);
 	}
 
 	/**

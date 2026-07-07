@@ -14,6 +14,7 @@
 <title>Pagamento</title>
   <link  rel="stylesheet" href="style/pagamento.css">
   <link rel="stylesheet" href="style/navbar.css">
+  <link rel="stylesheet" href="style/search.css">
 </head>
 <body>
 

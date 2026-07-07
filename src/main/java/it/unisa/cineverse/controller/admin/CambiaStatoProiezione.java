@@ -20,7 +20,7 @@ import it.unisa.cineverse.model.dao.impl.ProiezioniDaoImpl;
  * Servlet implementation class CambiaStatoFilm
  */
 @WebServlet("/admin/CambiaStatoFilmAndProiezione")
-public class CambiaStatoFilmAndProiezione extends HttpServlet {
+public class CambiaStatoProiezione extends HttpServlet {
 	private static final long serialVersionUID = 1L;
     
 	private FilmDao film;
@@ -28,7 +28,7 @@ public class CambiaStatoFilmAndProiezione extends HttpServlet {
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public CambiaStatoFilmAndProiezione() {
+    public CambiaStatoProiezione() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -52,25 +52,45 @@ public class CambiaStatoFilmAndProiezione extends HttpServlet {
 		String status = request.getParameter("nuovoStatus");
 		int id = Integer.parseInt(request.getParameter("id"));
 		
-		if("film".equals(scelta))
+		String cancella = request.getParameter("cancella");
+		
+		if("cancella".equals(cancella))
 		{
+			boolean fatto = false;
 			try {
-				film.updateStatusById(id, status);
+				fatto = proiezione.deleteIfNoBiglietti(id);
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-		}else 
+			
+			if(fatto == false )
+			{
+				request.setAttribute("errore", "Non e stato possibile cancellare la proiezione perchè ci sono dei biglietti associati");
+			}
+		}
+		else 
 		{
-			try {
-				proiezione.updateStatusById(id, status);
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+			if("film".equals(scelta))
+			{
+				try {
+					film.updateStatusById(id, status);
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}else 
+			{
+				try {
+					proiezione.updateStatusById(id, status);
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 		}
 		
-		response.sendRedirect(request.getContextPath() + "/admin/WelcomeGestioneFilmAdmin");
+		request.getRequestDispatcher("/admin/WelcomeGestioneFilmAdmin").forward(request, response);
 	}
 
 	/**

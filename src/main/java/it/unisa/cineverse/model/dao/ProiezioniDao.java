@@ -31,4 +31,6 @@ public interface ProiezioniDao
 	List<ProiezioneBean> findAllByIdFilmAndOrario(int id,LocalDateTime orario) throws SQLException ;
 	
 	public ProiezioneBean findPrimaProiezioneByFilm(int idFilm) throws SQLException;
+	
+	public boolean deleteIfNoBiglietti(int idProiezione) throws SQLException ;
 }

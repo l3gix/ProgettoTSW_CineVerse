@@ -1,4 +1,4 @@
-package it.unisa.cineverse.controller;
+package it.unisa.cineverse.controller.common;
 
 import jakarta.servlet.ServletConfig;
 import jakarta.servlet.ServletException;
@@ -24,7 +24,7 @@ import it.unisa.cineverse.util.PasswordUtil;
 /**
  * Servlet implementation class ModificaProfilo
  */
-@WebServlet("/ModificaProfilo")
+@WebServlet("/common/ModificaProfilo")
 public class ModificaProfilo extends HttpServlet {
 	private static final long serialVersionUID = 1L;
     
@@ -69,7 +69,7 @@ public class ModificaProfilo extends HttpServlet {
 			if(!nuovapassword1.equals(nuovapassword2)) 
 			{
 				request.setAttribute("errorroepassword", "Hai inserito due password diverse");
-				request.getRequestDispatcher("/WEB-INF/views/modificaprofilo.jsp").forward(request, response);
+				request.getRequestDispatcher("/WEB-INF/views/common/modificaprofilo.jsp").forward(request, response);
 				return;
 			}
 			else 
@@ -83,7 +83,7 @@ public class ModificaProfilo extends HttpServlet {
 					}
 					
 					session.setAttribute("utenti", utentesessione);	
-					 request.getRequestDispatcher("/WEB-INF/views/profilo.jsp").forward(request, response);
+					 request.getRequestDispatcher("/WEB-INF/views/common/profilo.jsp").forward(request, response);
 				     return;
 			} 
 		}else 
@@ -104,7 +104,7 @@ public class ModificaProfilo extends HttpServlet {
 			}
 			
 			session.setAttribute("utenti", utentesessione);
-			request.getRequestDispatcher("/WEB-INF/views/profilo.jsp").forward(request, response);
+			request.getRequestDispatcher("/WEB-INF/views/common/profilo.jsp").forward(request, response);
 		    return;
 		}
 	}

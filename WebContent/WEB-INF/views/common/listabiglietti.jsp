@@ -12,8 +12,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>ListaFilm</title>
-  <link  rel="stylesheet" href="style/listabiglietti.css">
-  <link rel="stylesheet" href="style/sidebarprofilo.css">
+  <link  rel="stylesheet" href="<%=request.getContextPath() %>/style/listabiglietti.css">
+  <link rel="stylesheet" href="<%=request.getContextPath() %>/style/sidebarprofilo.css">
 </head>
 <body>
 
