@@ -14,6 +14,7 @@
 <title>Cooming Soon</title>
 <link rel="stylesheet" href="style/navbar.css">
 <link rel="stylesheet" href="style/comingsoon.css">
+<link rel="stylesheet" href="style/search.css">
 </head>
 <body>
 	<%@include file="navbar.jsp" %>

@@ -239,6 +239,43 @@ public class FilmDaoImpl implements FilmDao{
 
 	    return films;
 	}
+
+	@Override
+	public synchronized List<FilmBean> searchFilm(String keyword) throws SQLException {
+		 List<FilmBean> films = new ArrayList<>();
+
+		    String sql =
+		        "SELECT * " +
+		        "FROM film " +
+		        "WHERE titolo LIKE ? " +
+		        "ORDER BY titolo ASC " +
+		        "LIMIT 10";
+		    
+		    try(Connection connection=ds.getConnection();
+					PreparedStatement ps= connection.prepareStatement(sql);){
+		    		ps.setString(1, "%" + keyword + "%");
+					try (ResultSet rs  = ps.executeQuery()){
+						while(rs.next()) {
+			            FilmBean film = new FilmBean();
+
+			            film.setId(rs.getInt("id"));
+			            film.setTitolo(rs.getString("titolo"));
+			            film.setSinossi(rs.getString("sinossi"));
+			            film.setDurata_minuti(rs.getInt("durata_minuti"));
+			            film.setAge_rating(rs.getString("age_rating"));
+			            film.setTrailer_url(rs.getString("trailer_url"));
+			            film.setCast_film(rs.getString("cast_film"));
+			            film.setStatus(rs.getString("status"));
+
+
+			            films.add(film);
+			        }
+					}
+			    }
+
+			    return films;
+		    
+	}
 	
 	
 	

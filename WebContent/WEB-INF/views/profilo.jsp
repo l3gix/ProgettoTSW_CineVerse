@@ -26,9 +26,6 @@
             <div class="profile-section-title">
                 <h2>DETTAGLI PERSONALI</h2>
 
-                <button class="edit-btn" type="button">
-                    ✎ Modifica
-                </button>
             </div>
 
             <div class="profile-details">

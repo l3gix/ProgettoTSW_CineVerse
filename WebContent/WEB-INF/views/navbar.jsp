@@ -19,9 +19,11 @@
 
             <div class="icon">
                 <!--Search-->
-                <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
-                    <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/>
-                </svg>
+                <button id="openSearch" class="search-icon-btn" type="button">
+				    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+ 				 <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/>
+					</svg>
+				</button>
             
                 <!--Cart-->
                  <button 
@@ -76,5 +78,37 @@
         
         </nav>
     </header>
+    
+    <div id="searchOverlay" class="search-overlay"></div>
 
+<div id="searchPanel" class="search-panel">
+    <button id="closeSearch" class="close-search" type="button">×</button>
+
+    <h2>CERCA</h2>
+
+    <div class="search-form">
+        <input 
+            type="text" 
+            id="searchInput"
+            placeholder="Cerca un film..." 
+            autocomplete="off"
+        >
+
+        <button type="button" class="search-submit">
+            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+ 				 <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/>
+					</svg>
+        </button>
+    </div>
+
+    <div id="searchResults" class="search-results"></div>
+</div>
+<script>
+window.appData = 
+{
+		contex : "<%=request.getContextPath()%>"
+};
+</script>
 <script src="script/navbar.js"></script>
+<script src="script/search.js"></script>
+

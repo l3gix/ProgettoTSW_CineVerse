@@ -14,6 +14,7 @@
 <title>CineVerse</title>
 <link rel="stylesheet" href="style/navbar.css">
 <link rel="stylesheet" href="style/index.css">
+<link rel="stylesheet" href="style/search.css">
 </head>
 <body>
 	<%@include file="navbar.jsp" %>
