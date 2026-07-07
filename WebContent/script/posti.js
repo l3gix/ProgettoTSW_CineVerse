@@ -309,6 +309,12 @@ console.log("sono nel bottone"+ selezionati);
     }
   }
 	console.log(selezionati);
+	
+	if(window.appData.isLogged)
+	{
+			window.location.href = contex + "/WelcomePagamento";
+	}
+	/*
   var params = 
   	        "azione=" + encodeURIComponent("pagamento") +
   			"&selezionati=" + encodeURIComponent(JSON.stringify(selezionati));
@@ -316,6 +322,8 @@ console.log("sono nel bottone"+ selezionati);
   	    loadAjaxDoc(contex+"/PrenotazionePosti", "POST", params, handleSelezionaPosto);
 
 	console.log("totale da mandare :" + somma );
+	
+	*/
 }
 
 

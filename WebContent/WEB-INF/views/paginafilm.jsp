@@ -15,6 +15,7 @@
 <title>Film</title>
 <link rel="stylesheet" href="style/navbar.css">
 <link rel="stylesheet" href="style/paginafilm.css">
+<link rel="stylesheet" href="style/search.css">
 </head>
 <body>
 	

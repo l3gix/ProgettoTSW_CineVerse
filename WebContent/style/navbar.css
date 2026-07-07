@@ -34,7 +34,7 @@ header
     display: flex;
     height: 70px;
     position : relative;
-    z-index: 9999;
+    z-index: 999;
 }
 
 nav
@@ -200,5 +200,8 @@ nav
         gap: 30px;
     }
 }
+
+
+
 
 
