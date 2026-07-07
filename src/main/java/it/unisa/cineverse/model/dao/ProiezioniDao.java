@@ -29,4 +29,6 @@ public interface ProiezioniDao
 	List<ProiezioneBean> findAllByIdFilm(int id) throws SQLException;
 	
 	List<ProiezioneBean> findAllByIdFilmAndOrario(int id,LocalDateTime orario) throws SQLException ;
+	
+	public ProiezioneBean findPrimaProiezioneByFilm(int idFilm) throws SQLException;
 }

@@ -320,4 +320,50 @@ public class ProiezioniDaoImpl implements ProiezioniDao
 		return proiezioni;
 	}
 	
+	
+	public synchronized ProiezioneBean findPrimaProiezioneByFilm(int idFilm) throws SQLException {
+	    ProiezioneBean proiezione = null;
+
+	    String sql =
+	        "SELECT * " +
+	        "FROM proiezioni " +
+	        "WHERE id_film = ? " +
+	        "AND starts > NOW() " +
+	        "AND status = 'scheduled' " +
+	        "ORDER BY starts ASC " +
+	        "LIMIT 1";
+
+	    try (Connection connection = ds.getConnection();
+	         PreparedStatement ps = connection.prepareStatement(sql)) {
+
+	        ps.setInt(1, idFilm);
+
+	        try (ResultSet rs = ps.executeQuery()) {
+	            if (rs.next()) {
+	                proiezione = new ProiezioneBean();
+
+	                proiezione.setId(rs.getInt("id"));
+	                proiezione.setId_film(rs.getInt("id_film"));
+	                proiezione.setId_sale(rs.getInt("id_sale"));
+	                proiezione.setId_formato(rs.getInt("id_formato"));
+
+	                Timestamp starts = rs.getTimestamp("starts");
+	                if (starts != null) {
+	                    proiezione.setStarts(starts.toLocalDateTime());
+	                }
+
+	                Timestamp ends = rs.getTimestamp("ends");
+	                if (ends != null) {
+	                    proiezione.setEnds(ends.toLocalDateTime());
+	                }
+
+	                proiezione.setPrezzo_base(rs.getDouble("prezzo_base"));
+	                proiezione.setStatus(rs.getString("status"));
+	            }
+	        }
+	    }
+
+	    return proiezione;
+	}
+	
 }
