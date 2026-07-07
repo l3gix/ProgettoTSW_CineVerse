@@ -19,6 +19,7 @@ import it.unisa.cineverse.model.dao.impl.FilmDaoImpl;
 import it.unisa.cineverse.model.dao.impl.PosterDaoImpl;
 import it.unisa.cineverse.model.dao.impl.ProiezioniDaoImpl;
 import it.unisa.cineverse.model.dao.impl.UtentiDaoImpl;
+import it.unisa.cineverse.util.PasswordUtil;
 
 /**
  * Servlet implementation class ModificaProfilo
@@ -60,6 +61,11 @@ public class ModificaProfilo extends HttpServlet {
 			
 			String nuovapassword1 = request.getParameter("nuovapassaword1");
 			String nuovapassword2 = request.getParameter("nuovapassaword2");
+			
+			nuovapassword1 = PasswordUtil.toDigest(nuovapassword1);
+			nuovapassword2 = PasswordUtil.toDigest(nuovapassword2);
+			
+			
 			if(!nuovapassword1.equals(nuovapassword2)) 
 			{
 				request.setAttribute("errorroepassword", "Hai inserito due password diverse");

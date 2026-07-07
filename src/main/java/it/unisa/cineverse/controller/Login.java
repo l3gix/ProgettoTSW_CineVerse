@@ -16,6 +16,7 @@ import javax.sql.DataSource;
 import it.unisa.cineverse.model.bean.UtentiBean;
 import it.unisa.cineverse.model.dao.UtentiDao;
 import it.unisa.cineverse.model.dao.impl.UtentiDaoImpl;
+import it.unisa.cineverse.util.PasswordUtil;
 
 /**
  * Servlet implementation class Login
@@ -52,6 +53,8 @@ public class Login extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String email = request.getParameter("email");
 		String password = request.getParameter("password");
+		
+		password = PasswordUtil.toDigest(password); // SHA della password
 		
 		UtentiBean ut = null;
 		try {

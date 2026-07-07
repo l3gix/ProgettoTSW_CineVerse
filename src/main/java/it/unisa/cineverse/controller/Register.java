@@ -16,6 +16,7 @@ import javax.sql.DataSource;
 import it.unisa.cineverse.model.bean.UtentiBean;
 import it.unisa.cineverse.model.dao.UtentiDao;
 import it.unisa.cineverse.model.dao.impl.UtentiDaoImpl;
+import it.unisa.cineverse.util.PasswordUtil;
 
 /**
  * Servlet implementation class Register
@@ -55,6 +56,8 @@ public class Register extends HttpServlet {
 		String nome = request.getParameter("nome");
 		String cognome = request.getParameter("cognome");
 		String telefono = request.getParameter("telefono");
+		
+		password = PasswordUtil.toDigest(password);
 		
 		UtentiBean ut = new UtentiBean(email, password, nome, cognome, telefono);
 		try {
