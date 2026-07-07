@@ -52,7 +52,7 @@ public class InserimentoProiezione extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int idfilm =Integer.parseInt(request.getParameter("id_film"));
 		int idsala =Integer.parseInt(request.getParameter("id_sale"));
-		int idformato =Integer.parseInt(request.getParameter("id_formato"));
+		//int idformato =Integer.parseInt(request.getParameter("id_formato"));
 		
 		LocalDateTime start = LocalDateTime.parse(request.getParameter("starts"));
 		LocalDateTime end = LocalDateTime.parse(request.getParameter("ends"));
@@ -64,7 +64,7 @@ public class InserimentoProiezione extends HttpServlet {
 		ProiezioneBean p = new ProiezioneBean();
 		p.setId_film(idfilm);
 		p.setId_sale(idsala);
-		p.setId_formato(idformato);
+		p.setId_formato(3);
 		p.setStarts(start);
 		p.setEnds(end);
 		p.setPrezzo_base(prezzo);
@@ -82,7 +82,7 @@ public class InserimentoProiezione extends HttpServlet {
 		    response.sendRedirect(request.getContextPath() + "/admin/WelcomeGestioneFilmAdmin");
 		    return;
 		} else {
-		    request.setAttribute("errore", "Non e stato possibile inserire la proieazione");
+		    request.setAttribute("errore", "Non e stato possibile inserire la proiezione");
 		    request.setAttribute("activeSection", "insert-proiezioni");
 
 		    request.getRequestDispatcher("/admin/WelcomeGestioneFilmAdmin")

@@ -133,11 +133,22 @@ body
 }
 
 
+.session-range {
+    padding: 0px 10px;
+    background: linear-gradient(to left, #45484d 0%,#000000 100%); 
+}
 
+.hall {
+    background: linear-gradient(to left, #45484d 0%,#000000 100%); 
+    display: flex;
+    justify-content: space-between;
+    color : #666666;
+    font-size: 20px;
+}
 
 .showing-list
 {
-    margin-top: 10%;
+    margin-top: 15%;
     width: 100%;
     display: flex;
     justify-content: center;
@@ -205,7 +216,12 @@ body
     height: 150px;
     object-fit: cover;
 }
-*/
+
+.showing-film-card p 
+{
+	color : #666666;
+}
+
 
 /* in piu per verificare */
 .showing-list-film

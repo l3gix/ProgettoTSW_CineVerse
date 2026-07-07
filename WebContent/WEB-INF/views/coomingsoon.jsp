@@ -12,9 +12,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta charset="UTF-8">
 <title>Cooming Soon</title>
-<link rel="stylesheet" href="style/navbar.css">
-<link rel="stylesheet" href="style/comingsoon.css">
-<link rel="stylesheet" href="style/search.css">
+<link rel="stylesheet" href="<%=request.getContextPath() %>/style/navbar.css">
+<link rel="stylesheet" href="<%=request.getContextPath() %>/style/comingsoon.css">
+<link rel="stylesheet" href="<%=request.getContextPath() %>/style/search.css">
 </head>
 <body>
 	<%@include file="navbar.jsp" %>
@@ -71,10 +71,10 @@
 				
 				<p class="sinossi"><%=f.getSinossi() %></p>
 				
-                <h3>cast</h3>
+                <h3>Cast</h3>
                 <p><%= f.getCast_film() %></p>
 
-                <h3>durata</h3>
+                <h3>Durata</h3>
                 <p><%= f.getDurata_minuti() %> min</p>
             </div>
         </div>
@@ -95,6 +95,6 @@
 	<script>
     const contextPath = "<%= request.getContextPath() %>";
 	</script>
-    <script src="script/index.js"></script>
+    <script src="<%=request.getContextPath() %>/script/index.js"></script>
 </body>
 </html>

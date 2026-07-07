@@ -8,9 +8,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Insert title here</title>
-<link rel="stylesheet" href="style/modificaprofilo.css">
-<link rel="stylesheet" href="style/sidebarprofilo.css">
-<script src="script/validator.js"></script>
+<link rel="stylesheet" href="<%=request.getContextPath() %>/style/modificaprofilo.css">
+<link rel="stylesheet" href="<%=request.getContextPath() %>/style/sidebarprofilo.css">
+<script src="<%=request.getContextPath() %>/script/validator.js"></script>
 </head>
 <body>
 
@@ -35,7 +35,7 @@
 
             <div class="profile-wrapper">
 
-        <form class="profile-form" method="post" action="<%=request.getContextPath()%>/ModificaProfilo">
+        <form class="profile-form" method="post" action="<%=request.getContextPath()%>/common/ModificaProfilo">
 			
 			<input type="hidden" id="scelta" name="scelta" value="nonpassoword">
             <div class="form-row">
@@ -65,7 +65,7 @@
          <div class="profile-section-title">
                 <h2>Cambio Password</h2>
             </div>
-        <form class="profile-form" method="post" action="<%=request.getContextPath()%>/ModificaProfilo">
+        <form class="profile-form" method="post" action="<%=request.getContextPath()%>/common/ModificaProfilo">
 			
 			<input type="hidden" id="scelta" name="scelta" value="modificapassword">
             <div class="form-row" style="margin-bottom:2px">

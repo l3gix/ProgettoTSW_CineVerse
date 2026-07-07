@@ -58,7 +58,7 @@ body {
 }
 
 .ticket-sopra p {
-    color: #d4d4d4;
+    color: #666666;
     font-size: 15px;
     margin-bottom: 6px;
 }
@@ -72,7 +72,7 @@ body {
 }
 
 .posti span {
-    background-color: blue;
+    background-color: #007BFA;
     padding: 7px 13px;
     border-radius: 999px;
     font-size: 14px;
@@ -89,7 +89,7 @@ body {
 
 .ticket-sotto .label {
     color: black;
-    font-size: 13px;
+    font-size: 16px;
 }
 
 .ticket-sotto h3 {
@@ -111,7 +111,7 @@ body {
 /* Box totale */
 .totale-box {
 	width : 100%;
-    background-color: #0b1824;
+    background-color: #101C29;
     border-radius: 20px;
     padding: 22px;
     box-shadow: 0 12px 28px rgba(0, 0, 0, 0.45);
@@ -128,11 +128,11 @@ totale-box-info
 
 .totale-box-info p {
     color: white;
-    font-size: 15px;
+    font-size: 18px;
 }
 
 .totale-box-info h2 {
-    font-size: 30px;
+    font-size: 40px;
     margin: 8px 0 18px;
 }
 
@@ -175,7 +175,7 @@ totale-box-info
             width: 100%;
             padding: 14px;
             border-radius: 12px;
-            border: 1px solid #1f6feb;
+            border: 1px solid black;
             background-color: transparent;
             color: white;
             font-size: 15px;
@@ -185,7 +185,7 @@ totale-box-info
 
         .provider-btn:hover,
         .provider-btn.active {
-            background-color: #1f6feb;
+            background-color: #007BFA;
         }
 
         .selected-provider {
@@ -236,7 +236,7 @@ totale-box-info
             margin-top: 8px;
             border: none;
             border-radius: 14px;
-            background-color: #1f6feb;
+            background-color: #054282;
             color: white;
             font-size: 17px;
             font-weight: bold;
@@ -278,6 +278,7 @@ totale-box-info
     {
     	width: 50%;
     }
+    
 
     .ticket-sopra {
         flex: 1;

@@ -32,7 +32,7 @@
 </div>
 <section class="list-user section" id="vis-utenti">
 
-<h1>Visualizzaione utenti</h1>
+<h1>Visualizzazione utenti</h1>
 
 <table class="user-table">
     <thead>
@@ -63,7 +63,27 @@
 
 <h1>Pagamento utenti</h1>
 
-<table class="user-table">
+<div class="search-box">
+    <input 
+        type="text" 
+        id="searchUtente" 
+        placeholder="Cerca per utente"
+        oninput="filtraPagamenti()">
+
+    <input 
+        type="date" 
+        id="searchDatainizio" 
+        onchange="filtraPagamenti()">
+
+    <input 
+        type="date" 
+        id="searchDatafine" 
+        onchange="filtraPagamenti()">
+
+    <button type="button" onclick="resetFiltri()">Reset</button>
+</div>
+
+<table class="user-table" id="tabellaPagamenti">
     <thead>
         <tr>
         	<th>Utente</th>
@@ -78,7 +98,12 @@
            <%for (PrenotazioniBean u : prenotazione){ 
            		for(PagamentoBean p : u.getPagamento()){
            %>
-            <tr>
+            <tr 
+            
+            data-utente="<%= u.getId_utenti().toLowerCase() %>"
+            data-data="<%= p.getData_pagamento().toLocalDate() %>">
+            
+            
                 <td><%=u.getId_utenti() %></td>
                 <td><%=u.getImporto_totale() %></td>
                 <td><%=p.getProvider()%></td>

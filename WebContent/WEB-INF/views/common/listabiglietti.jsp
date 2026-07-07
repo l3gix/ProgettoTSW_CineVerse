@@ -5,26 +5,23 @@
 <%@ page import="it.unisa.cineverse.model.bean.ProiezioneBean" %>
 <%@ page import="it.unisa.cineverse.model.bean.PostiBean" %>
 <%@ page import="it.unisa.cineverse.model.bean.BigliettoBean" %>
+<%@ page import="it.unisa.cineverse.model.bean.PostiBean" %>
+<%@ page import="it.unisa.cineverse.util.*" %>
 <%@ page import="java.util.ArrayList" %>
+<%@ page import="java.time.format.DateTimeFormatter" %>
+<%@ page import="java.util.Locale" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>ListaFilm</title>
-  <link  rel="stylesheet" href="style/listabiglietti.css">
-  <link rel="stylesheet" href="style/sidebarprofilo.css">
+  <link  rel="stylesheet" href="<%=request.getContextPath() %>/style/listabiglietti.css">
+  <link rel="stylesheet" href="<%=request.getContextPath() %>/style/sidebarprofilo.css">
 </head>
 <body>
 
 <%@include file="sidebarprofilo.jsp" %>
-<%
-List<List<FilmBean>> listafilmtotale = (List<List<FilmBean>>) request.getAttribute("listafilm");
-
-double totale = 0;
-
-if (listafilmtotale != null && !listafilmtotale.isEmpty()) {
-%>
 
 <div class="carrello">
 	<div class="carello-titolo">
@@ -34,10 +31,21 @@ if (listafilmtotale != null && !listafilmtotale.isEmpty()) {
 					  <path d="M1.5 3A1.5 1.5 0 0 0 0 4.5V6a.5.5 0 0 0 .5.5 1.5 1.5 0 1 1 0 3 .5.5 0 0 0-.5.5v1.5A1.5 1.5 0 0 0 1.5 13h13a1.5 1.5 0 0 0 1.5-1.5V10a.5.5 0 0 0-.5-.5 1.5 1.5 0 0 1 0-3A.5.5 0 0 0 16 6V4.5A1.5 1.5 0 0 0 14.5 3zM1 4.5a.5.5 0 0 1 .5-.5h13a.5.5 0 0 1 .5.5v1.05a2.5 2.5 0 0 0 0 4.9v1.05a.5.5 0 0 1-.5.5h-13a.5.5 0 0 1-.5-.5v-1.05a2.5 2.5 0 0 0 0-4.9z"/>
 					</svg>
 	</div>
-    <h1>I Mie Biglietti</h1>
+    <h1>I Miei Biglietti</h1>
 	</div>
 	<div class="info">
+<%
+List<List<FilmBean>> listafilmtotale = (List<List<FilmBean>>) request.getAttribute("listafilm");
+DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMMM yyyy HH:mm", Locale.ITALIAN);
+
+double totale = 0;
+
+if (listafilmtotale != null && !listafilmtotale.isEmpty()) {
+%>
+
+
     <%
+    List<PostiBean> listaposti = (List<PostiBean>) session.getAttribute("listaposti");
     for(List<FilmBean> listafilm : listafilmtotale){
     for (FilmBean film : listafilm) {
 
@@ -52,9 +60,10 @@ if (listafilmtotale != null && !listafilmtotale.isEmpty()) {
 
                     for (BigliettoBean biglietto : proiezione.getBiglietto()) {
 
-                        posti += biglietto.getId_posto() + ", ";
+                        //posti += biglietto.getId_posto() + ", ";
                         totaleSpettacolo += biglietto.getPrezzo();
                         totale += biglietto.getPrezzo();
+                        posti += PostiUtility.getPostiPrenotati(biglietto, listaposti) + ", ";
                     }
 
                     if (posti.endsWith(", ")) {
@@ -69,7 +78,7 @@ if (listafilmtotale != null && !listafilmtotale.isEmpty()) {
             <h2><%= film.getTitolo() %></h2>
 
             <p>Sala <%= proiezione.getId_sale() %></p>
-            <p><%= proiezione.getStarts() %></p>
+            <p><%= proiezione.getStarts().format(formatter) %></p>
 
             <div class="posti">
                 <span>Posti <%= posti %></span>

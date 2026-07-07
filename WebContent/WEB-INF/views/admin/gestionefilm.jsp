@@ -13,7 +13,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gestione Film And Proiezioni Admin</title>
     <link rel="stylesheet" href="<%= request.getContextPath() %>/style/gestionefilm.css">
-        <link rel="stylesheet" href="<%= request.getContextPath() %>/style/asideadmin.css">
+    <link rel="stylesheet" href="<%= request.getContextPath() %>/style/asideadmin.css">
     
 </head>
 <body>
@@ -25,7 +25,13 @@
 	List<FormatoFilmBean> formato = (List<FormatoFilmBean>) request.getAttribute("formato");
 	
 %>
+          <% if (request.getAttribute("errore") != null) { %>
 
+		    <p style="color:red;">
+		        <%= request.getAttribute("errore") %>
+		    </p>
+		
+		<% } %>
 
 <div class="admin-menu">
         <button onclick="showSection('inser-film')">InserisciFilm</button>
@@ -34,7 +40,7 @@
     </div>
     <section class="insert-film section" id="inser-film">
         <h1>Inserisci un nuovo film</h1>
-
+		            
         <form 
       action="<%= request.getContextPath() %>/admin/InserimentoFilm"
       method="post"
@@ -122,12 +128,13 @@
             <th>Data fine</th>
             <th>Status</th>
             <th>Azione</th>
+            <th>Cancella</ht>
         </tr>
     </thead>
 
 <%  DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy 'alle' HH:mm"); %>
     <tbody>
-           <% for(FilmBean f : film) {
+           <% for(FilmBean f : film.reversed()) {
         	   for(ProiezioneBean p : f.getProiezione()){
           %>
             <tr>
@@ -137,8 +144,8 @@
                 <td><%=p.getEnds().format(formatter)%></td>
                 <td><%=p.getStatus()%></td>
                 <td>
-                    <form action="<%= request.getContextPath() %>/admin/CambiaStatoFilmAndProiezione" method="post">
-                        <input type="hidden" name="tipo" values="proiezione">
+                    <form action="<%= request.getContextPath() %>/admin/CambiaStatoProiezione" method="post">
+                        <input type="hidden" name="tipo" value="proiezione">
 
                        <%if(("archived").equals(p.getStatus())) {%>
                             <input type="hidden" name="nuovoStatus" value="scheduled">
@@ -151,6 +158,15 @@
                         <%} %>
                     </form>
                 </td>
+                <td>
+                    <form action="<%= request.getContextPath() %>/admin/CambiaStatoProiezione" method="post">
+                        <input type="hidden" name="cancella" value="cancella">
+
+                            <input type="hidden" name="id" value="<%=p.getId() %>" >
+                            <button type="submit" class="btn-archive">Cancella</button>
+                       
+                    </form>
+                </td>
             </tr>
              <% }}%>
     </tbody>
@@ -160,6 +176,7 @@
 
     <section class="insert-proiezioni section" id="insert-proiezioni">
           <h1>Inserisci nuovo spettacolo</h1>
+          <br>
 
     <form  action="<%= request.getContextPath() %>/admin/InserimentoProiezione" method="post">
 
@@ -181,14 +198,7 @@
             </select>
         </div>
 
-        <div class="form-group">
-            <label for="id_formato">Formato</label>
-            <select name="id_formato" id="id_formato" required>
-                <% for(FormatoFilmBean f : formato){ %>
-                <option value="<%=f.getId()%>"><%=f.getName() %></option>
-                <%} %>
-            </select>
-        </div>
+        
 
         <div class="form-group">
             <label for="starts">Inizio spettacolo</label>
@@ -214,14 +224,7 @@
      
           
             <input type="hidden" name="status" id="status" value="scheduled" required>
-               
-		<% if (request.getAttribute("errore") != null) { %>
-
-		    <p style="color:red;">
-		        <%= request.getAttribute("errore") %>
-		    </p>
-		
-		<% } %>
+   
         <button type="submit">Inserisci spettacolo</button>
 
     </form>  

@@ -42,6 +42,27 @@ public class ProiezioniDaoImpl implements ProiezioniDao
 		}
 	}
 	
+	public synchronized boolean deleteIfNoBiglietti(int idProiezione) throws SQLException {
+
+	    String sql = "DELETE FROM proiezioni " +
+	                 "WHERE id = ? " +
+	                 "AND NOT EXISTS ( " +
+	                 "    SELECT 1 " +
+	                 "    FROM biglietto " +
+	                 "    WHERE biglietto.id_proiezione = proiezioni.id " +
+	                 ");";
+
+	    try (Connection connection = ds.getConnection();
+	         PreparedStatement ps = connection.prepareStatement(sql)) {
+
+	        ps.setInt(1, idProiezione);
+
+	        int rows = ps.executeUpdate();
+
+	        return rows > 0;
+	    }
+	}
+	
 	public synchronized boolean saveIfSalaDisponibile(ProiezioneBean p) throws SQLException {
 
 	    String sql = 

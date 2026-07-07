@@ -15,7 +15,6 @@ body
 }
 
 :root {
-  --verde: #62c783;
   --blu: #263b86;
   --rosso: #db5a42;
   --ultra: #ff8a00;
@@ -183,11 +182,7 @@ body
   margin-left: 0;
 }
 
-.ultra::before {
-  content: "★";
-  color: var(--ultra);
-  font-size: 7px;
-}
+
 
 .mini-occupato {
   background: var(--occupato);
@@ -228,14 +223,14 @@ body
 
 .selezione-box button {
     border: none;
-    background-color: #007BFA;
+    background-color: #054282;
     color: white;
     font-weight: bold;
     cursor: pointer;
 }
 
 .selezione-box button:hover {
-    background-color: #005ec2;
+    background-color: #005FC4;
 }
 
 

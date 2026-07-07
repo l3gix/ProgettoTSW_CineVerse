@@ -11,6 +11,7 @@ body
 {
       /*min-height: 100vh;*/
     min-height: 100vh;
+    
     display: flex;
     align-items: center;
     flex-direction: column;
@@ -42,10 +43,42 @@ h1 {
     width: 100%;
     border-collapse: collapse;
     margin-top: 10px;
-    background-color: #111c27;
+    background-color: #101c29;
     color: white;
     border-radius: 12px;
     overflow: hidden;
+    font-size: 14px;
+}
+
+.search-box
+{
+	width : 100%;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	justify-content: center;
+}
+.search-box button 
+{
+		display : flex;
+		align-items : center;
+		padding: 10px;
+		width: 30%;
+		text-align: center;
+		justify-content: center;
+}
+
+
+input 
+{
+	width : 50%;
+	height: 50px;
+	border-radius: 15px;
+	padding-left: 10px;
+	border: 1px solid black;
+	margin : 10px;
+	text-align: center;
 }
 
 .user-table th,
@@ -70,6 +103,19 @@ h1 {
     color: white;
     cursor: pointer;
     font-weight: bold;
+}
+
+button {
+    margin-top: 10px;
+    padding: 13px;
+    border: none;
+    border-radius: 8px;
+    background-color: #054282;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.2s;
 }
 
 .btn-archive {
@@ -133,7 +179,11 @@ h1 {
     padding: 10px;
     border: none;
     border-radius: 20px;
-    background-color: #10263a;
+    background-color: #054282;
     color: white;
     cursor: pointer;
+}
+
+.admin-menu button:hover {
+    background-color: #005FC4;
 }

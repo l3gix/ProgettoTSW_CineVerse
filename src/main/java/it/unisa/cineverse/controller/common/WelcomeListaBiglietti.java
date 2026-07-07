@@ -1,4 +1,4 @@
-package it.unisa.cineverse.controller;
+package it.unisa.cineverse.controller.common;
 
 import jakarta.servlet.ServletConfig;
 import jakarta.servlet.ServletException;
@@ -34,7 +34,7 @@ import it.unisa.cineverse.model.dao.impl.ProiezioniDaoImpl;
 /**
  * Servlet implementation class WelcomeListaBiglietti
  */
-@WebServlet("/WelcomeListaBiglietti")
+@WebServlet("/common/WelcomeListaBiglietti")
 public class WelcomeListaBiglietti extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -178,7 +178,7 @@ public class WelcomeListaBiglietti extends HttpServlet {
 	    
 		request.setAttribute("listafilm", listaPagamenti);
 		
-		request.getRequestDispatcher("/WEB-INF/views/listabiglietti.jsp").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/views/common/listabiglietti.jsp").forward(request, response);
 	}
 
 	/**

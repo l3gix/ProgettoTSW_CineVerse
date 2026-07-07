@@ -53,7 +53,7 @@ body {
 }
 
 .ticket-sopra p {
-    color: #d4d4d4;
+    color: #666666;
     font-size: 15px;
     margin-bottom: 6px;
 }
@@ -68,6 +68,7 @@ body {
 
 .posti span {
     background-color: rgba(255, 255, 255, 0.14);
+    background-color : #007BFA;
     padding: 7px 13px;
     border-radius: 999px;
     font-size: 14px;
@@ -83,8 +84,8 @@ body {
 }
 
 .ticket-sotto .label {
-    color: #d4d4d4;
-    font-size: 13px;
+    color: #666666;
+    font-size: 16px;
 }
 
 .ticket-sotto h3 {
@@ -105,7 +106,7 @@ body {
 
 /* Box totale */
 .totale-box {
-    background-color: #0b1824;
+    background-color: #101C29;
     border-radius: 20px;
     padding: 22px;
     box-shadow: 0 12px 28px rgba(0, 0, 0, 0.45);
@@ -114,8 +115,8 @@ body {
 }
 
 .totale-box p {
-    color: #cfcfcf;
-    font-size: 15px;
+    color: #666666;
+    font-size: 16px;
 }
 
 .totale-box h2 {
@@ -136,7 +137,7 @@ body {
 }
 
 .totale-box button:hover {
-    background-color: #0759ad;
+    background-color: #005FC4;
 }
 
 /* DESKTOP */
