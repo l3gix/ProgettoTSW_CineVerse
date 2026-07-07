@@ -52,6 +52,7 @@ public class Login extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String email = request.getParameter("email");
 		String password = request.getParameter("password");
+		
 		UtentiBean ut = null;
 		try {
 			 ut = utenteDao.findByEmailAndPassword(email, password);
@@ -66,10 +67,21 @@ public class Login extends HttpServlet {
 			session.setAttribute("utente", ut);
 			session.setAttribute("ruolo", ut.getRuolo());
 			
+			String redirect = (String) session.getAttribute("redirect");
+
+		    if ("pagamento".equals(redirect)) {
+		        session.removeAttribute("redirectAfterLogin");
+		        response.sendRedirect(request.getContextPath() + "/WelcomePagamento");
+		        return;
+		    }
+			
 			if ("Admin".equalsIgnoreCase(ut.getRuolo())) {
 				response.sendRedirect(request.getContextPath() + "/admin/WelcomeGestioneFilmAdmin");
 				return;
+				
+			
 			}else {
+				
 				response.sendRedirect(request.getContextPath() + "/WelcomeIndex");
 				return;
 			}

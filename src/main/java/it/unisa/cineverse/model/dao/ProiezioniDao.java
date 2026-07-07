@@ -10,6 +10,8 @@ public interface ProiezioniDao
 {
 	void save(ProiezioneBean proiezioni)throws SQLException;
 	
+	boolean saveIfSalaDisponibile(ProiezioneBean p) throws SQLException;
+	
 	void update(ProiezioneBean proiezioni)throws SQLException;
 	
 	void updateStatusById(int id,String status) throws SQLException;
@@ -27,4 +29,6 @@ public interface ProiezioniDao
 	List<ProiezioneBean> findAllByIdFilm(int id) throws SQLException;
 	
 	List<ProiezioneBean> findAllByIdFilmAndOrario(int id,LocalDateTime orario) throws SQLException ;
+	
+	public ProiezioneBean findPrimaProiezioneByFilm(int idFilm) throws SQLException;
 }

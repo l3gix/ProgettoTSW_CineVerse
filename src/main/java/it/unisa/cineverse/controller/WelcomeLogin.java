@@ -27,6 +27,12 @@ public class WelcomeLogin extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		String redirect = request.getParameter("redirect");
+
+	    if ("pagamento".equals(redirect)) {
+	        request.getSession().setAttribute("redirect", "pagamento");
+	    }
+
 		request.getRequestDispatcher("/WEB-INF/views/login.jsp").forward(request, response);
 	}
 

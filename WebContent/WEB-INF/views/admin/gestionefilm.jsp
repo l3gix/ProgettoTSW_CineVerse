@@ -29,7 +29,6 @@
 
 <div class="admin-menu">
         <button onclick="showSection('inser-film')">InserisciFilm</button>
-        <button onclick="showSection('modifica-status')">Modifica status film</button>
         <button onclick="showSection('insert-proiezioni')">Nuova Proiezione</button>
         <button onclick="showSection('modifica-status-proiezione')">Modifica Status Proiezione</button>
     </div>
@@ -93,14 +92,8 @@
         <input type="text" name="trailer" id="trailer" placeholder="Inserisci il url del trailer" required>
         </div>
 
-    <div class="form-group">
-    <label for="status">Classificazione età</label>
-    <select name="status" id="status" required>
-        <option value="coming_soon">coming_soon</option>
-        <option value="now_showing">now_showing</option>
-        <option value="archived">archived</option>
-    </select>
-    </div>
+    <input type="hidden" name="status" id="status" value="now_showing">
+        
 
     <div class="form-group">
         <label for="img1">Immagine Poster</label>
@@ -116,46 +109,7 @@
     </form>
     </section>
 
-<section class="modifica-status section" id="modifica-status">
-        <h1>Gestione film</h1>
 
-<table class="film-table">
-    <thead>
-        <tr>
-            <th>Titolo</th>
-            <th>Durata</th>
-            <th>Stato</th>
-            <th>Azione</th>
-        </tr>
-    </thead>
-
-    <tbody>
-           <% for(FilmBean f : film) {%>
-            <tr>
-                <td><%=f.getTitolo() %></td>
-                <td><%=f.getDurata_minuti()%> min</td>
-                <td><%=f.getStatus() %></td>
-
-                <td>
-                    <form action="<%= request.getContextPath() %>/admin/CambiaStatoFilmAndProiezione" method="post">
-                        <input type="hidden" name="tipo"  value="film">
-
-                       <%if(("archived").equals(f.getStatus())) {%>
-                            <input type="hidden" name="nuovoStatus" value="now_showing">
-                            <input type="hidden" name="id" value="<%=f.getId() %>" >
-                            <button type="submit" class="btn-active">now_showing</button>
-                       <%} else { %>
-                            <input type="hidden" name="nuovoStatus" value="archived">
-                            <input type="hidden" name="id" value="<%=f.getId() %>" >
-                            <button type="submit" class="btn-archive">archived</button>
-                        <%} %>
-                    </form>
-                </td>
-            </tr>
-             <% }%>
-    </tbody>
-</table>
-    </section>
  <section class="modifica-status section" id="modifica-status-proiezione">
         <h1>Gestione Proiezioni</h1>
     
@@ -257,14 +211,17 @@
                    required>
         </div>
 
-        <div class="form-group">
-            <label for="status">Stato</label>
-            <select name="status" id="status" required>
-                <option value="scheduled">Scheduled</option>
-                <option value="cancelled">Non scheduled</option>
-            </select>
-        </div>
+     
+          
+            <input type="hidden" name="status" id="status" value="scheduled" required>
+               
+		<% if (request.getAttribute("errore") != null) { %>
 
+		    <p style="color:red;">
+		        <%= request.getAttribute("errore") %>
+		    </p>
+		
+		<% } %>
         <button type="submit">Inserisci spettacolo</button>
 
     </form>  

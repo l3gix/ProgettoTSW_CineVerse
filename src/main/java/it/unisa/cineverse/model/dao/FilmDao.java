@@ -21,6 +21,6 @@ public interface FilmDao {
 	
 	FilmBean findByIdAndNowShowing(int id)throws SQLException;
 	
-	
+	public List<FilmBean> findComingSoon() throws SQLException;
 
 }

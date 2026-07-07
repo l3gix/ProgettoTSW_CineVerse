@@ -41,6 +41,52 @@ public class ProiezioniDaoImpl implements ProiezioniDao
 			ps.executeUpdate();
 		}
 	}
+	
+	public synchronized boolean saveIfSalaDisponibile(ProiezioneBean p) throws SQLException {
+
+	    String sql = 
+	        "INSERT INTO proiezioni " +
+	        "(id_film, id_sale, id_formato, starts, ends, prezzo_base, status) " +
+	        "SELECT ?, ?, ?, ?, ?, ?, ? " +
+	        "WHERE ? >= NOW() " +
+	        "AND ? < ? " +
+	        "AND NOT EXISTS ( " +
+	        "    SELECT 1 " +
+	        "    FROM proiezioni " +
+	        "    WHERE id_sale = ? " +
+	        "    AND status = 'scheduled' " +
+	        "    AND starts < ? " +
+	        "    AND ends > ? " +
+	        ")";
+
+	    try (Connection con = ds.getConnection();
+	         PreparedStatement ps = con.prepareStatement(sql)) {
+
+	        Timestamp starts = Timestamp.valueOf(p.getStarts());
+	        Timestamp ends = Timestamp.valueOf(p.getEnds());
+
+	        ps.setInt(1, p.getId_film());
+	        ps.setInt(2, p.getId_sale());
+	        ps.setInt(3, p.getId_formato());
+	        ps.setTimestamp(4, starts);
+	        ps.setTimestamp(5, ends);
+	        ps.setDouble(6, p.getPrezzo_base());
+	        ps.setString(7, p.getStatus());
+
+	        ps.setTimestamp(8, starts);
+
+	        ps.setTimestamp(9, starts);
+	        ps.setTimestamp(10, ends);
+
+	        ps.setInt(11, p.getId_sale());
+	        ps.setTimestamp(12, ends);
+	        ps.setTimestamp(13, starts);
+
+	        int righeInserite = ps.executeUpdate();
+
+	        return righeInserite > 0;
+	    }
+	}
 
 	@Override
 	public synchronized void update(ProiezioneBean proiezioni) throws SQLException {
@@ -272,6 +318,52 @@ public class ProiezioniDaoImpl implements ProiezioniDao
 				}
 		}
 		return proiezioni;
+	}
+	
+	
+	public synchronized ProiezioneBean findPrimaProiezioneByFilm(int idFilm) throws SQLException {
+	    ProiezioneBean proiezione = null;
+
+	    String sql =
+	        "SELECT * " +
+	        "FROM proiezioni " +
+	        "WHERE id_film = ? " +
+	        "AND starts > NOW() " +
+	        "AND status = 'scheduled' " +
+	        "ORDER BY starts ASC " +
+	        "LIMIT 1";
+
+	    try (Connection connection = ds.getConnection();
+	         PreparedStatement ps = connection.prepareStatement(sql)) {
+
+	        ps.setInt(1, idFilm);
+
+	        try (ResultSet rs = ps.executeQuery()) {
+	            if (rs.next()) {
+	                proiezione = new ProiezioneBean();
+
+	                proiezione.setId(rs.getInt("id"));
+	                proiezione.setId_film(rs.getInt("id_film"));
+	                proiezione.setId_sale(rs.getInt("id_sale"));
+	                proiezione.setId_formato(rs.getInt("id_formato"));
+
+	                Timestamp starts = rs.getTimestamp("starts");
+	                if (starts != null) {
+	                    proiezione.setStarts(starts.toLocalDateTime());
+	                }
+
+	                Timestamp ends = rs.getTimestamp("ends");
+	                if (ends != null) {
+	                    proiezione.setEnds(ends.toLocalDateTime());
+	                }
+
+	                proiezione.setPrezzo_base(rs.getDouble("prezzo_base"));
+	                proiezione.setStatus(rs.getString("status"));
+	            }
+	        }
+	    }
+
+	    return proiezione;
 	}
 	
 }

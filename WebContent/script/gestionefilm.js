@@ -1,3 +1,8 @@
+document.addEventListener("DOMContentLoaded", function () {
+    const activeSection = document.body.dataset.activeSection || "insert-proiezioni";
+    showSection(activeSection);
+});
+
 function showSection(id) {
     let sections = document.querySelectorAll(".section");
 

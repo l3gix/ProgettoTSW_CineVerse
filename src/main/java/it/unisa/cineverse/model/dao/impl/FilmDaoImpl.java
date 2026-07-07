@@ -201,6 +201,45 @@ public class FilmDaoImpl implements FilmDao{
 	
 	}
 	
+	public synchronized List<FilmBean> findComingSoon() throws SQLException {
+	    List<FilmBean> films = new ArrayList<>();
+
+	    String sql =
+	        "SELECT f.*, x.prima_proiezione " +
+	        "FROM film f " +
+	        "JOIN ( " +
+	        "    SELECT id_film, MIN(starts) AS prima_proiezione " +
+	        "    FROM proiezioni " +
+	        "    WHERE starts > NOW() " +
+	        "    AND status = 'scheduled' " +
+	        "    GROUP BY id_film " +
+	        ") x ON f.id = x.id_film " +
+	        "ORDER BY x.prima_proiezione ASC";
+
+	    try (Connection connection = ds.getConnection();
+	         PreparedStatement ps = connection.prepareStatement(sql);
+	         ResultSet rs = ps.executeQuery()) {
+
+	        while (rs.next()) {
+	            FilmBean film = new FilmBean();
+
+	            film.setId(rs.getInt("id"));
+	            film.setTitolo(rs.getString("titolo"));
+	            film.setSinossi(rs.getString("sinossi"));
+	            film.setDurata_minuti(rs.getInt("durata_minuti"));
+	            film.setAge_rating(rs.getString("age_rating"));
+	            film.setTrailer_url(rs.getString("trailer_url"));
+	            film.setCast_film(rs.getString("cast_film"));
+	            film.setStatus(rs.getString("status"));
+
+
+	            films.add(film);
+	        }
+	    }
+
+	    return films;
+	}
+	
 	
 	
 

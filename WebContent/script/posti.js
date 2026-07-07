@@ -280,10 +280,21 @@ function formattaPrezzo(prezzo) {
 function confermaPrenotazione() {
   if (selezionati.length == 0) {
 	apriModale(
-		"Errore", "Devi selezionare un posto"
+		"Errore", "Devi selezionare un posto" , "#","Chiudi"
 	)
-    return;
+	
+	return;
   }
+  
+  console.log(window.appData.isLogged);
+  if(!window.appData.isLogged)
+  	{
+  		apriModale(
+  				"Errore", "Devi essere Loggato" , contex + "/WelcomeLogin?redirect=pagamento","Vai alla login"
+  			);
+			
+			return;
+  	}
 
   var testoPosti = "";
   var somma = 0;
@@ -326,12 +337,27 @@ if (postiincarello && postiincarello.length > 0) {
 aggiornaRiepilogo();
 
 
-function apriModale(t,cont) {
+function apriModale(t, cont, link, testoBottone) {
     document.getElementById("modale").style.display = "flex";
-	titolo = document.getElementById("titolo-modale");
-	titolo.innerHTML = t;
-	contenuto = document.getElementById("contenuto-modale");
-	contenuto.innerHTML = cont;
+
+    let titolo = document.getElementById("titolo-modale");
+    titolo.innerHTML = t;
+
+    let contenuto = document.getElementById("contenuto-modale");
+    contenuto.innerHTML = cont;
+
+    let bottone = document.getElementById("bottone-modale");
+    bottone.innerHTML = testoBottone;
+
+	if (link === "#") {
+	        bottone.onclick = function() {
+	            chiudiModale();
+	        };
+	    } else {
+	        bottone.onclick = function() {
+	            window.location.href = link;
+	        };
+	    }
 }
 
 function chiudiModale() {

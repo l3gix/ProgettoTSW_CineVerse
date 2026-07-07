@@ -70,14 +70,24 @@ public class InserimentoProiezione extends HttpServlet {
 		p.setPrezzo_base(prezzo);
 		p.setStatus(status);
 		
+		boolean inserita = false;
 		try {
-			proiezioni.save(p);
+			inserita = proiezioni.saveIfSalaDisponibile(p);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
-		response.sendRedirect(request.getContextPath() + "/admin/WelcomeGestioneFilmAdmin");
+		if (inserita) {
+		    response.sendRedirect(request.getContextPath() + "/admin/WelcomeGestioneFilmAdmin");
+		    return;
+		} else {
+		    request.setAttribute("errore", "Non e stato possibile inserire la proieazione");
+		    request.setAttribute("activeSection", "insert-proiezioni");
+
+		    request.getRequestDispatcher("/admin/WelcomeGestioneFilmAdmin")
+		           .forward(request, response);
+		}
 	}
 
 	/**
