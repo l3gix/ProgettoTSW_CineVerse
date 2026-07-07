@@ -78,9 +78,16 @@ public class InserimentoProiezione extends HttpServlet {
 			e.printStackTrace();
 		}
 		
-		if (inserita == false ) request.setAttribute("errore", "Sala occupata oppure data non valida");
-		
-		response.sendRedirect(request.getContextPath() + "/admin/WelcomeGestioneFilmAdmin");
+		if (inserita) {
+		    response.sendRedirect(request.getContextPath() + "/admin/WelcomeGestioneFilmAdmin");
+		    return;
+		} else {
+		    request.setAttribute("errore", "Non e stato possibile inserire la proieazione");
+		    request.setAttribute("activeSection", "insert-proiezioni");
+
+		    request.getRequestDispatcher("/admin/WelcomeGestioneFilmAdmin")
+		           .forward(request, response);
+		}
 	}
 
 	/**

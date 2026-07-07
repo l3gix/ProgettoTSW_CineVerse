@@ -1,5 +1,6 @@
 document.addEventListener("DOMContentLoaded", function () {
-    document.getElementById("dati").classList.add("active");
+    const activeSection = document.body.dataset.activeSection || "insert-proiezioni";
+    showSection(activeSection);
 });
 
 function showSection(id) {
