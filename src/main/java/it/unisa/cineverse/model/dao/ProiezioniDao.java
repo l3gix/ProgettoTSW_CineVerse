@@ -10,6 +10,8 @@ public interface ProiezioniDao
 {
 	void save(ProiezioneBean proiezioni)throws SQLException;
 	
+	boolean saveIfSalaDisponibile(ProiezioneBean p) throws SQLException;
+	
 	void update(ProiezioneBean proiezioni)throws SQLException;
 	
 	void updateStatusById(int id,String status) throws SQLException;

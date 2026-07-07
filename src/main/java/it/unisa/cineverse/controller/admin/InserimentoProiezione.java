@@ -70,12 +70,15 @@ public class InserimentoProiezione extends HttpServlet {
 		p.setPrezzo_base(prezzo);
 		p.setStatus(status);
 		
+		boolean inserita = false;
 		try {
-			proiezioni.save(p);
+			inserita = proiezioni.saveIfSalaDisponibile(p);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+		if (inserita == false ) request.setAttribute("errore", "Sala occupata oppure data non valida");
 		
 		response.sendRedirect(request.getContextPath() + "/admin/WelcomeGestioneFilmAdmin");
 	}

@@ -41,6 +41,52 @@ public class ProiezioniDaoImpl implements ProiezioniDao
 			ps.executeUpdate();
 		}
 	}
+	
+	public synchronized boolean saveIfSalaDisponibile(ProiezioneBean p) throws SQLException {
+
+	    String sql = 
+	        "INSERT INTO proiezioni " +
+	        "(id_film, id_sale, id_formato, starts, ends, prezzo_base, status) " +
+	        "SELECT ?, ?, ?, ?, ?, ?, ? " +
+	        "WHERE ? >= NOW() " +
+	        "AND ? < ? " +
+	        "AND NOT EXISTS ( " +
+	        "    SELECT 1 " +
+	        "    FROM proiezioni " +
+	        "    WHERE id_sale = ? " +
+	        "    AND status = 'scheduled' " +
+	        "    AND starts < ? " +
+	        "    AND ends > ? " +
+	        ")";
+
+	    try (Connection con = ds.getConnection();
+	         PreparedStatement ps = con.prepareStatement(sql)) {
+
+	        Timestamp starts = Timestamp.valueOf(p.getStarts());
+	        Timestamp ends = Timestamp.valueOf(p.getEnds());
+
+	        ps.setInt(1, p.getId_film());
+	        ps.setInt(2, p.getId_sale());
+	        ps.setInt(3, p.getId_formato());
+	        ps.setTimestamp(4, starts);
+	        ps.setTimestamp(5, ends);
+	        ps.setDouble(6, p.getPrezzo_base());
+	        ps.setString(7, p.getStatus());
+
+	        ps.setTimestamp(8, starts);
+
+	        ps.setTimestamp(9, starts);
+	        ps.setTimestamp(10, ends);
+
+	        ps.setInt(11, p.getId_sale());
+	        ps.setTimestamp(12, ends);
+	        ps.setTimestamp(13, starts);
+
+	        int righeInserite = ps.executeUpdate();
+
+	        return righeInserite > 0;
+	    }
+	}
 
 	@Override
 	public synchronized void update(ProiezioneBean proiezioni) throws SQLException {

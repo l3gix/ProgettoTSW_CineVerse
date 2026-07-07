@@ -157,7 +157,7 @@
         <h2 id="titolo-modale"></h2>
         <p id="contenuto-modale"></p>
 
-        <button onclick="chiudiModale()">Chiudi</button>
+        <button id="bottone-modale">Chiudi</button>
     </div>
 </div>
   
@@ -166,7 +166,7 @@
     		context: "<%= request.getContextPath() %>",
     		idproiezione : <%=p.getId() %>,
     		prezzoBase : <%= p.getPrezzo_base() %>,
-    		
+    		isLogged: <%= session.getAttribute("utente") != null %>,
     		posti: [
     	            <% 
     	                for (int i = 0; i < poss.size(); i++) { 

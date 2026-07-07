@@ -1,3 +1,7 @@
+document.addEventListener("DOMContentLoaded", function () {
+    document.getElementById("dati").classList.add("active");
+});
+
 function showSection(id) {
     let sections = document.querySelectorAll(".section");
 
