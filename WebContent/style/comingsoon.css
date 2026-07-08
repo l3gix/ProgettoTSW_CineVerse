@@ -1,0 +1,435 @@
+@charset "UTF-8";
+@import url('https://fonts.googleapis.com/css2?family=Saira:ital,wght@0,100..900;1,100..900&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Saira", sans-serif;
+}
+
+body
+{
+      /*min-height: 100vh;*/
+    min-height: 100vh;
+   background-image: linear-gradient(
+        to top,
+        #091119 0%,
+        #091119 80%,
+        #054282 100%
+    );
+    background-repeat: no-repeat;
+    color: white;
+
+}
+
+
+
+/* SLIDESHOW CONTAINER */
+
+/* Slideshow container */
+.slideshow-container {
+  width: 95%;
+  height: 220px;
+  position: relative;
+  margin: auto;
+  margin-top: 20px;
+  z-index: 1;
+}
+
+.mySlides img {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    display: block;
+    z-index: 2;
+}
+
+/* Hide the images by default */
+.mySlides {
+  display: none;
+}
+
+.slide-info {
+    background-color: #091119;
+    color: white;
+    margin-top: 10px;
+    text-align: left;
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.slide-info-desc
+{
+    width: 55%;
+    display: flex;
+    flex-direction: column;
+
+}
+
+.slide-info-button{
+    width: 35%;
+    display: flex;
+   
+}
+
+
+.slide-info-desc h2 {
+    font-size: x-large;
+    margin-bottom: 8px;
+}
+
+.slide-info-desc p {
+    font-size: small;
+    color: rgb(115, 115, 115);
+    margin-bottom: 12px;
+}
+
+.slide-info-button button {
+    width: 100%;
+    cursor: pointer;
+    font-size: large;
+    height: 50px;
+    background-color: transparent;
+    color : white;
+    border : 3px solid transparent;
+    border-image-source: linear-gradient(to bottom, #007BFA, #054282);
+  /* Ritaglio del gradiente per adattarlo al bordo */
+    border-image-slice: 1; 
+    background-clip: padding-box;
+}
+
+.slide-info-desc button:hover {
+    background-color: #005fc4;
+}
+
+/* Next & previous buttons */
+.prev, .next {
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  width: auto;
+  margin-top: -22px;
+  padding: 16px;
+  color: white;
+  font-weight: bold;
+  font-size: 18px;
+  transition: 0.6s ease;
+  border-radius: 0 3px 3px 0;
+  user-select: none;
+}
+
+/* Position the "next button" to the right */
+.next {
+  right: 0;
+  border-radius: 3px 0 0 3px;
+}
+
+/* On hover, add a black background color with a little bit see-through */
+.prev:hover, .next:hover {
+  background-color: rgba(0,0,0,0.8);
+}
+
+
+.session-range {
+    padding: 0px 10px;
+    background: linear-gradient(to left, #45484d 0%,#000000 100%); 
+}
+
+.hall {
+    background: linear-gradient(to left, #45484d 0%,#000000 100%); 
+    display: flex;
+    justify-content: space-between;
+    color : #666666;
+    font-size: 20px;
+}
+
+.showing-list
+{
+    margin-top: 15%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+
+.container
+{
+    width: 95%;
+    display: inline;
+}
+.showing-list-info
+{
+    width: 100%;
+    display: flex;
+}
+
+.list-hall
+{
+    width: 100%;
+    display: flex;
+    margin-bottom: 10px;
+    flex-direction: column;
+    align-items: flex-end;
+    margin-top: 10px;
+}
+
+.session
+{
+    width: 65%;
+    margin-bottom: 20px;
+
+}
+
+.session button 
+{
+	width: 50%;
+  cursor: pointer;
+  font-size: large;
+  height: 50px;
+  background-color: transparent;
+  color: white;
+  border: 3px solid transparent;
+    border-image-slice: 100%;
+    border-image-source: none;
+  border-image-source: linear-gradient(to bottom, #007BFA, #054282);
+  border-image-slice: 1;
+  background-clip: padding-box;
+ 
+}
+
+
+.showing-list-film
+{
+    
+    width: 30%;
+    margin-right: 10px;
+    height: 150px;
+    background-color: brown;
+}
+
+.showing-list-film img 
+{
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+}
+
+.showing-film-card p 
+{
+	color : #666666;
+}
+
+
+/* in piu per verificare */
+.showing-list-film
+{
+    width: 110px;
+    min-width: 110px; /*serve per non far schiacciare la locandina */
+    height: 165px;
+    margin-right: 15px;
+    background-color: #111;
+    overflow: hidden;
+    box-shadow: 0px 0px 40px black;
+}
+
+.showing-list-film img 
+{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+
+.showing-film-card
+{
+    width: 65%;
+    
+}
+
+
+.showing-film-card h1
+{
+    font-size: x-large;
+}
+
+.showing-film-card p 
+{
+    font-size: small;
+}
+
+.showing-film-card h3
+{
+    font-size: medium;
+}
+
+
+
+.slide-info-desc > p
+{
+	display: none;
+}
+
+.sinossi
+{
+	display:none;
+}
+
+.session-link 
+{
+	text-decoration: none;
+    color: inherit;
+}
+
+@media screen and (min-width: 768px) {
+  .slideshow-container {
+    width: 90%;
+    margin: 20px auto 0 auto;
+    height: 320px;
+  }
+
+    .mySlides img {
+        height: 320px;
+    }
+
+     .showing-film-card
+    {
+        width: 80%;
+    }
+
+
+       .container
+    {
+        width: 50%;
+        display: inline;
+        
+    }
+
+    .title
+    {
+        margin-top: 7%;
+    }
+
+}
+
+@media screen and (min-width: 1024px) {
+    .slideshow-container {
+        width: 90%;
+        height: 580px;
+    }
+
+    .mySlides img {
+        height: 580px;
+    }
+
+    .slide-info {
+     margin: auto;
+     width: 55%;
+     margin-top: 10px;
+     
+    }
+
+
+    /*
+     .showing-list-film 
+    {
+        width: 20%;
+        height: 300px;
+       
+    }
+
+    .showing-list-film img 
+    {
+        height: 300px;
+        width: 100%;
+    }
+    */
+    .showing-list-film 
+    {
+        width: 150px;
+        min-width: 150px;
+        height: 225px;
+        margin-right: 50px;
+        background-color: #111;
+        overflow: hidden;
+    }
+
+    .showing-list-film img 
+    {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .showing-film-card
+    {
+        width: 80%;
+    }
+
+    .container
+    {
+        width: 50%;
+    }
+
+
+    .list-hall
+    {
+        margin-top: 10px;
+        width: 100%;
+        display: flex;
+        justify-content: flex-start;
+        gap: 10px;
+        margin-bottom: 10px;
+    }
+    
+    .session {
+    	width: 80%;
+    	padding-left: 50px;
+    	
+    }
+    
+    .session button {
+    	padding: 5%;
+    	text-align: center;
+    	align-items: center;
+    	justify-content: center;
+    	display: flex;
+    	
+    }
+
+    .title
+    {
+        margin-top: 0;
+        width: 80%;
+        display :flex;
+        margin-left : auto;
+    }
+
+
+    .hall 
+    {
+        flex-direction: column;
+    }    
+
+    .hall p 
+    {
+        font-size: small;
+    }
+
+   
+
+	.slide-info-desc > p
+	{
+		display: flex;
+	}
+	
+	.sinossi
+	{
+		display:flex;
+	}
+
+
+}

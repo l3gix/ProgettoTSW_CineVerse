@@ -1,0 +1,242 @@
+@import url('https://fonts.googleapis.com/css2?family=Saira:ital,wght@0,100..900;1,100..900&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Saira", sans-serif;
+}
+
+body
+{
+      /*min-height: 100vh;*/
+    min-height: 100vh;
+   background-image: linear-gradient(
+        to top,
+        #091119 0%,
+        #091119 80%,
+        #054282 100%
+    );
+    background-repeat: no-repeat;
+    color: white;
+
+}
+
+.modale {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.6);
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+
+/*Per il box modale*/
+.box-modale {
+    background: linear-gradient(180deg, #0b1824, #091119);
+    color: white;
+    padding: 25px;
+    border-radius: 18px;
+    width: 90%;
+    max-width: 380px;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    text-align: center;
+    animation: entraModale 0.25s ease;
+}
+
+.box-modale h2 {
+    font-size: 24px;
+    margin-bottom: 12px;
+    color: white;
+}
+
+.box-modale p {
+    font-size: 15px;
+    color: #cfcfcf;
+    margin-bottom: 22px;
+}
+
+.box-modale button {
+    border: none;
+    background-color: #054282;
+    color: white;
+    padding: 10px 18px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.box-modale button:hover {
+    background-color: #0759ad;
+}
+
+header
+{
+    width: 100%;
+    background-color: black;
+    display: flex;
+    align-items : center;
+    height: 70px;
+}
+
+nav
+{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+
+.icon
+{
+    width: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding: 10px;
+
+}
+
+.desc 
+{
+	width: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size : 1.1rem;
+    color : white;
+}
+
+
+.icon > button
+{
+	display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    background: none;
+    cursor: pointer;
+}
+
+.icon img
+{
+    width: 50px;
+    height: 50px;
+}
+
+
+.logo
+{
+    width: 50%;
+    display: flex;
+    align-items: center;
+    padding: 10px;
+}
+
+.container-film 
+{
+    width: 100%;
+    background: linear-gradient(to bottom, #45484d 0%,#000000 100%); 
+    display: flex;
+    align-items: center;
+}
+
+.film 
+{
+    width: 100%;
+    display: flex;
+}
+
+.copertina 
+{
+    display: inline;
+    width: 30%;
+}
+
+.copertina img 
+{
+    width: 100px;
+    height: 150px;
+    padding: 10px;
+}
+
+.descrizione-film
+{
+    width: 70%;
+    padding: 10px;
+    display: inline;
+}
+
+.descrizione-film h3
+{
+	color : #007BFA;
+}
+
+.descrizione-film > div 
+{
+    border-bottom: 1px solid white;
+}
+
+
+
+
+
+@media screen and (min-width: 1024px) {
+
+    /* Nascondo l'icona burger */
+    header
+    {
+        justify-content: center;
+    }
+    nav 
+    {
+        width: 50%;
+    }
+    .menu-icon {
+        display: none;
+    }
+
+    .menu-button {
+        display: none;
+    }
+
+
+    .icon 
+    {
+        width: 50%;
+        justify-content: right;
+ 
+    }
+
+    .logo 
+    {
+        width: 50%;
+    }
+
+    .container-film
+    {
+        display: flex;
+        justify-content: center;
+    }
+
+
+    .copertina
+    {
+        display: flex;
+        justify-content: center;
+    }
+
+    .film 
+    {
+        width: 50%;
+    }
+
+    
+
+    
+}
+
+
+

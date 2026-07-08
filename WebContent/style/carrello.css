@@ -1,0 +1,199 @@
+@charset "UTF-8";
+@import url('https://fonts.googleapis.com/css2?family=Saira:ital,wght@0,100..900;1,100..900&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Saira", sans-serif;
+}
+
+body {
+    min-height: 100vh;
+    background-image: linear-gradient(
+        to top,
+        #091119 0%,
+        #091119 80%,
+        #054282 100%
+    );
+    background-repeat: no-repeat;
+    color: white;
+}
+
+
+.carrello {
+    width: 90%;
+    margin: 25px auto;
+    color: white;
+}
+
+.carrello h1 {
+    font-size: 26px;
+    margin-bottom: 20px;
+}
+
+/* CARD BIGLIETTO */
+.ticket-card {
+    background: linear-gradient(160deg, #0b1824, #054282);
+    border-radius: 20px;
+    margin-bottom: 22px;
+    overflow: hidden;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.45);
+    position: relative;
+}
+
+/* Parte sopra del biglietto */
+.ticket-sopra {
+    padding: 22px;
+}
+
+.ticket-sopra h2 {
+    font-size: 20px;
+    margin-bottom: 12px;
+}
+
+.ticket-sopra p {
+    color: #666666;
+    font-size: 15px;
+    margin-bottom: 6px;
+}
+
+/* Badge posto/categoria */
+.posti {
+    margin-top: 16px;
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.posti span {
+    background-color: rgba(255, 255, 255, 0.14);
+    background-color : #007BFA;
+    padding: 7px 13px;
+    border-radius: 999px;
+    font-size: 14px;
+}
+
+/* Parte sotto prezzo */
+.ticket-sotto {
+    border-top: 2px dashed rgba(255, 255, 255, 0.28);
+    padding: 18px 22px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.ticket-sotto .label {
+    color: #666666;
+    font-size: 16px;
+}
+
+.ticket-sotto h3 {
+    font-size: 24px;
+}
+
+.ticket-sotto button {
+    border: none;
+    background-color: #d62828;
+    color: white;
+    padding: 9px 13px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+
+
+/* Box totale */
+.totale-box {
+    background-color: #101C29;
+    border-radius: 20px;
+    padding: 22px;
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.45);
+    text-align: center;
+    margin-top: 25px;
+}
+
+.totale-box p {
+    color: #666666;
+    font-size: 16px;
+}
+
+.totale-box h2 {
+    font-size: 30px;
+    margin: 8px 0 18px;
+}
+
+.totale-box button {
+    width: 100%;
+    border: none;
+    background-color: #054282;
+    color: white;
+    padding: 13px;
+    border-radius: 12px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+.totale-box button:hover {
+    background-color: #005FC4;
+}
+
+/* DESKTOP */
+@media (min-width: 1024px) {
+
+    .carrello {
+        max-width: 760px;
+        margin-top: 40px;
+    }
+
+    .carrello h1 {
+        font-size: 32px;
+    }
+
+    .ticket-card {
+        display: flex;
+        min-height: 180px;
+    }
+
+    .ticket-sopra {
+        flex: 1;
+        padding: 28px;
+    }
+
+    .ticket-sopra h2 {
+        font-size: 24px;
+    }
+
+    .ticket-sotto {
+        width: 170px;
+        border-top: none;
+        border-left: 2px dashed rgba(255, 255, 255, 0.28);
+        flex-direction: column;
+        justify-content: center;
+        gap: 12px;
+        padding: 22px;
+        text-align: center;
+    }
+
+    .ticket-sotto h3 {
+        font-size: 28px;
+    }
+
+    .totale-box {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        text-align: left;
+    }
+
+    .totale-box h2 {
+        margin: 0;
+    }
+
+    .totale-box button {
+        width: auto;
+        padding: 13px 22px;
+    }
+}

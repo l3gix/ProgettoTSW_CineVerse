@@ -1,0 +1,343 @@
+@charset "UTF-8";
+@import url('https://fonts.googleapis.com/css2?family=Saira:ital,wght@0,100..900;1,100..900&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Saira", sans-serif;
+}
+
+body {
+    min-height: 100vh;
+}
+
+
+.carrello {
+    width: 100%;
+    color: black;
+    display : block;
+	flex-direction: column;
+}
+
+
+
+.carello-titolo
+{
+	width: 100%;
+	padding-left: 5%;
+	margin-bottom: 10px;
+}
+
+.info {
+	width: 100;
+	display : flex;
+	align-items : center;
+	flex-direction: column;
+}
+
+/* CARD BIGLIETTO */
+.ticket-card {
+    /*background: linear-gradient(160deg, #0b1824, #054282);*/
+    width:90%;
+    background : white;
+    border-radius: 20px;
+    margin-bottom: 22px;
+    overflow: hidden;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.45);
+}
+
+/* Parte sopra del biglietto */
+.ticket-sopra {
+    padding: 22px;
+}
+
+.ticket-sopra h2 {
+    font-size: 20px;
+    margin-bottom: 12px;
+}
+
+.ticket-sopra p {
+    color: #666666;
+    font-size: 15px;
+    margin-bottom: 6px;
+}
+
+/* Badge posto/categoria */
+.posti {
+    margin-top: 16px;
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.posti span {
+    background-color: #007BFA;
+    padding: 7px 13px;
+    border-radius: 999px;
+    font-size: 14px;
+}
+
+/* Parte sotto prezzo */
+.ticket-sotto {
+    border-top: 2px dashed black;
+    padding: 18px 22px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.ticket-sotto .label {
+    color: black;
+    font-size: 16px;
+}
+
+.ticket-sotto h3 {
+    font-size: 24px;
+}
+
+.ticket-sotto button {
+    border: none;
+    background-color: #d62828;
+    color: white;
+    padding: 9px 13px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+
+
+/* Box totale */
+.totale-box {
+	width : 100%;
+    background-color: #101C29;
+    border-radius: 20px;
+    padding: 22px;
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.45);
+    margin-top: 25px;
+    color: white;
+}
+
+totale-box-info
+{
+	padding : 10px;
+	display:flex;
+	width: 100%;
+}
+
+.totale-box-info p {
+    color: white;
+    font-size: 18px;
+}
+
+.totale-box-info h2 {
+    font-size: 40px;
+    margin: 8px 0 18px;
+}
+
+
+
+
+/*css del pagamento*/
+
+.payment-card {
+            width: 100%;
+            display : flex;
+            border-radius: 20px;
+            padding: 22px;
+            flex-direction: column;
+        }
+
+        .payment-header {
+            text-align: center;
+            margin-bottom: 24px;
+        }
+
+        .payment-header h1 {
+            font-size: 28px;
+            margin-bottom: 8px;
+        }
+
+        .payment-header p {
+            color: #b8c6d9;
+            font-size: 14px;
+        }
+
+        .provider-box {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .provider-btn {
+            width: 100%;
+            padding: 14px;
+            border-radius: 12px;
+            border: 1px solid black;
+            background-color: transparent;
+            color: white;
+            font-size: 15px;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .provider-btn:hover,
+        .provider-btn.active {
+            background-color: #007BFA;
+        }
+
+        .selected-provider {
+            text-align: center;
+            color: #b8c6d9;
+            font-size: 14px;
+            margin-bottom: 18px;
+        }
+
+
+        
+
+        .form-group {
+            margin-bottom: 16px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 7px;
+            color: #d8e2ef;
+            font-size: 14px;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 14px;
+            border-radius: 12px;
+            border: 1px solid #26384d;
+            background-color: #091119;
+            color: white;
+            outline: none;
+            font-size: 16px;
+        }
+
+        .form-group input:focus {
+            border-color: #1f6feb;
+        }
+
+        .row {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 0;
+        }
+
+        .pay-btn {
+            width: 100%;
+            padding: 15px;
+            margin-top: 8px;
+            border: none;
+            border-radius: 14px;
+            background-color: #054282;
+            color: white;
+            font-size: 17px;
+            font-weight: bold;
+            cursor: pointer;
+
+        }
+
+        .pay-btn:hover {
+            background-color: #388bfd;
+        }
+
+
+
+/* DESKTOP */
+@media (min-width: 1024px) {
+
+    .carrello {
+    	width : 100%;
+        margin-top: 40px;
+    }
+
+    .carello-titolo {
+        font-size: 32px;
+    }
+	
+	.info 
+	{
+		flex-direction: row;
+		align-items: flex-start;
+		justify-content: center;
+	}
+    .ticket-card {
+    	margin-top : 25px;
+        display: flex;
+        width: 30%;
+    }
+    
+    .totale-box
+    {
+    	width: 50%;
+    }
+    
+
+    .ticket-sopra {
+        flex: 1;
+        padding: 28px;
+    }
+
+    .ticket-sopra h2 {
+        font-size: 24px;
+    }
+
+    .ticket-sotto {
+        width: 170px;
+        border-top: none;
+        border-left: 2px dashed rgba(255, 255, 255, 0.28);
+        flex-direction: column;
+        justify-content: center;
+        gap: 12px;
+        padding: 22px;
+        text-align: center;
+    }
+
+    .ticket-sotto h3 {
+        font-size: 28px;
+    }
+
+    .totale-box {
+    	margin-left : 5%;
+    	width : 30%;
+        display: flex;
+        flex-direction : column;
+        text-align: left;
+    }
+    
+    .totale-box-info
+    {
+    	width: 100%;
+    	padding: 10px;
+    }
+
+    .totale-box-info h2 {
+        margin: 0;
+    }
+
+    
+    /*pagamento*/
+    .payment-card {
+                width: 100%;
+                padding: 32px;
+                color : white;
+            }
+
+            .provider-box {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .row {
+                grid-template-columns: 1fr 1fr;
+                gap: 14px;
+            }
+    
+    
+}

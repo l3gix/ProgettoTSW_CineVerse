@@ -1,0 +1,14 @@
+document.addEventListener("DOMContentLoaded", function () {
+    const activeSection = document.body.dataset.activeSection || "insert-proiezioni";
+    showSection(activeSection);
+});
+
+function showSection(id) {
+    let sections = document.querySelectorAll(".section");
+
+    sections.forEach(section => {
+        section.classList.remove("active");
+    });
+
+    document.getElementById(id).classList.add("active");
+}

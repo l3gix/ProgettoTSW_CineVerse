@@ -1,0 +1,205 @@
+@import url('https://fonts.googleapis.com/css2?family=Saira:ital,wght@0,100..900;1,100..900&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Saira", sans-serif;
+}
+
+body
+{
+      /*min-height: 100vh;*/
+    width : 100%;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+
+}
+/*mettici un honover*/
+
+
+h1 {
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+.insert-film {
+    margin-top: 10px;
+    width: 100%;
+    padding: 25px;
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.35);
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.form-group label {
+    font-weight: bold;
+    font-size: 15px;
+}
+
+.form-group input,
+.form-group textarea {
+    padding: 12px;
+    border-radius: 8px;
+    outline: none;
+    font-size: 15px;
+}
+
+.form-group textarea {
+    min-height: 120px;
+    resize: vertical;
+}
+
+
+button {
+    margin-top: 10px;
+    padding: 13px;
+    border: none;
+    border-radius: 8px;
+    background-color: #054282;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+button:hover {
+    background-color: #005FC4;
+}
+
+
+
+/*Modifica status*/
+
+.modifica-status
+{
+    margin-top: 10px;
+    width: 100%;
+    padding: 20px;
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.35);
+    overflow-x: auto;
+    font-size: 14px;
+}
+.film-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+    background-color: #111c27;
+    color: white;
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.film-table th,
+.film-table td {
+    padding: 14px;
+    text-align: left;
+    border-bottom: 1px solid #243447;
+}
+
+.film-table th {
+    background-color: #054282;
+}
+
+.film-table tr:hover {
+    background-color: #182838;
+}
+
+.film-table button {
+    padding: 8px 14px;
+    border: none;
+    border-radius: 7px;
+    color: white;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.btn-archive {
+    background-color: #b83232;
+}
+
+.btn-active {
+    background-color: #228b22;
+}
+
+
+/*inserimento delle proiezioni*/
+
+.insert-proiezioni
+{
+    margin-top: 10px;
+    width: 100%;
+    padding: 25px;
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.35);
+}
+
+@media screen and (min-width: 1024px) 
+{
+	.main 
+	{
+		width:100%;
+	}
+    .insert-film
+    {
+        width: 50%;
+    }
+
+   .modifica-status 
+   {
+        width: 50%;
+   }
+   
+   .insert-proiezioni
+    {
+        width: 50%;
+    }
+}
+
+/*Gestione bottoni superione*/
+.section {
+    display: none;
+}
+
+.section.active {
+    display: block;
+}
+
+.admin-menu {
+    display: flex;
+    gap: 10px;
+    overflow-x: auto;
+    margin: 20px;
+}
+
+.admin-menu button {
+    padding: 10px;
+    border: none;
+    border-radius: 20px;
+    background-color: #054282;
+    color: white;
+    cursor: pointer;
+}
+
+.admin-menu button:hover {
+    background-color: #005FC4;
+}
+
