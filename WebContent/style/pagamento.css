@@ -21,7 +21,12 @@ body {
 }
 
 
-
+.list-pagamenti
+{
+	display : flex;
+	width : 100%;
+	flex-direction: column;
+}
 .carello-titolo
 {
 	width: 100%;
@@ -39,7 +44,7 @@ body {
 /* CARD BIGLIETTO */
 .ticket-card {
     /*background: linear-gradient(160deg, #0b1824, #054282);*/
-    width:90%;
+    width:100%;
     background : white;
     border-radius: 20px;
     margin-bottom: 22px;
@@ -271,7 +276,7 @@ totale-box-info
     .ticket-card {
     	margin-top : 25px;
         display: flex;
-        width: 30%;
+        width: 100%;
     }
     
     .totale-box

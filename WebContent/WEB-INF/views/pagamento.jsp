@@ -37,6 +37,7 @@ if (listafilm != null && !listafilm.isEmpty()) {
     <h1>IL Tuo pagamento</h1>
 	</div>
 	<div class="info">
+	<div class="lista-pagamenti">
     <%
     List<PostiBean> listaposti = (List<PostiBean>) session.getAttribute("listaposti");
     for (FilmBean film : listafilm) {
@@ -101,7 +102,7 @@ if (listafilm != null && !listafilm.isEmpty()) {
         }
     }
     %>
-
+</div>
     <div class="totale-box">
     	<div class="totale-box-info">
         <p>Totale</p>

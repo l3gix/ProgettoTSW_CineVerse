@@ -45,12 +45,14 @@
 
 		    if (cart != null) {
 		        for (BigliettoBean b : cart) {
+		        	if(b.getId_proiezione() == p.getId()){
 		            for (PostiBean pPosto : postisala) {
 		                if (pPosto.getId() == b.getId_posto()) {
 		                    postiCarrello.add(pPosto);
 		                    break;
 		                }
 		            }
+		        }
 		        }
 		    }
 		
